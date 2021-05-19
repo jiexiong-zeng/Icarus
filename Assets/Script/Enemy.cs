@@ -6,10 +6,11 @@ public class Enemy : MonoBehaviour
 {
 
     public Animator animator;
+    public aggro_ctrl test;
 
 
     public int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,9 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
-
-
+        //animator.SetBool("Aggroed", true);
+        //Debug.Log("aggro on");
+        test.aggroed = true;
         if (currentHealth <= 0)
         {
             Die();
@@ -32,9 +34,20 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        animator.SetBool("isDead", true);
+        animator.SetBool("Dead", true);
+        //To-do add this to animation controller
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+    }
+
+    public void Phase()
+    {
+       GameObject a = animator.gameObject;
+       Collider2D[] b = a.GetComponentsInChildren<Collider2D>();
+       foreach (var collider in b)
+       {
+           collider.enabled = false;
+       }
     }
 
     void Update()

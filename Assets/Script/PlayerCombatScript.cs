@@ -20,18 +20,24 @@ public class PlayerCombatScript : MonoBehaviour
     public float damagedelay = 0.25f;
     bool attacked = false;
 
+    public int currentHealth;
+    public int maxHealth = 100;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
     // Update is called once per frame
     void Update()
     {
-
-
         if (Time.time >= nextAttackTime)
         {
             Playermove.Attacking = false;
             if (Input.GetButtonDown("Attack"))
             {
                 animator.SetTrigger("Attack");
-                //Attack();
+                Attack();
                 attacked = false;
                 Playermove.Attacking = true;
                 nextAttackTime = Time.time + 1f / attackRate;
@@ -58,6 +64,10 @@ public class PlayerCombatScript : MonoBehaviour
 
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
 
     void OnDrawGizmosSelected()
     {

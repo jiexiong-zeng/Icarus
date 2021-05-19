@@ -18,9 +18,8 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	//edit
-	//public float groundedbuffer = 0.2f;
-	//float groundtime;
+
+	public Animator animator;
 
 	[Header("Events")]
 	[Space]
@@ -67,6 +66,18 @@ public class CharacterController2D : MonoBehaviour
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
 			}
+		}
+
+		if (!m_Grounded && m_Rigidbody2D.velocity.y < -0.01f)
+        {
+			animator.SetBool("Jumping", false);
+			animator.SetBool("Falling", true);
+        }
+
+		if (m_Grounded && !wasGrounded)
+        {
+			animator.SetBool("Jumping", false);
+			animator.SetBool("Falling", false);
 		}
 	}
 
@@ -139,12 +150,17 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			//m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			//change from addforce to set veloctiy
+			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 		}
 	}
 
-
-	private void Flip()
+    public void Stop()
+    {
+		m_Rigidbody2D.velocity = new Vector2(0, 0);
+	}
+    private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;

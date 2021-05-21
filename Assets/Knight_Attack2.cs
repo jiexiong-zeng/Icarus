@@ -6,20 +6,22 @@ public class Knight_Attack2 : StateMachineBehaviour
 {
    
     public float delay = 0.1f;
+    float delaytime;
     public int attackDamage;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerCombatScript combat = animator.GetComponent<PlayerCombatScript>();
         animator.SetBool("Attack2",false);
+        delaytime = delay + 0.2f;
         combat.Attack(delay, attackDamage);
     }
-
+    
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // Debug.Log("Attack3 called");
-        if (Input.GetButtonDown("Attack"))
+        delaytime -= Time.deltaTime;
+        if (Input.GetButton("Attack") && delaytime < 0)
         {
             animator.SetBool("Attack3",true);
         }
@@ -27,7 +29,11 @@ public class Knight_Attack2 : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("Attack1", false);
+        //PlayerCombatScript combat = animator.GetComponent<PlayerCombatScript>();
+        //combat.buffertime = combat.combobuffer;
+        PlayerMovement playermove = animator.GetComponent<PlayerMovement>();
+        playermove.attacking = false;
+        //animator.SetBool("Attack2", false);
     }
 
 

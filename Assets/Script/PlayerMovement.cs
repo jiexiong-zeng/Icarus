@@ -7,24 +7,24 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
     public Collider2D playerCollider;
+
     float horizontalMove = 0f;
     public float runSpeed = 40f;
-    public float dashSpeed = 100f;
+
     bool jump = false;
-    bool crouch = false;
-    public bool Attacking;
+    public float jumpduration = 0.2f;
 
+    public bool attacking;
 
-    public float jumpbuffer = 0.2f;
-    float jumptime;
-
+    public float dashSpeed = 100f;
     bool dash = false;
-    float dashtime = 0f;
     public float dashduration = 0.5f;
+    float dashtime = 0f;
     float dashDirection = 0f;
-    float invulnerableDuration = 0.2f;
+    public float invulnerableDuration = 0.2f;
     float invulnerableTime = 0f;
-   
+    bool block = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -33,73 +33,102 @@ public class PlayerMovement : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        jumptime -= Time.deltaTime;
         dashtime -= Time.deltaTime;
         invulnerableTime -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump"))
+        if (!controller.falling && !attacking && controller.m_Grounded)
         {
-            jumptime = jumpbuffer;
-            animator.SetBool("Jumping",true);
-        }
-        if (jumptime > 0)
-        {
-            jump = true;
+            if (Input.GetButton("Attack"))
+            {
+                animator.SetBool("Attack1", true);
+                block = false;
+                animator.SetBool("Block", false);
+            }
+
+            if (Input.GetButton("Block") && !dash && !jump)
+            {
+                block = true;
+                animator.SetBool("Block", true);
+            }
+            else
+            {
+                block = false;
+                animator.SetBool("Block", false);
+            }
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                block = false;
+                jump = true;
+                animator.SetBool("Block", false);
+                animator.SetBool("Jumping", true);
+            }
+
+            if (Input.GetButtonDown("Dash") && !jump && dashtime <= 0)
+            {
+                block = false;
+                animator.SetBool("Block", false);
+                dashtime = dashduration;
+                invulnerableTime = invulnerableDuration;
+                //dashDirection = Input.GetAxisRaw("Horizontal");
+            }
+            if (dashtime > 0)
+            {
+                dash = true;
+            }
+            if (invulnerableTime > 0)
+            {
+                playerCollider.enabled = false;
+            }
+          
         }
 
 
-        if (Input.GetButtonDown("Crouch"))
+        if (controller.grab && Input.GetButtonDown("Jump"))
         {
-            crouch = true;
-        } 
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
+            animator.SetBool("Climb", true);
+            //transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
         }
 
-
-        if (Input.GetButtonDown("Dash"))
-        {
-            dashtime = dashduration;
-            invulnerableTime = invulnerableDuration;
-            dashDirection = Input.GetAxisRaw("Horizontal");
-        }
-        if (dashtime > 0)
-        {
-            dash = true;
-        }
-        if(invulnerableTime > 0)
-        {
-            playerCollider.enabled = false;
-        }
 
     }
     
     
     public void OnLanding ()
     {
-        //Debug.Log("Fell");
-        //animator.SetBool("Falling", false);
     }
 
     void FixedUpdate()
     {
         animator.SetBool("Roll", false);
 
-        if (Attacking)
+        
+        if (attacking)
         {
             controller.Stop();
         }
-
+        else if (block)
+        {
+            controller.Stop();
+        }
         else if (dash)
         {
+            if (controller.m_FacingRight)
+            {
+                dashDirection = 1;
+            }
+            else
+            {
+                dashDirection = -1;
+            }
             controller.Move(dashDirection* dashSpeed* Time.fixedDeltaTime, false, false);
             animator.SetBool("Roll", true);
         }
-
+    
         else
         {
-            controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+            controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+            
         }
         
         jump = false;

@@ -14,7 +14,6 @@ public class PlayerCombatScript : MonoBehaviour
     public int attackDamage = 40;
 
     public float attackRate = 2f;
-    float nextAttackTime = 0f;
 
     //float attackDamageTime = 0f;
     public float damagedelay = 0.25f;
@@ -30,24 +29,26 @@ public class PlayerCombatScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Attack"))
-        {
-            animator.SetBool("Attack1", true);
-        }
+       // if (Input.GetButton("Attack") && !Playermove.attacking)
+       // {
+        //    animator.SetBool("Attack1", true);
+        //}
     }
   
     public void Attack(float delay, int attackDamage)
     {
-        Playermove.Attacking = true;
+        Playermove.attacking = true;
         StartCoroutine(DelayAction(delay));
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach(Collider2D enemy in hitEnemies)
+        if (Playermove.attacking)
         {
-            Debug.Log("We hit " + enemy.name);
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-        }
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("We hit " + enemy.name);
+                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            }
+        }
     }
 
     public void TakeDamage(int damage)

@@ -8,8 +8,8 @@ public class Knight_Idle : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        
-        PlayerMovement playermove = animator.GetComponent<PlayerMovement>();
-        playermove.Attacking = false;
+        //PlayerMovement playermove = animator.GetComponent<PlayerMovement>();
+       // playermove.attacking = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

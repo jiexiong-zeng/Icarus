@@ -7,19 +7,24 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
-	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
+	[SerializeField] private LayerMask m_WhatIsGround;  
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
-	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
-	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
+	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+	[SerializeField] private Transform m_WallCheck1;
+	[SerializeField] private Transform m_WallCheck2;
 
+	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+
+	public float initialGravity = 2f;
 	const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	public bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-
+	public bool falling;
 	public Animator animator;
+	public bool atLadder;
 
 	[Header("Events")]
 	[Space]
@@ -32,7 +37,7 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
-	
+	public bool grab;
 
     public void Update()
     {
@@ -70,15 +75,35 @@ public class CharacterController2D : MonoBehaviour
 
 		if (!m_Grounded && m_Rigidbody2D.velocity.y < -0.01f)
         {
+			falling = true;
 			animator.SetBool("Jumping", false);
 			animator.SetBool("Falling", true);
         }
 
 		if (m_Grounded && !wasGrounded)
         {
+			falling = false;
 			animator.SetBool("Jumping", false);
 			animator.SetBool("Falling", false);
 		}
+
+
+		Collider2D[] wall1 = Physics2D.OverlapCircleAll(m_WallCheck1.position, .01f , m_WhatIsGround);
+		Collider2D[] wall2 = Physics2D.OverlapCircleAll(m_WallCheck2.position, .01f, m_WhatIsGround);
+
+
+		if (wall1.Length == 0 && wall2.Length > 0)
+        {
+			grab = true;
+			falling = false;
+			animator.SetBool("Grab", true);
+        }
+        else
+        {
+			grab = false;
+			animator.SetBool("Grab", false);
+		}
+
 	}
 
 
@@ -93,6 +118,16 @@ public class CharacterController2D : MonoBehaviour
 				crouch = true;
 			}
 		}
+
+		if (grab)
+        {
+			Stop();
+			m_Rigidbody2D.gravityScale = 0f;
+        }
+        else
+        {
+			m_Rigidbody2D.gravityScale = initialGravity;
+        }
 
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
@@ -154,12 +189,25 @@ public class CharacterController2D : MonoBehaviour
 			//change from addforce to set veloctiy
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 		}
+
+	}
+
+	public void ClimbLadder()
+    {
+		m_Rigidbody2D.velocity = new Vector2(0, 2f);
 	}
 
     public void Stop()
     {
 		m_Rigidbody2D.velocity = new Vector2(0, 0);
 	}
+
+
+	public void Roll()
+    {
+
+    }
+
     private void Flip()
 	{
 		// Switch the way the player is labelled as facing.

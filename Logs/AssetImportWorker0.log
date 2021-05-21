@@ -7798,3 +7798,4 @@ Received Import Request.
 Start importing Assets/Scythe.prefab using Guid(14940a54b9c4a2f4489fedaf78e8e620) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1252ab152196e22a2cf8194e33f5300') in 0.113386 seconds
   Import took 0.117197 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

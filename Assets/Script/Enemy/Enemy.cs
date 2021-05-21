@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public aggro_ctrl test;
 
-
     public int maxHealth = 100;
     public int currentHealth;
+
+    public Transform attack;
+    public float attackRange = 0.7f;
+    public float scytheRange = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +21,13 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
+    //Called by player combat  
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
         //animator.SetBool("Aggroed", true);
-        //Debug.Log("aggro on");
+        Debug.Log("aggro on");
         test.aggroed = true;
         if (currentHealth <= 0)
         {
@@ -50,8 +53,16 @@ public class Enemy : MonoBehaviour
        }
     }
 
-    void Update()
+    //Called by movement animation script
+    public void DealDamage()
     {
-        
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attack.position, scytheRange);
+        foreach (Collider2D collider in hitColliders)
+        {
+            if (collider.tag == "Player")
+            {
+                collider.GetComponent<PlayerCombatScript>().TakeDamage(10);
+            }
+        }
     }
 }

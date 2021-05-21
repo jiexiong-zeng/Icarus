@@ -7716,3 +7716,48 @@ System memory in use after: 143.9 MB.
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 3832.
 Total: 2.214100 ms (FindLiveObjects: 0.242000 ms CreateObjectMapping: 0.108900 ms MarkObjects: 1.782500 ms  DeleteObjects: 0.079800 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 3761.863608 seconds.
+  path: Assets/Scenes/MeleeAi.unity
+  artifactKey: Guid(a3787a60088385841889dc8d0782225e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MeleeAi.unity using Guid(a3787a60088385841889dc8d0782225e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26f0bd875a917686dadd617cac73bf9d') in 0.014211 seconds
+  Import took 0.019063 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001308 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.665 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.63 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3152 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 143.8 MB.
+System memory in use after: 143.9 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 3836.
+Total: 2.379700 ms (FindLiveObjects: 0.298900 ms CreateObjectMapping: 0.127200 ms MarkObjects: 1.869700 ms  DeleteObjects: 0.083100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 344.943888 seconds.
+  path: Assets/Scythe_move.cs
+  artifactKey: Guid(f66160d6908434602afe464aa9b37547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scythe_move.cs using Guid(f66160d6908434602afe464aa9b37547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb51f674b9ede90b6a7ba0068ae056ca') in 0.011154 seconds
+  Import took 0.015660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007072 seconds.
+  path: Assets/Scythe_move.cs
+  artifactKey: Guid(f66160d6908434602afe464aa9b37547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scythe_move.cs using Guid(f66160d6908434602afe464aa9b37547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb51f674b9ede90b6a7ba0068ae056ca') in 0.001915 seconds
+  Import took 0.005382 seconds .
+

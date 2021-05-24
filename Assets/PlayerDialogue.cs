@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDialogue : MonoBehaviour
 {
-    public float InteractionRadius;
+    public float InteractionRadius = 1;
     public DialogueController dialogueController;
     public DialogueData dialogueData;
     public LayerMask NPCLayers;
@@ -16,15 +16,16 @@ public class PlayerDialogue : MonoBehaviour
         if (npcColliders.Length != 0)
         {
             string name = npcColliders[0].name;
-            Debug.Log(name);
+            //Debug.Log(name);
             foreach (Dialogue dialogue in dialogueData.interactions)
             {
                 //Find the specific interaction
                 if (dialogue.NPCname == name)
                 {
-                    Debug.Log("NPC name is " + dialogue.NPCname);
-                    Debug.Log("First dialogue is " + dialogue.dialogues[0].Text);
-                    dialogueController.startDialogue(dialogue);
+                    //Debug.Log("NPC name is " + dialogue.NPCname);
+                    //Debug.Log("First dialogue is " + dialogue.dialogues[0].Text);
+                    if(Input.GetKey("e"))
+                        dialogueController.startDialogue(dialogue);
                     //break;
                 }
             }

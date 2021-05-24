@@ -7,48 +7,30 @@ public class PlayerCombatScript : MonoBehaviour
 
     public Animator animator;
     public PlayerMovement Playermove;
-
     public Transform attackPoint;
-    public float attackRange = 0.5f;
     public LayerMask enemyLayers;
-    public int attackDamage = 40;
 
-    public float attackRate = 2f;
-
-    //float attackDamageTime = 0f;
-    public float damagedelay = 0.25f;
-
-    public int currentHealth;
+    public float attackRange = 0.5f;
     public int maxHealth = 100;
+    private int currentHealth;
 
     void Start()
     {
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       // if (Input.GetButton("Attack") && !Playermove.attacking)
-       // {
-        //    animator.SetBool("Attack1", true);
-        //}
-    }
-  
     public void Attack(float delay, int attackDamage)
     {
-        Playermove.attacking = true;
-        StartCoroutine(DelayAction(delay));
-        if (Playermove.attacking)
-        {
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+       Playermove.animationLocked = true;
+       StartCoroutine(DelayAction(delay));
+       Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("We hit " + enemy.name);
-                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-            }
-        }
+       foreach (Collider2D enemy in hitEnemies)
+       {
+            Debug.Log("We hit " + enemy.name);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+       }
+   
     }
 
     public void TakeDamage(int damage)

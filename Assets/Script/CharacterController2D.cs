@@ -1,212 +1,159 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public class CharacterController2D : MonoBehaviour
 {
+	private Rigidbody2D m_Rigidbody2D;
+	private Animator animator;
+	private PlayerMovement playermove;
+	private Vector3 m_Velocity = Vector3.zero;
+	public Tilemap tile;
+
+
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
-	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
-	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
-	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
-	[SerializeField] private LayerMask m_WhatIsGround;  
+	[SerializeField] private LayerMask m_WhatIsGround;
+	[SerializeField] private LayerMask m_WhatIsLadder;
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Transform m_WallCheck1;
 	[SerializeField] private Transform m_WallCheck2;
-
-	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+	[Space]
+	 
 
 	public float initialGravity = 2f;
-	const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
 	public bool m_Grounded;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
-	private Vector3 m_Velocity = Vector3.zero;
 	public bool falling;
-	public Animator animator;
+	public float movementSmoothing = 0.05f;
+
 	public bool atLadder;
+	private float ladderPosX;
+	private bool wasOnLadder;
+	public bool atLedge;
 
-	[Header("Events")]
-	[Space]
-
-	public UnityEvent OnLandEvent;
-
-	[System.Serializable]
-	public class BoolEvent : UnityEvent<bool> { }
-
-	public BoolEvent OnCrouchEvent;
-	private bool m_wasCrouching = false;
-
-	public bool grab;
-
-    public void Update()
-    {
-		//groundtime -= Time.deltaTime;
-	}
     private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
-		if (OnLandEvent == null)
-			OnLandEvent = new UnityEvent();
-
-		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
+		playermove = GetComponent<PlayerMovement>();
+		
 	}
 
 	private void FixedUpdate()
 	{
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
 
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+
+		m_Grounded = false;
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, .01f , m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-				//groundtime = groundedbuffer; ///
-				if (!wasGrounded)
-					OnLandEvent.Invoke();
 			}
 		}
 
-		if (!m_Grounded && m_Rigidbody2D.velocity.y < -0.01f)
-        {
-			falling = true;
-			animator.SetBool("Jumping", false);
-			animator.SetBool("Falling", true);
-        }
-
-		if (m_Grounded && !wasGrounded)
-        {
-			falling = false;
-			animator.SetBool("Jumping", false);
-			animator.SetBool("Falling", false);
-		}
-
-
+		atLedge = false;
 		Collider2D[] wall1 = Physics2D.OverlapCircleAll(m_WallCheck1.position, .01f , m_WhatIsGround);
 		Collider2D[] wall2 = Physics2D.OverlapCircleAll(m_WallCheck2.position, .01f, m_WhatIsGround);
-
-
 		if (wall1.Length == 0 && wall2.Length > 0)
         {
-			grab = true;
-			falling = false;
-			animator.SetBool("Grab", true);
+			atLedge= true;
         }
-        else
+
+		atLadder = false;
+		
+		Collider2D[] ladder = Physics2D.OverlapCircleAll(m_GroundCheck.position, 0.01f, m_WhatIsLadder);
+		if (ladder.Length > 0)
         {
-			grab = false;
-			animator.SetBool("Grab", false);
-		}
-
-	}
-
-
-	public void Move(float move, bool crouch, bool jump)
-	{
-		// If crouching, check to see if the character can stand up
-		if (!crouch)
-		{
-			// If the character has a ceiling preventing them from standing up, keep them crouching
-			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-			{
-				crouch = true;
-			}
-		}
-
-		if (grab)
-        {
-			Stop();
-			m_Rigidbody2D.gravityScale = 0f;
+			atLadder = true;
+			wasOnLadder = true;
+			Vector3Int cellPosition = tile.WorldToCell(transform.position);
+			ladderPosX = tile.GetCellCenterWorld(cellPosition).x;
+			//ladderPosX = tile.GetLayoutCellCenter(cellPosition).x;
+			//ladderPosX = ladder[0].gameObject.transform.position.x;
         }
-        else
+		if (wasOnLadder && atLadder == false)
         {
+			wasOnLadder = false;
+			playermove.animationLocked = false;
 			m_Rigidbody2D.gravityScale = initialGravity;
         }
 
-		//only control the player if grounded or airControl is turned on
-		if (m_Grounded || m_AirControl)
-		{
 
-			// If crouching
-			if (crouch)
-			{
-				if (!m_wasCrouching)
-				{
-					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);
-				}
+	}
 
-				// Reduce the speed by the crouchSpeed multiplier
-				move *= m_CrouchSpeed;
 
-				// Disable one of the colliders when crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = false;
-			} else
-			{
-				// Enable the collider when not crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = true;
-
-				if (m_wasCrouching)
-				{
-					m_wasCrouching = false;
-					OnCrouchEvent.Invoke(false);
-				}
-			}
-
-			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-			// And then smoothing it out and applying it to the character
-			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+	public void Move(float speed)
+	{ 
+		Vector3 targetVelocity = new Vector2(speed*10f, m_Rigidbody2D.velocity.y);
+		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-		}
-		// If the player should jump...
-		if (m_Grounded && jump)
-		//if (m_Grounded && groundtime > 0 && jump)
+		if (speed > 0 && !m_FacingRight)
 		{
-			// Add a vertical force to the player.
-			m_Grounded = false;
-			//m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-			//change from addforce to set veloctiy
-			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
+			Flip();
 		}
-
+		else if (speed < 0 && m_FacingRight)
+		{
+			Flip();
+		}
+		
 	}
 
-	public void ClimbLadder()
+	public void Jump()
     {
-		m_Rigidbody2D.velocity = new Vector2(0, 2f);
+		m_Grounded = false;
+		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 	}
 
-    public void Stop()
+	public void ClimbLadder(bool up)
+    {
+		m_Rigidbody2D.gravityScale = 0;
+		playermove.animationLocked = true;
+		if (up)
+		{
+			transform.position = new Vector2(ladderPosX, transform.position.y + 0.1f);
+		}
+        else
+        {
+			transform.position = new Vector2(ladderPosX, transform.position.y - 0.1f);
+		}
+	}
+
+
+	public void ClimbLedge()
+    {
+		if (m_FacingRight)
+        {
+			transform.position = new Vector2(transform.position.x + 0.2f, transform.position.y + 0.7f);
+		}
+        else
+        {
+			transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y + 0.7f);
+		}
+    }
+
+	public void Freeze()
+    {
+		m_Rigidbody2D.velocity = new Vector2(0, 0);
+		m_Rigidbody2D.gravityScale = 0;
+	}
+	public void UnFreeze()
+	{
+		m_Rigidbody2D.gravityScale = initialGravity;
+	}
+
+
+	public void Stop()
     {
 		m_Rigidbody2D.velocity = new Vector2(0, 0);
 	}
 
-
-	public void Roll()
+	public void Dash(float dashSpeed)
     {
-
-    }
+		m_Rigidbody2D.velocity = new Vector2(dashSpeed, 0);
+	}
 
     private void Flip()
 	{

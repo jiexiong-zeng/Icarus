@@ -1422,3 +1422,99 @@ System memory in use after: 143.2 MB.
 Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 4182.
 Total: 1.806800 ms (FindLiveObjects: 0.211200 ms CreateObjectMapping: 0.082700 ms MarkObjects: 1.499000 ms  DeleteObjects: 0.013000 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 1744.613554 seconds.
+  path: Assets/CM vcam1.prefab
+  artifactKey: Guid(d651f9a8488183c4fb53fc2e8e94d333) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CM vcam1.prefab using Guid(d651f9a8488183c4fb53fc2e8e94d333) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb431ae197e74826a7096dcad56239ca') in 0.025539 seconds
+  Import took 0.030636 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000129 seconds.
+  path: Assets/Friction Material.physicsMaterial2D
+  artifactKey: Guid(8954ec7e7594b5547aae6778f73b6fb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Friction Material.physicsMaterial2D using Guid(8954ec7e7594b5547aae6778f73b6fb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7895259dbc060257ef8baab1707bad30') in 0.005821 seconds
+  Import took 0.009530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000188 seconds.
+  path: Assets/OneWay.prefab
+  artifactKey: Guid(5d03c30d3dae3594c8a155e0e1f5d795) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/OneWay.prefab using Guid(5d03c30d3dae3594c8a155e0e1f5d795) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57456c44919bff83c585ff5a6a3949fc') in 0.006785 seconds
+  Import took 0.011034 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000142 seconds.
+  path: Assets/Forest Background.prefab
+  artifactKey: Guid(1c8207a5398082441a48ba1897b45edd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Forest Background.prefab using Guid(1c8207a5398082441a48ba1897b45edd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03fae487cb3d881560a29aefec6546d8') in 0.144242 seconds
+  Import took 0.149077 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000222 seconds.
+  path: Assets/Mystery_Knight.prefab
+  artifactKey: Guid(acb7432c918f12e47b5054779f601ad3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mystery_Knight.prefab using Guid(acb7432c918f12e47b5054779f601ad3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8865f622cdb91eb5703256374ae06bd7') in 0.031312 seconds
+  Import took 0.035230 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000166 seconds.
+  path: Assets/Player_Knight.prefab
+  artifactKey: Guid(a2b23dd68c0d1e34ea7051f8b2ddedd0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player_Knight.prefab using Guid(a2b23dd68c0d1e34ea7051f8b2ddedd0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b449a4db84b1d4b60e55ba91a03a0188') in 0.026217 seconds
+  Import took 0.030201 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.951841 seconds.
+  path: Assets/Dialogue/Chatbubble.prefab
+  artifactKey: Guid(b887a1b3624e31145b6c3fb0cac48f89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dialogue/Chatbubble.prefab using Guid(b887a1b3624e31145b6c3fb0cac48f89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e098d27cb323339ae3d0054db4d5ae9') in 0.030970 seconds
+  Import took 0.035021 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.604227 seconds.
+  path: Assets/Dialogue/ChatBubble.cs
+  artifactKey: Guid(993a4023f43f2324a8700e54aa6e4426) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dialogue/ChatBubble.cs using Guid(993a4023f43f2324a8700e54aa6e4426) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2322127c8fd0fcbb4f5505be194cbdc') in 0.004615 seconds
+  Import took 0.008496 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.399387 seconds.
+  path: Assets/Dialogue/DialogueHandler.cs
+  artifactKey: Guid(fd51ded5c5413764288d6c271403bd59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dialogue/DialogueHandler.cs using Guid(fd51ded5c5413764288d6c271403bd59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99d58d123f07ccd4e46f176575f1bbfc') in 0.004841 seconds
+  Import took 0.008646 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000448 seconds.
+  path: Assets/Dialogue/DialogueHandler.cs
+  artifactKey: Guid(fd51ded5c5413764288d6c271403bd59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Dialogue/DialogueHandler.cs using Guid(fd51ded5c5413764288d6c271403bd59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99d58d123f07ccd4e46f176575f1bbfc') in 0.001790 seconds
+  Import took 0.005807 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.031258 seconds.
+  path: Assets/Script/DialogueData.cs
+  artifactKey: Guid(2377f388fc7327148bf402428979f265) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/DialogueData.cs using Guid(2377f388fc7327148bf402428979f265) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84f3c2576f4e7ac8cbe7480754899723') in 0.005134 seconds
+  Import took 0.008943 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.007316 seconds.
+  path: Assets/Script/DialogueController.cs
+  artifactKey: Guid(694c8e19370758d408300efc2f45c36d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/DialogueController.cs using Guid(694c8e19370758d408300efc2f45c36d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b58266a8cb26bd501fdf733c21af116') in 0.005001 seconds
+  Import took 0.008831 seconds .
+

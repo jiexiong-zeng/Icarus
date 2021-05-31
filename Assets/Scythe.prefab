@@ -123,13 +123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b829a53a52a39854a90cb1fee3c36182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 32059395026867327}
-  test: {fileID: 32059395026867326}
+  animator: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
+  damage: 0
+  aggroed: 0
   attack: {fileID: 32059396654692246}
   attackRange: 0.7
-  scytheRange: 0.2
+  idle_state: Idle
+  aggro_state: Aggroed
+  hurt_state: Hurt
+  attack_state: Attack
+  death_state: Dead
 --- !u!114 &32059395026867326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,17 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d96de8fb334f9eae57821d79fdce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 32059395026867327}
-  rb: {fileID: 32059395026867322}
+  rb: {fileID: 0}
   player: {fileID: 0}
-  attack: {fileID: 32059396654692246}
   facingRight: 0
-  aggroed: 0
-  aggroRange: {fileID: 32059396595264861}
-  speed: 2
-  delayTime: 1
-  nextAttackTime: 0
-  scytheRange: 0.2
+  aggroRange: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!95 &32059395026867327
 Animator:
   serializedVersion: 3
@@ -185,7 +184,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00305859, y: -0.06422901}
+  m_Offset: {x: -0.15222268, y: -0.06422901}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -196,7 +195,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38217854, y: 0.41888082}
+  m_Size: {x: 0.69274116, y: 0.41888082}
   m_EdgeRadius: 0
 --- !u!58 &32059395026867317
 CircleCollider2D:
@@ -211,9 +210,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.18351126}
+  m_Offset: {x: 0.0062112412, y: 0.18351126}
   serializedVersion: 2
-  m_Radius: 0.09015814
+  m_Radius: 0.083946824
 --- !u!1 &32059396595264803
 GameObject:
   m_ObjectHideFlags: 0

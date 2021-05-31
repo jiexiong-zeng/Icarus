@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_DASH = "Knight_Roll";
     const string PLAYER_BLOCK_IDLE = "Knight_Block_Idle";
     const string PLAYER_ATTACK1 = "Knight_Attack1";
-    const string PLAYER_LEDGEHANG = "Knight_LedgeGrab";
     const string PLAYER_LEDGECLIMB = "Knight_LedgeClimb";
 
 
@@ -60,11 +59,22 @@ public class PlayerMovement : MonoBehaviour
     private float xAxis;
     private float yAxis;
     public bool animationLocked = false;
-
+    public PhysicsMaterial2D noFriction, hasFriction;
+    private bool drift = false;
 
     void Update()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
+        if (xAxis == 0 || Input.GetButton("Block") || animationLocked)
+        {
+            rigidBody.sharedMaterial = hasFriction;
+        }
+        else
+        {
+            rigidBody.sharedMaterial = noFriction;
+        }
+
+
         yAxis = Input.GetAxisRaw("Vertical");
 
         dashTime -= Time.deltaTime;
@@ -75,16 +85,15 @@ public class PlayerMovement : MonoBehaviour
             invulnerableTime = invulnerableDuration;
         }
 
-        //block = false;
         block = Input.GetButton("Block");
 
-        //attack = false;
         attack = Input.GetButton("Attack");
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             jump = true;
         }
+
     }
 
 
@@ -96,7 +105,14 @@ public class PlayerMovement : MonoBehaviour
             playerHitbox.enabled = false;
         }
 
+        if (!controller.m_Grounded && rigidBody.velocity.y < 0)
+        {
+            ChangeAnimationState(PLAYER_FALL);
+            
+        }
 
+
+        /*
         if (controller.atLadder)
         {
             if(yAxis == 1)
@@ -108,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 controller.ClimbLadder(false);
             }
-        }
+        }*/
 
 
         //if not animation locked
@@ -124,27 +140,25 @@ public class PlayerMovement : MonoBehaviour
                     ChangeAnimationState(PLAYER_LEDGECLIMB);
                 }
 
+
                 else if (airMovement && xAxis != 0)
                 {
                     controller.Move(xAxis * runSpeed * Time.fixedDeltaTime);
                 }
-
-                if (rigidBody.velocity.y < 0)
-                {
-                    ChangeAnimationState(PLAYER_FALL);
-                }
-
 
             }
 
             //if grounded
             if (controller.m_Grounded)
             {
-                //jump
-                if (jump)
+                if (jump && yAxis == -1)
                 {
-                    Debug.Log("YAGHH");
-                    //controller.Move(xAxis * (runSpeed + 10) * Time.fixedDeltaTime);
+                    StartCoroutine(controller.FallThrough());
+                }
+
+                //jump
+                else if (jump)
+                {
                     controller.Jump();
                     ChangeAnimationState(PLAYER_JUMP);
                 }
@@ -190,7 +204,6 @@ public class PlayerMovement : MonoBehaviour
                 //idle
                 else
                 {
-                    controller.Stop();
                     ChangeAnimationState(PLAYER_IDLE);
                 }
             }
@@ -200,125 +213,3 @@ public class PlayerMovement : MonoBehaviour
 
     
 }
-
-    /*
-    // Update is called once per frame
-    void Update()
-    {
-        playerCollider.enabled = true;
-
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
-        dashtime -= Time.deltaTime;
-        invulnerableTime -= Time.deltaTime;
-
-        if (!controller.falling && !attacking && controller.m_Grounded)
-        {
-            if (Input.GetButton("Attack"))
-            {
-                animator.SetBool("Attack1", true);
-                block = false;
-                animator.SetBool("Block", false);
-            }
-
-            if (Input.GetButton("Block") && !dash && !jump)
-            {
-                block = true;
-                animator.SetBool("Block", true);
-            }
-            else
-            {
-                block = false;
-                animator.SetBool("Block", false);
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                block = false;
-                jump = true;
-                animator.SetBool("Block", false);
-                animator.SetBool("Jumping", true);
-            }
-
-            if (Input.GetButtonDown("Dash") && !jump && dashtime <= 0)
-            {
-                block = false;
-                animator.SetBool("Block", false);
-                dashtime = dashduration;
-                invulnerableTime = invulnerableDuration;
-                //dashDirection = Input.GetAxisRaw("Horizontal");
-            }
-            if (dashtime > 0)
-            {
-                dash = true;
-            }
-            if (invulnerableTime > 0)
-            {
-                playerCollider.enabled = false;
-            }
-          
-        }
-
-
-        if (controller.grab)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                animator.SetBool("Climb", true);
-            }
-
-            if (Input.GetButtonDown("Down"))
-            {
-                //drop
-            }
-
-
-        }
-
-
-
-    }
-    
-   
-
-    void FixedUpdate()
-    {
-        animator.SetBool("Roll", false);
-
-        
-        if (attacking)
-        {
-            controller.Stop();
-        }
-        else if (block)
-        {
-            controller.Stop();
-        }
-        else if (dash)
-        {
-            if (controller.m_FacingRight)
-            {
-                dashDirection = 1;
-            }
-            else
-            {
-                dashDirection = -1;
-            }
-            controller.Move(dashDirection* dashSpeed* Time.fixedDeltaTime, false, false);
-            animator.SetBool("Roll", true);
-        }
-    
-        else
-        {
-            controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-            
-        }
-        
-        jump = false;
-        dash = false;
-        //crouch = false;
-    }
-
-}
-    */

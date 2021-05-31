@@ -1,26 +1,38 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
+using System.Collections;
 
 public class CharacterController2D : MonoBehaviour
 {
 	private Rigidbody2D m_Rigidbody2D;
-	private Animator animator;
-	private PlayerMovement playermove;
-	private Vector3 m_Velocity = Vector3.zero;
-	public Tilemap tile;
+	//private PlayerMovement playermove;
+	private CapsuleCollider2D Collider;
+	//private Vector3 m_Velocity = Vector3.zero;
+	//public Tilemap tile;
+	public GameObject oneWayPlatform;
+
+	//slope stuff
+	private Vector2 colliderSize;
+	private float slopeDownAngle;
+	private Vector2 slopeNormalPerp;
+	private float slopeDownAngleOld;
+	private bool isOnSlope;
+	
+
 
 
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[SerializeField] private LayerMask m_WhatIsGround;
-	[SerializeField] private LayerMask m_WhatIsLadder;
-	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
+	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+	[SerializeField] private Transform m_GroundCheckLeft;
+	[SerializeField] private Transform m_GroundCheckRight;
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Transform m_WallCheck1;
 	[SerializeField] private Transform m_WallCheck2;
-	[Space]
-	 
 
+
+	public float maxSpeed = 10f;
 	public float initialGravity = 2f;
 	public bool m_Grounded;            // Whether or not the player is grounded.
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
@@ -31,27 +43,32 @@ public class CharacterController2D : MonoBehaviour
 	private float ladderPosX;
 	private bool wasOnLadder;
 	public bool atLedge;
+	private bool goingUp, goingDown;
+	private Vector3 targetVelocity;
 
-    private void Awake()
+
+	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-		playermove = GetComponent<PlayerMovement>();
-		
+		Collider = GetComponent<CapsuleCollider2D>();
+		colliderSize = Collider.size;
+		m_Rigidbody2D.gravityScale = initialGravity;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 
-
 		m_Grounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, .01f , m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-			}
-		}
+		RaycastHit2D hit_mid, hit_left, hit_right;
+		hit_mid = Physics2D.Raycast(m_GroundCheck.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
+		hit_left = Physics2D.Raycast(m_GroundCheckLeft.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
+		hit_right = Physics2D.Raycast(m_GroundCheckRight.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
+
+		if(hit_mid.collider != null || hit_left.collider != null || hit_right.collider != null)
+        {
+			m_Grounded = true;
+        }
+
 
 		atLedge = false;
 		Collider2D[] wall1 = Physics2D.OverlapCircleAll(m_WallCheck1.position, .01f , m_WhatIsGround);
@@ -62,7 +79,9 @@ public class CharacterController2D : MonoBehaviour
         }
 
 		atLadder = false;
-		
+
+		/*
+		LADDER DO NOT DELETE
 		Collider2D[] ladder = Physics2D.OverlapCircleAll(m_GroundCheck.position, 0.01f, m_WhatIsLadder);
 		if (ladder.Length > 0)
         {
@@ -79,17 +98,63 @@ public class CharacterController2D : MonoBehaviour
 			playermove.animationLocked = false;
 			m_Rigidbody2D.gravityScale = initialGravity;
         }
+		*/
 
+
+	}
+    void FixedUpdate()	
+    {
+		SlopeCheck();
+		m_Rigidbody2D.velocity = Vector2.ClampMagnitude(m_Rigidbody2D.velocity, maxSpeed);
+	}
+
+    private void SlopeCheck()
+    {
+		Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
+		SlopeCheckVertical(checkPos);
+    }
+
+
+	private void SlopeCheckVertical(Vector2 checkPos)
+	{
+		RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, 0.5f, m_WhatIsGround);
+		if (hit)
+        {
+			slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
+			slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+			if(slopeDownAngle != slopeDownAngleOld)
+            {
+				isOnSlope = true;
+			}
+
+			slopeDownAngleOld = slopeDownAngle;
+
+			Debug.DrawRay(hit.point, slopeNormalPerp, Color.red);
+			Debug.DrawRay(hit.point, hit.normal, Color.green);
+        }
 
 	}
 
 
 	public void Move(float speed)
-	{ 
-		Vector3 targetVelocity = new Vector2(speed*10f, m_Rigidbody2D.velocity.y);
-		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
+	{
+		float multiplier = 10f;
 
-			// If the input is moving the player right and the player is facing left...
+		if (isOnSlope && m_Grounded)
+		{
+			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
+			m_Rigidbody2D.velocity = targetVelocity;
+				
+		}
+		else
+		{
+			targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
+			m_Rigidbody2D.velocity = targetVelocity;
+			
+		}
+
+		// If the input is moving the player right and the player is facing left...
 		if (speed > 0 && !m_FacingRight)
 		{
 			Flip();
@@ -100,27 +165,23 @@ public class CharacterController2D : MonoBehaviour
 		}
 		
 	}
+	public IEnumerator FallThrough()
+    {
+		Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), oneWayPlatform.GetComponent<CompositeCollider2D>(),true);
+		yield return new WaitForSeconds(0.2f);
+		Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), oneWayPlatform.GetComponent<CompositeCollider2D>(),false);
+	}
+
+	public void Drift()
+    {
+		m_Rigidbody2D.velocity += Vector2.up * 0.25f;
+    }
 
 	public void Jump()
     {
 		m_Grounded = false;
 		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 	}
-
-	public void ClimbLadder(bool up)
-    {
-		m_Rigidbody2D.gravityScale = 0;
-		playermove.animationLocked = true;
-		if (up)
-		{
-			transform.position = new Vector2(ladderPosX, transform.position.y + 0.1f);
-		}
-        else
-        {
-			transform.position = new Vector2(ladderPosX, transform.position.y - 0.1f);
-		}
-	}
-
 
 	public void ClimbLedge()
     {

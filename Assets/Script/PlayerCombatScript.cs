@@ -21,9 +21,16 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void Attack(float delay, int attackDamage)
     {
-       Playermove.animationLocked = true;
-       StartCoroutine(DelayAction(delay));
-       Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        StartCoroutine(AttackRoutine(delay, attackDamage));
+    }
+
+    public IEnumerator AttackRoutine(float delay, int attackDamage)
+    {
+       //Playermove.animationLocked = true;
+        Debug.Log("Delay1");
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Delay2");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
        foreach (Collider2D enemy in hitEnemies)
        {
@@ -38,12 +45,6 @@ public class PlayerCombatScript : MonoBehaviour
         currentHealth -= damage;
     }
 
-    IEnumerator DelayAction(float delayTime)
-    {
-        //Wait for the specified delay time before continuing.
-        yield return new WaitForSeconds(delayTime);
-        //Do the action after the delay time has finished.
-    }
 
     void OnDrawGizmosSelected()
     {

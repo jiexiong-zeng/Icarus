@@ -19,7 +19,7 @@ public class MysteryKnight_Attack3 : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        playermove.currentState = "MysteryKnight_Idle";
         playermove.animationLocked = false;
     }
 }

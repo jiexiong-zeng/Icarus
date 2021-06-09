@@ -8,6 +8,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rigidBody;
     public Collider2D playerHitbox;
+    private PlayerCombatScript combat;
 
     public float runSpeed = 40f;
     public float jumpduration = 0.2f;
@@ -19,22 +20,28 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     public float dashDuration = 0.5f;
     float dashTime = 0f;
     public float invulnerableDuration = 0.2f;
-    float invulnerableTime = 0f;
+    public float invulnerableTime = 0f;
 
     bool magic = false;
     public bool airMovement;
 
     private bool jump = false;
 
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController2D>();
         rigidBody = GetComponent<Rigidbody2D>();
+        combat = GetComponent<PlayerCombatScript>();
+
+       
+
     }
 
     //Animation
-    private string currentState;
+    public string currentState;
     const string PLAYER_IDLE = "MysteryKnight_Idle";
     const string PLAYER_RUN = "MysteryKnight_Run";
     const string PLAYER_JUMP = "MysteryKnight_Jump";
@@ -43,6 +50,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     const string PLAYER_MAGIC = "MysteryKnight_Magic";
     const string PLAYER_ATTACK1 = "MysteryKnight_Attack1";
     //const string PLAYER_LEDGECLIMB = "Knight_LedgeClimb";
+
 
 
     public void ChangeAnimationState(string newState)
@@ -61,10 +69,20 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     public bool animationLocked = false;
     public PhysicsMaterial2D noFriction, hasFriction;
 
+    public float magicChargeTime = 0.6f;
+    private float magicTime;
+    
+
     void Update()
     {
+        //input
+
         xAxis = Input.GetAxisRaw("Horizontal");
-        if (xAxis == 0 || Input.GetButton("Block") || animationLocked)
+        if(dashTime > 0)
+        {
+            rigidBody.sharedMaterial = noFriction;
+        }
+        else if (xAxis == 0 || Input.GetButton("Block") || animationLocked)
         {
             rigidBody.sharedMaterial = hasFriction;
         }
@@ -85,6 +103,29 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         }
 
         magic = Input.GetButton("Block");
+        if (magic)
+        {
+            if (combat.mana >= combat.manaCost)
+            {
+                magicTime -= Time.deltaTime;
+            }
+            else
+            {
+                //flash mana bar
+            }
+        }
+        else
+        {
+            magicTime = magicChargeTime;
+        }
+        if (magicTime < 0)
+        {
+            combat.mana -= combat.manaCost;
+            combat.AttackRangeNoDelay();
+            magicTime = magicChargeTime + 0.3f;
+        }
+
+
 
         attack = Input.GetButton("Attack");
 
@@ -93,17 +134,23 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             jump = true;
         }
 
-        
+        //instructions
+        if (currentState == PLAYER_JUMP)
+        {
+            controller.isJumping = true;
+        }
+        else
+        {
+            controller.isJumping = false;
+        }
 
-    }
-
-
-    void FixedUpdate()
-    {
-        playerHitbox.enabled = true;
         if (invulnerableTime > 0)
         {
             playerHitbox.enabled = false;
+        }
+        else
+        {
+            playerHitbox.enabled = true;
         }
 
         if (!controller.m_Grounded && rigidBody.velocity.y < 0)
@@ -113,14 +160,14 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
 
         //if not animation locked
-        if (!animationLocked)
+        if (!animationLocked && !combat.dazed)
         {
             //if not grounded
             if (!controller.m_Grounded)
             {
                 if (airMovement)
                 {
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime);
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime,false);
                 }
 
             }
@@ -136,8 +183,10 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                 //jump
                 else if (jump)
                 {
-                    controller.Jump();
+                    
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, true);
                     ChangeAnimationState(PLAYER_JUMP);
+                    //controller.Jump();
                 }
 
                 //dash
@@ -145,22 +194,26 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                 {
                     if (controller.m_FacingRight)
                     {
-                        controller.Move(dashSpeed * Time.fixedDeltaTime);
+                        controller.Move(dashSpeed * Time.fixedDeltaTime, false);
                     }
                     else
                     {
-                        controller.Move(-1 * dashSpeed * Time.fixedDeltaTime);
+                        controller.Move(-1 * dashSpeed * Time.fixedDeltaTime, false);
                     }
                     ChangeAnimationState(PLAYER_DASH);
 
                 }
 
+
                 //attack
-                else if (attack)
+
+                else if (attack && combat.stamina > combat.attackStaminaCost)
                 {
-                    animationLocked = true;
-                    controller.Stop();
-                    ChangeAnimationState(PLAYER_ATTACK1);
+                        controller.Stop();
+                        ChangeAnimationState(PLAYER_ATTACK1);
+                    
+                        //flash Stamina bar
+                    
                 }
 
                 //block
@@ -174,15 +227,18 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                 //run
                 else if (xAxis != 0)
                 {
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime);
-                    ChangeAnimationState(PLAYER_RUN);
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
+                    if (!controller.isJumping)
+                    {
+                        ChangeAnimationState(PLAYER_RUN);
+                    }
                 }
 
                 //idle
                 else
                 {
-                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath")) {
-                        
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") && !controller.isJumping)
+                    {
                         ChangeAnimationState(PLAYER_IDLE);
                     }
                 }

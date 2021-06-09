@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
     private float yAxis;
     public bool animationLocked = false;
     public PhysicsMaterial2D noFriction, hasFriction;
-    private bool drift = false;
 
     void Update()
     {
@@ -143,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
                 else if (airMovement && xAxis != 0)
                 {
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime);
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
                 }
 
             }
@@ -168,11 +167,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (controller.m_FacingRight)
                     {
-                        controller.Move(dashSpeed * Time.fixedDeltaTime);
+                        controller.Move(dashSpeed * Time.fixedDeltaTime, false);
                     }
                     else
                     {
-                        controller.Move(-1 * dashSpeed * Time.fixedDeltaTime);
+                        controller.Move(-1 * dashSpeed * Time.fixedDeltaTime, false);
                     }
                     ChangeAnimationState(PLAYER_DASH);
 
@@ -197,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
                 //run
                 else if (xAxis != 0)
                 {
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime);
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
                     ChangeAnimationState(PLAYER_RUN);
                 }
 

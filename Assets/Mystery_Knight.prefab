@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4841366483452112924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.221, y: -0.054, z: 0}
+  m_LocalPosition: {x: 0.249, y: -0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4841366484106534922}
@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 3734595897988321227}
   - component: {fileID: 3734595899136785711}
   - component: {fileID: 3734595897298238802}
+  - component: {fileID: 1317711232}
   m_Layer: 6
   m_Name: Mystery_Knight
   m_TagString: Player
@@ -205,7 +206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 2281159582846828405, guid: ea8fa0028084f214eb449201905910e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -255,7 +256,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4841366484106534926
 MonoBehaviour:
@@ -288,6 +289,7 @@ MonoBehaviour:
   movementSmoothing: 0.05
   atLadder: 0
   atLedge: 0
+  isJumping: 0
 --- !u!114 &4841366484106534927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,13 +303,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4841366484106534920}
-  Playermove: {fileID: 0}
   attackPoint: {fileID: 4841366483452112925}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 8
-  attackRange: 0.2
+  attackRange: 0.25
   maxHealth: 100
+  maxStamina: 200
+  maxMana: 200
+  health: 0
+  stamina: 0
+  mana: 0
+  manaRefillRate: 50
+  staminaRefillRate: 0.2
+  attackStaminaCost: 50
+  manaCost: 50
+  floatingText: {fileID: 4827432546840907538, guid: ad49309efdf797f4cb2ef0b557f5c0d9, type: 3}
+  particleEffect: {fileID: 1962130249936933181, guid: 6c283f6a818a8c247a8aa349be15119c, type: 3}
+  dazed: 0
+  RangeProjectile: {fileID: 3128238198876545047, guid: 9bdffc981ff0d1641bce702d40d4074b, type: 3}
 --- !u!70 &3734595897988321227
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -355,11 +369,40 @@ MonoBehaviour:
   jumpduration: 0.2
   dashSpeed: 30
   dashDuration: 0.15
-  invulnerableDuration: 0.1
+  invulnerableDuration: 0.2
+  invulnerableTime: 0
   airMovement: 1
+  currentState: 
   animationLocked: 0
   noFriction: {fileID: 6200000, guid: cafb041bffae0314cb24a6db406316c4, type: 2}
   hasFriction: {fileID: 6200000, guid: 8954ec7e7594b5547aae6778f73b6fb4, type: 2}
+  magicChargeTime: 0.6
+--- !u!114 &1317711232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4841366484106534967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 4756ca430000000057e20772
+  m_ShapePath:
+  - {x: -0.08082867, y: -0.25359368, z: 0}
+  - {x: 0.07944107, y: -0.25362492, z: 0}
+  - {x: 0.06374073, y: 0.17669606, z: 0}
+  - {x: -0.06374025, y: 0.17666459, z: 0}
+  m_ShapePathHash: -331799755
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -1326
 --- !u!1 &4841366484481245045
 GameObject:
   m_ObjectHideFlags: 0

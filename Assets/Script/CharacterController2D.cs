@@ -31,7 +31,6 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_WallCheck1;
 	[SerializeField] private Transform m_WallCheck2;
 
-
 	public float maxSpeed = 10f;
 	public float initialGravity = 2f;
 	public bool m_Grounded;            // Whether or not the player is grounded.
@@ -45,7 +44,7 @@ public class CharacterController2D : MonoBehaviour
 	public bool atLedge;
 	private bool goingUp, goingDown;
 	private Vector3 targetVelocity;
-
+	public bool isJumping = false;
 
 	private void Awake()
 	{
@@ -64,19 +63,19 @@ public class CharacterController2D : MonoBehaviour
 		hit_left = Physics2D.Raycast(m_GroundCheckLeft.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
 		hit_right = Physics2D.Raycast(m_GroundCheckRight.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
 
-		if(hit_mid.collider != null || hit_left.collider != null || hit_right.collider != null)
-        {
+		if (hit_mid.collider != null || hit_left.collider != null || hit_right.collider != null)
+		{
 			m_Grounded = true;
-        }
-
+		}
+		
 
 		atLedge = false;
-		Collider2D[] wall1 = Physics2D.OverlapCircleAll(m_WallCheck1.position, .01f , m_WhatIsGround);
+		Collider2D[] wall1 = Physics2D.OverlapCircleAll(m_WallCheck1.position, .01f, m_WhatIsGround);
 		Collider2D[] wall2 = Physics2D.OverlapCircleAll(m_WallCheck2.position, .01f, m_WhatIsGround);
 		if (wall1.Length == 0 && wall2.Length > 0)
-        {
-			atLedge= true;
-        }
+		{
+			atLedge = true;
+		}
 
 		atLadder = false;
 
@@ -99,10 +98,8 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.gravityScale = initialGravity;
         }
 		*/
-
-
 	}
-    void FixedUpdate()	
+    void FixedUpdate()
     {
 		SlopeCheck();
 		m_Rigidbody2D.velocity = Vector2.ClampMagnitude(m_Rigidbody2D.velocity, maxSpeed);
@@ -127,32 +124,47 @@ public class CharacterController2D : MonoBehaviour
             {
 				isOnSlope = true;
 			}
+			if (slopeDownAngle == 0)
+			{
+				isOnSlope = false;
+			}
+
+
 
 			slopeDownAngleOld = slopeDownAngle;
 
 			Debug.DrawRay(hit.point, slopeNormalPerp, Color.red);
 			Debug.DrawRay(hit.point, hit.normal, Color.green);
-        }
+
+
+
+		}
 
 	}
 
-
-	public void Move(float speed)
+	private float jumptime;
+	public void Move(float speed, bool jump)
 	{
 		float multiplier = 10f;
 
-		if (isOnSlope && m_Grounded)
+		if (m_Grounded && isOnSlope && !isJumping)
 		{
 			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
-			m_Rigidbody2D.velocity = targetVelocity;
 				
 		}
 		else
 		{
 			targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
-			m_Rigidbody2D.velocity = targetVelocity;
-			
 		}
+
+		if (jump)
+        {
+			jumptime = Time.time;
+			m_Grounded = false;
+			targetVelocity.y = m_JumpForce;
+        }
+
+		m_Rigidbody2D.velocity = targetVelocity;
 
 		// If the input is moving the player right and the player is facing left...
 		if (speed > 0 && !m_FacingRight)
@@ -211,10 +223,6 @@ public class CharacterController2D : MonoBehaviour
 		m_Rigidbody2D.velocity = new Vector2(0, 0);
 	}
 
-	public void Dash(float dashSpeed)
-    {
-		m_Rigidbody2D.velocity = new Vector2(dashSpeed, 0);
-	}
 
     private void Flip()
 	{

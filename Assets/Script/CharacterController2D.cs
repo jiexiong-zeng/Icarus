@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -46,7 +47,19 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 targetVelocity;
 	public bool isJumping = false;
 
-	private void Awake()
+
+    private void Awake()
+    {
+		DontDestroyOnLoad(this.gameObject);
+    }
+
+	void OnSceneLoaded() {
+
+		GameObject SpawnPoint = GameObject.Find("SpawnPoint");
+		if (SpawnPoint != null)
+			transform.position = SpawnPoint.transform.position;
+    }
+    private void Start()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		Collider = GetComponent<CapsuleCollider2D>();

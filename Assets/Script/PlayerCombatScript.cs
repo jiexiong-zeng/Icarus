@@ -14,13 +14,17 @@ public class PlayerCombatScript : MonoBehaviour
 
     public float attackRange = 0.5f;
 
-    public int maxHealth = 200;
-    public float maxStamina = 200;
-    public int maxMana = 200;
+    public float maxHealth = 200f;
+    public float maxStamina = 200f;
+    public float maxMana = 200f;
 
-    public int health;
+    public float health;
     public float stamina;
-    public int mana;
+    public float mana;
+    public HpBar healthBar;
+    public HpBar manaBar;
+    public HpBar stamBar;
+    bool isHUDon;
 
     public int manaRefillRate = 50;
     public float staminaRefillRate = 0.2f;
@@ -45,6 +49,16 @@ public class PlayerCombatScript : MonoBehaviour
         stamina = maxStamina;
         mana = 0;
 
+        isHUDon = GameObject.Find("HPBar") == null ? false : true;
+        if (isHUDon)
+        {
+            healthBar = GameObject.Find("HPBar").GetComponent<HpBar>();
+            manaBar = GameObject.Find("Mana").GetComponent<HpBar>();
+            stamBar = GameObject.Find("Stamina").GetComponent<HpBar>();
+            healthBar.Begin(health, maxHealth);
+            manaBar.Begin(mana, maxMana);
+            stamBar.Begin(stamina, maxStamina);
+        } 
     }
 
     void Update()
@@ -54,6 +68,8 @@ public class PlayerCombatScript : MonoBehaviour
         if (stamina < maxStamina && staminaTime <= 0)
         {
             stamina += staminaRefillRate;
+            if (isHUDon)
+                stamBar.Set(stamina / maxStamina);
         }
 
         dazedtime -= Time.deltaTime;
@@ -70,6 +86,8 @@ public class PlayerCombatScript : MonoBehaviour
     public void Attack(float delay, int attackDamage)
     {
         stamina -= attackStaminaCost;
+        if (isHUDon)
+            stamBar.DropHealth(stamina / maxStamina);
         staminaTime = staminaRegenDelay;
         StartCoroutine(AttackRoutine(delay, attackDamage));
     }
@@ -87,6 +105,8 @@ public class PlayerCombatScript : MonoBehaviour
             {
                 mana = maxMana;
             }
+            if (isHUDon)
+                manaBar.GainHealth(mana / maxMana);
 
             Vector3 hitVector = (enemy.transform.position - transform.position).normalized;
             hitVector.y += 0.01f;
@@ -131,6 +151,8 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void AttackRangeNoDelay()
     {
+        if (isHUDon)
+            manaBar.DropHealth(mana / maxMana);
         Vector3 spawnPos;
         if (transform.localScale.x == 1)
         {
@@ -156,6 +178,8 @@ public class PlayerCombatScript : MonoBehaviour
         //instantiate blood effect
         Instantiate(particleEffect, transform.position, Quaternion.identity);
         health -= damage;
+        if (isHUDon)
+            healthBar.DropHealth(health/maxHealth);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

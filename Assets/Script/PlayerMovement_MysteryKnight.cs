@@ -27,6 +27,8 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
     private bool jump = false;
 
+    public HpBar manaBar;
+
 
 
     void Start()
@@ -36,8 +38,8 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         combat = GetComponent<PlayerCombatScript>();
 
-       
-
+        if(GameObject.Find("Mana"))
+            manaBar = GameObject.Find("Mana").GetComponent<HpBar>();
     }
 
     //Animation
@@ -112,6 +114,8 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             else
             {
                 //flash mana bar
+                if (GameObject.Find("HPBar"))
+                    StartCoroutine(manaBar.Flash());
             }
         }
         else

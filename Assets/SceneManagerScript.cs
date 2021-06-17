@@ -17,7 +17,6 @@ public class SceneManagerScript : MonoBehaviour
     {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Player.transform.position = transform.position;
-        Debug.Log("OnSceneLoaded: " + scene.name);
         
     }
 

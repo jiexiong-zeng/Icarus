@@ -10,17 +10,17 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
-  - Player
   - Obstacle
-  - Hitbox
-  - Ladder
+  - Player
+  - Enemy
   - NPC
-  - Dead
-  - Projectile Enemy
-  - Projectile Player
+  - 
+  - Enemy Blocker
+  - Enemy Projectile
+  - 'Player Projectile '
   - 
   - 
   - 

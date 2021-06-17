@@ -10,11 +10,13 @@ public class MysteryKnight_Attack2 : StateMachineBehaviour
     private float delaytime;
     PlayerMovement_MysteryKnight playermove;
     PlayerCombatScript combat;
+    private bool flashed;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         combat = animator.GetComponent<PlayerCombatScript>();
         playermove = animator.GetComponent<PlayerMovement_MysteryKnight>();
+        flashed = false;
         animator.SetBool("continueCombo", false);
         delaytime = delay + 0.2f;
         playermove.animationLocked = true;
@@ -25,9 +27,17 @@ public class MysteryKnight_Attack2 : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         delaytime -= Time.deltaTime;
-        if (Input.GetButton("Attack") && delaytime < 0 && combat.stamina > combat.attackStaminaCost)
+        if (Input.GetButton("Primary") && delaytime < 0)
         {
-            animator.SetBool("continueCombo", true);
+            if (combat.stamina > combat.attackStaminaCost)
+            {
+                animator.SetBool("continueCombo", true);
+            }
+            else if (!flashed)
+            {
+                combat.FlashStaminaBar();
+                flashed = true;
+            }
         }
     }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

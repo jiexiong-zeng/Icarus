@@ -7,7 +7,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     private CharacterController2D controller;
     private Animator animator;
     private Rigidbody2D rigidBody;
-    public Collider2D playerHitbox;
+    private Collider2D playerHitbox;
     private PlayerCombatScript combat;
 
     public float runSpeed = 40f;
@@ -22,14 +22,8 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     public float invulnerableDuration = 0.2f;
     public float invulnerableTime = 0f;
 
-    bool magic = false;
-    public bool airMovement;
-
+    private bool magic = false;
     private bool jump = false;
-
-    public HpBar manaBar;
-
-
 
     void Start()
     {
@@ -37,9 +31,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         controller = GetComponent<CharacterController2D>();
         rigidBody = GetComponent<Rigidbody2D>();
         combat = GetComponent<PlayerCombatScript>();
-
-        if(GameObject.Find("Mana"))
-            manaBar = GameObject.Find("Mana").GetComponent<HpBar>();
+        playerHitbox = GetComponent<CapsuleCollider2D>();
     }
 
     //Animation
@@ -51,9 +43,6 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     const string PLAYER_DASH = "MysteryKnight_Dash";
     const string PLAYER_MAGIC = "MysteryKnight_Magic";
     const string PLAYER_ATTACK1 = "MysteryKnight_Attack1";
-    //const string PLAYER_LEDGECLIMB = "Knight_LedgeClimb";
-
-
 
     public void ChangeAnimationState(string newState)
     {
@@ -73,18 +62,64 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
     public float magicChargeTime = 0.6f;
     private float magicTime;
-    
 
-    void Update()
+    private float debugi;
+    private void DashCheck()
     {
-        //input
+        dashTime -= Time.deltaTime;
+        invulnerableTime -= Time.deltaTime;
+        if (Input.GetButtonDown("Dash") && dashTime < 0)
+        {
+            if (combat.stamina >= combat.dashStaminaCost)
+            {
+                combat.Dash();
+                debugi += 1;
+                Debug.Log(debugi);
+                dashTime = dashDuration;
+                invulnerableTime = invulnerableDuration;
+            }
+            else
+            {
+                combat.FlashStaminaBar();
+            }
+        }
+    }
 
-        xAxis = Input.GetAxisRaw("Horizontal");
-        if(dashTime > 0)
+    private void MagicCheck()
+    {
+        if (magic)
+        {
+            if (combat.mana >= combat.manaCost)  // sufficient mana
+            {
+                magicTime -= Time.deltaTime; // start charging magic
+            }
+            else
+            {
+                combat.FlashManaBar();
+            }
+        }
+        else
+        {
+            magicTime = magicChargeTime; //reset magic charge to full
+        }
+
+
+        if (magicTime < 0)   //if magic fully charged
+        {
+            combat.mana -= combat.manaCost;
+            combat.AttackRangeNoDelay();
+            magicTime = magicChargeTime + 0.3f;
+        }
+    }
+
+    private void StateCheck() // Assortment of status checks
+    {
+        // Friction Material - to prevent sliding off slanted surfaces
+        if (dashTime > 0)
         {
             rigidBody.sharedMaterial = noFriction;
         }
-        else if (xAxis == 0 || Input.GetButton("Block") || animationLocked)
+        else if (xAxis == 0 || magic || animationLocked)
         {
             rigidBody.sharedMaterial = hasFriction;
         }
@@ -93,67 +128,23 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             rigidBody.sharedMaterial = noFriction;
         }
 
-
-        yAxis = Input.GetAxisRaw("Vertical");
-
-        dashTime -= Time.deltaTime;
-        invulnerableTime -= Time.deltaTime;
-        if (Input.GetButtonDown("Dash") & dashTime < 0)
-        {
-            dashTime = dashDuration;
-            invulnerableTime = invulnerableDuration;
-        }
-
-        magic = Input.GetButton("Block");
-        if (magic)
-        {
-            if (combat.mana >= combat.manaCost)
-            {
-                magicTime -= Time.deltaTime;
-            }
-            else
-            {
-                //flash mana bar
-                if (GameObject.Find("HPBar"))
-                    StartCoroutine(manaBar.Flash());
-            }
-        }
-        else
-        {
-            magicTime = magicChargeTime;
-        }
-        if (magicTime < 0)
-        {
-            combat.mana -= combat.manaCost;
-            combat.AttackRangeNoDelay();
-            magicTime = magicChargeTime + 0.3f;
-        }
-
-
-
-        attack = Input.GetButton("Attack");
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            jump = true;
-        }
-
-        //instructions
+        controller.isJumping = false;
         if (currentState == PLAYER_JUMP)
         {
             controller.isJumping = true;
         }
-        else
-        {
-            controller.isJumping = false;
-        }
 
         if (invulnerableTime > 0)
         {
-            playerHitbox.enabled = false;
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Projectile"), true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Blocker"), true);
         }
         else
         {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Projectile"), false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Blocker"), false);
             playerHitbox.enabled = true;
         }
 
@@ -162,39 +153,56 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             ChangeAnimationState(PLAYER_FALL);
         }
 
+    }
 
+
+    void Update()
+    {
+        //input
+
+        xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        magic = Input.GetButton("Secondary");
+
+        if (Input.GetButtonDown("Primary"))
+            attack = true;
+
+        if (Input.GetButtonDown("Jump"))
+            jump = true;
+
+        DashCheck();
+        MagicCheck();
+        StateCheck();
+    }    
+
+    void FixedUpdate() {
         //if not animation locked
         if (!animationLocked && !combat.dazed)
         {
             //if not grounded
             if (!controller.m_Grounded)
             {
-                if (airMovement)
-                {
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime,false);
-                }
-
+                controller.Move(xAxis * runSpeed * Time.fixedDeltaTime,false);
             }
 
             //if grounded
             if (controller.m_Grounded)
             {
-                if (jump && yAxis == -1)
+                if (jump)
                 {
-                    StartCoroutine(controller.FallThrough());
+                    if (yAxis == -1)    //disable collider to drop through platform
+                    {
+                        StartCoroutine(controller.FallThrough()); 
+                    }
+                    else
+                    {
+                        controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, true);
+                        ChangeAnimationState(PLAYER_JUMP);
+                    }
+                    jump = false;
                 }
 
-                //jump
-                else if (jump)
-                {
-                    
-                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, true);
-                    ChangeAnimationState(PLAYER_JUMP);
-                    //controller.Jump();
-                }
-
-                //dash
-                else if (dashTime > 0)
+                else if (dashTime > 0) // if in a dash
                 {
                     if (controller.m_FacingRight)
                     {
@@ -205,22 +213,22 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                         controller.Move(-1 * dashSpeed * Time.fixedDeltaTime, false);
                     }
                     ChangeAnimationState(PLAYER_DASH);
-
                 }
 
-
-                //attack
-
-                else if (attack && combat.stamina > combat.attackStaminaCost)
+                else if (attack)
                 {
+                    if (combat.stamina > combat.attackStaminaCost)
+                    {
                         controller.Stop();
                         ChangeAnimationState(PLAYER_ATTACK1);
-                    
-                        //flash Stamina bar
-                    
+                    }
+                    else
+                    {
+                        combat.FlashStaminaBar();
+                    }
+                    attack = false;
                 }
 
-                //block
                 else if (magic)
                 {
                     controller.Stop();
@@ -228,27 +236,21 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                 }
 
 
-                //run
                 else if (xAxis != 0)
                 {
                     controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
                     if (!controller.isJumping)
-                    {
                         ChangeAnimationState(PLAYER_RUN);
-                    }
                 }
 
-                //idle
-                else
+                else  //idle
                 {
                     if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") && !controller.isJumping)
-                    {
                         ChangeAnimationState(PLAYER_IDLE);
-                    }
                 }
             }
         }
-        jump = false;
+       
     }
 
     

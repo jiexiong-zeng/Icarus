@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1186351150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186351151}
+  - component: {fileID: 1186351153}
+  - component: {fileID: 1186351152}
+  m_Layer: 11
+  m_Name: Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186351151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186351150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4364068776985997556}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1186351153
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186351150}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013551526, y: -0.007905215}
+  m_Size: {x: 0.47289696, y: 0.7447794}
+  m_Direction: 0
+--- !u!50 &1186351152
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186351150}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1488803424
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488803425}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,10 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 4364068777014203269}
   playerLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   maxHealth: 100
   attackColliderRadius: 0.22
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
@@ -86,7 +154,7 @@ MonoBehaviour:
   isOnSlope: 0
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   m_GroundCheck: {fileID: 1488803425}
   m_GapCheck: {fileID: 1000336899320816568}
   maxSpeed: 10
@@ -109,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebee919acfc9154daba5dd8f57b5335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 3
   attackRange: 0.7
   currentState: 
   animationLocked: 0
@@ -118,7 +186,7 @@ MonoBehaviour:
   aggroDuration: 10
   aggroed: 0
   delaybtwAttack: 1.5
-  patrol: 1
+  patrol: 0
   m_PatrolPoint1: {fileID: 2682951047794387318}
   m_PatrolPoint2: {fileID: 3942902808163815118}
 --- !u!1 &4473791857712100498
@@ -130,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3942902808163815118}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2682951047794387318}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1000336899320816568}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: GapCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,6 +366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 6256419526757083269, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083271, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: attack
       value: 
@@ -336,11 +408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.36
+      value: 2.037
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: -2.322
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -386,6 +458,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AggroRange
       objectReference: {fileID: 0}
+    - target: {fileID: 6256419526995519108, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256419526995519108, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6256419526995519110, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_Size.x
       value: 2.3129745
@@ -415,10 +495,5 @@ GameObject:
 --- !u!4 &4364068776985997556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
-  m_PrefabInstance: {fileID: 7656978115875559544}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4364068777014203269 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6256419526804360189, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
   m_PrefabInstance: {fileID: 7656978115875559544}
   m_PrefabAsset: {fileID: 0}

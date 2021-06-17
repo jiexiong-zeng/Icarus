@@ -107,7 +107,6 @@ public class EnemyController : MonoBehaviour
 
 	}
 
-
 	public void Move(float speed)
 	{
 		float multiplier = 10f;

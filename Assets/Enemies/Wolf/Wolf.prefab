@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &297348479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297348480}
+  - component: {fileID: 297348482}
+  - component: {fileID: 297348481}
+  m_Layer: 11
+  m_Name: Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &297348480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297348479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1716487845505153790}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &297348482
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297348479}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008151437, y: -0.050328247}
+  m_Size: {x: 0.5180147, y: 0.20332512}
+  m_Direction: 1
+--- !u!50 &297348481
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297348479}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &563669555
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563669556}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1066724232}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: GapCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088176034}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1716487845373738027}
   - component: {fileID: 1716487845373738021}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AggroRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +262,7 @@ GameObject:
   - component: {fileID: 1716487845505153665}
   - component: {fileID: 1716487845505153664}
   - component: {fileID: 1716487845505153671}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +286,7 @@ Transform:
   - {fileID: 1066724232}
   - {fileID: 563669556}
   - {fileID: 1088176034}
+  - {fileID: 297348480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -283,7 +353,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
@@ -342,7 +412,7 @@ MonoBehaviour:
   isOnSlope: 0
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   m_GroundCheck: {fileID: 1716487845878134592}
   m_GapCheck: {fileID: 1066724232}
   maxSpeed: 10
@@ -365,10 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 1716487844519121129}
   playerLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   maxHealth: 100
   attackColliderRadius: 0.1
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
@@ -390,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8225a05b0c98f4ba5e643cdf5d6eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
+  moveSpeed: 10
   attackRange: 0.5
   currentState: 
   animationLocked: 0

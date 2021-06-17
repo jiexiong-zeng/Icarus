@@ -7,7 +7,7 @@ using TMPro;
 public class EnemyCombat : MonoBehaviour
 {
 
-    public Transform attackPoint;
+    private Transform attackPoint;
     public LayerMask playerLayers;
 
     public int maxHealth = 100;
@@ -19,6 +19,7 @@ public class EnemyCombat : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        attackPoint = transform.Find("AttackPoint");
     }
 
     public void Attack(float delay, int attackDamage)
@@ -39,9 +40,11 @@ public class EnemyCombat : MonoBehaviour
         {
             foreach (Collider2D player in hitPlayer)
             {
-                Vector3 hitVector = (player.transform.position - transform.position).normalized;
-                hitVector.y += 0.01f;
-                player.attachedRigidbody.AddForce(hitVector * 2000);
+                //Vector3 hitVector = (player.transform.position - transform.position).normalized;
+                //hitVector.y += 0.01f;
+                Vector3 hitVector = new Vector3((player.transform.position - transform.position).normalized.x, 0, 0);
+                player.transform.position += hitVector * 0.2f;
+                //player.attachedRigidbody.AddForce(hitVector * 2000);
                 player.GetComponent<PlayerCombatScript>().TakeDamage(attackDamage);
             }
         }
@@ -76,18 +79,17 @@ public class EnemyCombat : MonoBehaviour
     public float dazedtime = -1;
     public bool dazed = false;
     public bool dead = false;
+    public bool damageframe = false;
 
     public void TakeDamage(int damage)
     {
 
         dazedtime = Time.time;
-
         currentHealth -= damage;
+        damageframe = true;
 
-
-       GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity);
+        GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity);
         dmgText.transform.GetChild(0).GetComponent<TextMeshPro>().text = damage.ToString();
-
 
 
         if (spawnParticle)
@@ -118,7 +120,11 @@ public class EnemyCombat : MonoBehaviour
 
     public void Die()
     {
-        GetComponent<CapsuleCollider2D>().enabled = false;
+        CapsuleCollider2D[] colList = transform.GetComponentsInChildren<CapsuleCollider2D>();
+        foreach (CapsuleCollider2D col in colList)
+        {
+            col.enabled = false;
+        }
         Destroy(this.gameObject,5);
     }
 

@@ -29,10 +29,11 @@ public class PlayerCombatScript : MonoBehaviour
     public int manaRefillRate = 50;
     public float staminaRefillRate = 0.2f;
     public int attackStaminaCost = 50;
+    public int dashStaminaCost = 30;
     public int manaCost = 50;
 
-    private float staminaRegenDelay = 1f;
-    private float staminaTime;
+    public float staminaRegenDelay = 1f;
+    public float staminaTime;
 
 
     public GameObject floatingText;
@@ -83,18 +84,40 @@ public class PlayerCombatScript : MonoBehaviour
         }
     }
 
+    public void FlashManaBar()
+    {
+        StartCoroutine(manaBar.Flash());
+    }
+    public void FlashStaminaBar()
+    {
+        StartCoroutine(stamBar.Flash());
+    }
+
+    public void Dash()
+    {
+        stamina -= dashStaminaCost;
+        if (isHUDon)
+           stamBar.DropHealth(stamina / maxStamina);
+        staminaTime = staminaRegenDelay;
+    }
+
     public void Attack(float delay, int attackDamage)
     {
-        stamina -= attackStaminaCost;
-        if (isHUDon)
-            stamBar.DropHealth(stamina / maxStamina);
-        staminaTime = staminaRegenDelay;
         StartCoroutine(AttackRoutine(delay, attackDamage));
     }
 
     public IEnumerator AttackRoutine(float delay, int attackDamage)
     {
+        
         yield return new WaitForSeconds(delay);
+
+        stamina -= attackStaminaCost;
+        if (isHUDon)
+            stamBar.DropHealth(stamina / maxStamina);
+        staminaTime = staminaRegenDelay;
+
+        transform.position += new Vector3(transform.localScale.x * 0.1f,0,0); //nudge player forward on attack
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
        foreach (Collider2D enemy in hitEnemies)
@@ -107,15 +130,12 @@ public class PlayerCombatScript : MonoBehaviour
             }
             if (isHUDon)
                 manaBar.GainHealth(mana / maxMana);
-
-            Vector3 hitVector = (enemy.transform.position - transform.position).normalized;
-            hitVector.y += 0.01f;
-            enemy.attachedRigidbody.AddForce(hitVector * 5000);
-            if(enemy.GetComponent<EnemyCombat>() != null)
-                enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
-            else if(enemy.GetComponent<BossCombat>() != null)
-                enemy.GetComponent<BossCombat>().TakeDamage(attackDamage);
-        }
+            Vector3 hitVector = new Vector3((enemy.transform.position - transform.position).normalized.x, 0, 0);
+            enemy.transform.position += hitVector*0.1f;
+            enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
+            //enemy.attachedRigidbody.transform.position.x += 1;
+            //enemy.attachedRigidbody.AddForce(hitVector * 1000);
+       }
    
     }
 
@@ -173,7 +193,7 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        playermove.invulnerableTime = 1f;
+        playermove.invulnerableTime = 0.2f;
         //instantiate dmgtext
         GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity);
         //set dmgtext to damage taken
@@ -184,20 +204,17 @@ public class PlayerCombatScript : MonoBehaviour
         if (isHUDon)
             healthBar.DropHealth(health/maxHealth);
     }
-
+    /*
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             dazedtime = 0.2f;
-            Vector3 hitVector = (transform.position - collider.transform.position).normalized;
-            hitVector.y += 0.05f;
-            GetComponentInParent<Rigidbody2D>().AddForce(hitVector * 3000);
+            Vector3 hitVector = new Vector3((transform.position - collider.transform.position).normalized.x,0,0);
+            GetComponentInParent<Rigidbody2D>().AddForce(hitVector * 1000);
             TakeDamage(20);
         }
-    }
-
-
+    }*/
 
 
     void OnDrawGizmosSelected()

@@ -111,8 +111,11 @@ public class PlayerCombatScript : MonoBehaviour
             Vector3 hitVector = (enemy.transform.position - transform.position).normalized;
             hitVector.y += 0.01f;
             enemy.attachedRigidbody.AddForce(hitVector * 5000);
-            enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
-       }
+            if(enemy.GetComponent<EnemyCombat>() != null)
+                enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
+            else if(enemy.GetComponent<BossCombat>() != null)
+                enemy.GetComponent<BossCombat>().TakeDamage(attackDamage);
+        }
    
     }
 

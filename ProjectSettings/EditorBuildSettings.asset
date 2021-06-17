@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Sanctuary.unity
     guid: cda156b79f89dd940a9edb478192f2ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Castle.unity
     guid: c9e9f68000acc694b87e0725c7089dd7
+  - enabled: 1
+    path: Assets/Scenes/Castle 3.unity
+    guid: 6f8330ccb91041748aeb4933d518b37f
   m_configObjects: {}

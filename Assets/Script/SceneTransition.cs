@@ -20,6 +20,8 @@ public class SceneTransition : MonoBehaviour
             SpawnPoint.transform.position = spawnPos;
             SceneManager.LoadScene(sceneToLoad);
         }
+        //Object.DontDestroyOnLoad(GameObject.Find("HUD"));
+        Object.DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
     }
 
 

@@ -34,7 +34,7 @@ public class EnemyCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackColliderRadius, playerLayers);
-
+        Debug.Log(hitPlayer[0]);
         if (!dazed)
         {
             foreach (Collider2D player in hitPlayer)

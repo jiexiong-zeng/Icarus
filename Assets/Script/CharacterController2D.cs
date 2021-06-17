@@ -40,10 +40,7 @@ public class CharacterController2D : MonoBehaviour
 	public float movementSmoothing = 0.05f;
 
 	public bool atLadder;
-	private float ladderPosX;
-	private bool wasOnLadder;
 	public bool atLedge;
-	private bool goingUp, goingDown;
 	private Vector3 targetVelocity;
 	public bool isJumping = false;
 
@@ -90,27 +87,6 @@ public class CharacterController2D : MonoBehaviour
 			atLedge = true;
 		}
 
-		atLadder = false;
-
-		/*
-		LADDER DO NOT DELETE
-		Collider2D[] ladder = Physics2D.OverlapCircleAll(m_GroundCheck.position, 0.01f, m_WhatIsLadder);
-		if (ladder.Length > 0)
-        {
-			atLadder = true;
-			wasOnLadder = true;
-			Vector3Int cellPosition = tile.WorldToCell(transform.position);
-			ladderPosX = tile.GetCellCenterWorld(cellPosition).x;
-			//ladderPosX = tile.GetLayoutCellCenter(cellPosition).x;
-			//ladderPosX = ladder[0].gameObject.transform.position.x;
-        }
-		if (wasOnLadder && atLadder == false)
-        {
-			wasOnLadder = false;
-			playermove.animationLocked = false;
-			m_Rigidbody2D.gravityScale = initialGravity;
-        }
-		*/
 	}
     void FixedUpdate()
     {
@@ -163,7 +139,6 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded && isOnSlope && !isJumping)
 		{
 			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
-				
 		}
 		else
 		{
@@ -176,7 +151,7 @@ public class CharacterController2D : MonoBehaviour
 			m_Grounded = false;
 			targetVelocity.y = m_JumpForce;
         }
-
+		//m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		m_Rigidbody2D.velocity = targetVelocity;
 
 		// If the input is moving the player right and the player is facing left...

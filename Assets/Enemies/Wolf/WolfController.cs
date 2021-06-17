@@ -10,8 +10,46 @@ public class WolfController : MonoBehaviour
     private Animator animator;
     private Transform playerPos;
 
-    public float moveSpeed = 5f;
-    public float attackRange = 0.5f;
+    [SerializeField] private float moveSpeed = 5f;
+    [HideInInspector] public bool animationLocked = false;
+    [SerializeField] private PhysicsMaterial2D noFriction, hasFriction;
+    private bool canMove;
+
+    //Animation
+    [HideInInspector] public string currentState;
+    const string IDLE = "Wolf_Idle";
+    const string RUN = "Wolf_Run";
+    const string ATTACK = "Wolf_Attack";
+    const string HURT = "Wolf_Hurt";
+    const string DEATH = "Wolf_Death";
+
+    //aggro
+    [HideInInspector] public bool aggroed = false;
+    private float aggroTime;
+    [SerializeField] private float aggroDuration = 10f;
+
+    //attack
+    private float attackTime;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float delaybtwAttack = 2f;
+
+    //patrol
+    [SerializeField] private bool patrol = false;
+    [SerializeField] private Transform m_PatrolPoint1, m_PatrolPoint2;
+    private Vector3 patrolPoint1, patrolPoint2, nextPos;
+    private float waitTime;
+    [SerializeField] private float waitDuration = 2;
+    [SerializeField] private GameObject Exclamation;
+
+    public void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState && currentState != HURT)
+            return;
+
+        animator.Play(newState);
+
+        currentState = newState;
+    }
 
     void Start()
     {
@@ -29,45 +67,24 @@ public class WolfController : MonoBehaviour
         }
     }
 
-    //Animation
-    public string currentState;
-    const string IDLE = "Wolf_Idle";
-    const string RUN = "Wolf_Run";
-    const string ATTACK = "Wolf_Attack";
-    const string HURT = "Wolf_Hurt";
-    const string DEATH = "Wolf_Death";
-
-
-    public void ChangeAnimationState(string newState)
+    void Update()
     {
-        if (currentState == newState)
-            return;
-
-        animator.Play(newState);
-
-        currentState = newState;
+        aggroTime -= Time.deltaTime;
+        waitTime -= Time.deltaTime;
+        attackTime -= Time.deltaTime;
+        canMove = StateCheck();
     }
-
-
-    public bool animationLocked = false;
-    public PhysicsMaterial2D noFriction, hasFriction;
-    private float aggroTime;
-    public float aggroDuration = 10f;
-    public bool aggroed = false;
-
-    public float delaybtwAttack = 2f;
-    private float attackTime;
-
-    public bool patrol = false;
-    [SerializeField] private Transform m_PatrolPoint1, m_PatrolPoint2;
-    Vector3 patrolPoint1, patrolPoint2, nextPos;
-
 
     void FixedUpdate()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        if (canMove)
+        {
+            Behavior();
+        }
     }
-    void Update()
+
+    bool StateCheck()
     {
         if (currentState == RUN)
         {
@@ -76,6 +93,15 @@ public class WolfController : MonoBehaviour
         else
         {
             rigidBody.sharedMaterial = hasFriction;
+        }
+
+        if (aggroTime + aggroDuration > Time.time)
+        {
+            aggroed = true;
+        }
+        else
+        {
+            aggroed = false;
         }
 
         if (combat.dead)
@@ -88,55 +114,74 @@ public class WolfController : MonoBehaviour
         {
             aggroTime = Time.time;
             controller.Stop();
-            ChangeAnimationState(HURT);
+            if (combat.damageframe)
+            {
+                combat.damageframe = false;
+                ChangeAnimationState(HURT);
+            }
         }
 
         else if (!animationLocked)
         {
+            return true;
+        }
 
-            if (aggroed)
+        return false;
+        
+    }
+
+    void Behavior()
+    {
+        if (aggroed)
+        {
+            CheckFlip();
+
+            if (Vector2.Distance(playerPos.position, rigidBody.position) <= attackRange)
             {
-                CheckFlip();
 
-                if (Vector2.Distance(playerPos.position, rigidBody.position) <= attackRange)
+                controller.Stop();
+
+                if (attackTime + delaybtwAttack < Time.time)
                 {
-
-                    controller.Stop();
-
-                    if (attackTime + delaybtwAttack < Time.time)
-                    {
-                        attackTime = Time.time;
-                        ChangeAnimationState(ATTACK);
-                    }
+                    attackTime = Time.time;
+                    ChangeAnimationState(ATTACK);
                 }
-
-                else
-                {
-                    if (controller.gap || (Mathf.Abs(playerPos.position.y - rigidBody.position.y) > 0.8f && !controller.isOnSlope))
-                    {
-                        controller.Stop();
-                        ChangeAnimationState(IDLE);
-                    }
-                    else
-                    {
-                        if (playerPos.position.x - rigidBody.position.x > 0.1f)
-                        {
-                            ChangeAnimationState(RUN);
-                            controller.Move(moveSpeed * Time.deltaTime);
-                        }
-                        else if (rigidBody.position.x - playerPos.position.x > 0.1f)
-                        {
-                            ChangeAnimationState(RUN);
-                            controller.Move(-moveSpeed * Time.deltaTime);
-                        }
-                    }
-                }
-
             }
 
             else
             {
-                if (patrol)
+                if (controller.gap || (Mathf.Abs(playerPos.position.y - rigidBody.position.y) > 0.8f && !controller.isOnSlope))
+                {
+                    controller.Stop();
+                    ChangeAnimationState(IDLE);
+                }
+                else
+                {
+                    if (playerPos.position.x - rigidBody.position.x > 0.1f)
+                    {
+                        ChangeAnimationState(RUN);
+                        controller.Move(moveSpeed * Time.deltaTime);
+                    }
+                    else if (rigidBody.position.x - playerPos.position.x > 0.1f)
+                    {
+                        ChangeAnimationState(RUN);
+                        controller.Move(-moveSpeed * Time.deltaTime);
+                    }
+                }
+            }
+
+        }
+
+        else
+        {
+            if (patrol)
+            {
+                if (waitTime > 0)
+                {
+                    ChangeAnimationState(IDLE);
+                    controller.Stop();
+                }
+                else
                 {
                     if (nextPos == patrolPoint2)
                     {
@@ -148,41 +193,33 @@ public class WolfController : MonoBehaviour
                         ChangeAnimationState(RUN);
                         controller.Move(-moveSpeed * Time.deltaTime);
                     }
-
-
-                    if (transform.position.x <= patrolPoint1.x && nextPos == patrolPoint1)
-                    {
-                        nextPos = patrolPoint2;
-                        StartCoroutine(Wait());
-                    }
-
-                    if (transform.position.x >= patrolPoint2.x && nextPos == patrolPoint2)
-                    {
-                        nextPos = patrolPoint1;
-                        StartCoroutine(Wait());
-                    }
-
-
                 }
 
-                else
+                if (transform.position.x <= patrolPoint1.x && nextPos == patrolPoint1)
                 {
-                    controller.Stop();
-                    ChangeAnimationState(IDLE);
+                    nextPos = patrolPoint2;
+                    if (waitTime < 0)
+                        waitTime = waitDuration;
+                    //StartCoroutine(Wait());
                 }
+
+                if (transform.position.x >= patrolPoint2.x && nextPos == patrolPoint2)
+                {
+                    nextPos = patrolPoint1;
+                    if (waitTime < 0)
+                        waitTime = waitDuration;
+                    //StartCoroutine(Wait());
+                }
+
+
             }
 
+            else
+            {
+                controller.Stop();
+                ChangeAnimationState(IDLE);
+            }
         }
-
-        if(aggroTime + aggroDuration > Time.time)
-        {
-            aggroed = true;
-        }
-        else
-        {
-            aggroed = false;
-        }
-
     }
 
     void CheckFlip()
@@ -200,11 +237,6 @@ public class WolfController : MonoBehaviour
             }
     }
 
-
-
-
-    public GameObject Exclamation;
-   
     void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -212,6 +244,7 @@ public class WolfController : MonoBehaviour
 
             if (!aggroed)
             {
+                ChangeAnimationState(IDLE);
                 combat.dazedtime = Time.time;
                 Instantiate(Exclamation, transform.position, Quaternion.identity);
             }
@@ -219,15 +252,6 @@ public class WolfController : MonoBehaviour
             aggroTime = Time.time;
 
         }
-    }
-
-
-
-    IEnumerator Wait()
-    {
-        patrol = false;
-        yield return new WaitForSeconds(2f);
-        patrol = true;
     }
 
 

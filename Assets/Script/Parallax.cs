@@ -7,7 +7,7 @@ public class Parallax : MonoBehaviour
 
     private float length, startpos;
     public GameObject cam;
-    public float parallaxEffect;
+    public float parallaxEffect = 1f;
     // Start is called before the first frame update
     void Start()
     {

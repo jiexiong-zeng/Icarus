@@ -16,7 +16,7 @@ filters = {
 	settings = true
 }
 scopes = {
-	"last_search.AB59B443" = "physics2d"
+	"last_search.AB59B443" = "postprocess"
 }
 providers = {
 	asset = {

@@ -63,8 +63,9 @@ public class Projectile : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            Vector3 hitVector = (other.transform.position - transform.position).normalized;
-            other.attachedRigidbody.AddForce(hitVector * 5000);
+            Vector3 hitVector = new Vector3((other.transform.position - transform.position).normalized.x, 0, 0);
+            other.transform.position += hitVector * 0.2f;
+            //other.attachedRigidbody.AddForce(hitVector * 2000);
             playerCombat.TakeDamage(damage);
         }
 

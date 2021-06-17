@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 600198023}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782307186}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Patrol 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,6 +60,75 @@ Transform:
   m_Father: {fileID: 7060992372913701676}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1999876185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999876186}
+  - component: {fileID: 1999876188}
+  - component: {fileID: 1999876187}
+  m_Layer: 11
+  m_Name: Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1999876186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999876185}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7060992372913701676}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1999876188
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999876185}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.026470482, y: 0.057730824}
+  m_Size: {x: 0.31921238, y: 0.414998}
+  m_Direction: 0
+--- !u!50 &1999876187
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999876185}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7060992372913701679
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +145,7 @@ GameObject:
   - component: {fileID: 7060992372913701675}
   - component: {fileID: 7060992372913701674}
   - component: {fileID: 7060992372913701677}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Witch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +168,7 @@ Transform:
   - {fileID: 4143094026148162229}
   - {fileID: 1782307186}
   - {fileID: 600198023}
+  - {fileID: 1999876186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -224,7 +294,7 @@ MonoBehaviour:
   isOnSlope: 0
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   m_GroundCheck: {fileID: 7060992373505611041}
   m_GapCheck: {fileID: 4143094026148162229}
   maxSpeed: 10
@@ -247,10 +317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 0}
   playerLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   maxHealth: 100
   attackColliderRadius: 0.7
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
@@ -272,16 +341,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446738d8061bb3543b6091b677c4492b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   attackRange: 5
   currentState: 
   animationLocked: 0
   noFriction: {fileID: 6200000, guid: cafb041bffae0314cb24a6db406316c4, type: 2}
   hasFriction: {fileID: 6200000, guid: 8954ec7e7594b5547aae6778f73b6fb4, type: 2}
+  aggroDuration: 10
   aggroed: 0
   delaybtwAttack: 3
   targetDelay: 0.7
-  patrol: 1
+  patrol: 0
   m_PatrolPoint1: {fileID: 1782307186}
   m_PatrolPoint2: {fileID: 600198023}
 --- !u!1 &7060992373505611040
@@ -324,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7060992374627518886}
   - component: {fileID: 7060992374627518887}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AggroRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

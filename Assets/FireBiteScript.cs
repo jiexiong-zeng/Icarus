@@ -33,9 +33,10 @@ public class FireBiteScript : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log("1");
+            Vector3 hitVector = new Vector3((other.transform.position - transform.position).normalized.x, 0, 0);
+            other.transform.position += hitVector * 0.2f;
             other.gameObject.GetComponents<EnemyCombat>()[0].TakeDamage(damage);
-            Vector3 hitVector = (other.transform.position - transform.position).normalized;
-            other.attachedRigidbody.AddForce(hitVector * 5000);
+            //other.attachedRigidbody.AddForce(hitVector * 1000);
         }
 
     }

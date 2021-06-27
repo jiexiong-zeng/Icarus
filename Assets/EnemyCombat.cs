@@ -12,7 +12,7 @@ public class EnemyCombat : MonoBehaviour
 
     public int maxHealth = 100;
     public float attackColliderRadius = 0.7f;
-    public int currentHealth;
+    private int currentHealth;
 
     public GameObject floatingText;
 
@@ -20,11 +20,10 @@ public class EnemyCombat : MonoBehaviour
     {
         currentHealth = maxHealth;
         attackPoint = transform.Find("AttackPoint");
-
     }
+
     public void Attack(float delay, int attackDamage)
     {
-
         if (attackPoint == null)
         {
             return;
@@ -35,31 +34,23 @@ public class EnemyCombat : MonoBehaviour
     public IEnumerator AttackRoutine(float delay, int attackDamage)
     {
         yield return new WaitForSeconds(delay);
-        transform.position += new Vector3(transform.localScale.x * 0.1f, 0, 0); //nudge forward on attack
-
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackColliderRadius, playerLayers);
-
-        if (!dazed && !dead)
+        Debug.Log(hitPlayer[0]);
+        if (!dazed)
         {
             foreach (Collider2D player in hitPlayer)
             {
-                if (player.GetComponent<PlayerCombatScript>() != null)
-                {
-                    //Vector3 hitVector = (player.transform.position - transform.position).normalized;
-                    //hitVector.y += 0.01f;
-                    Vector3 hitVector = new Vector3((player.transform.position - transform.position).x, 0, 0);
-                    hitVector = Vector3.Normalize(hitVector);
-                    player.attachedRigidbody.AddForce(hitVector*1000);
-                    player.transform.position += hitVector * 0.1f;
-                    //player.attachedRigidbody.AddForce(hitVector * 2000);
-                    player.GetComponent<PlayerCombatScript>().TakeDamage(attackDamage);
-                }
+                //Vector3 hitVector = (player.transform.position - transform.position).normalized;
+                //hitVector.y += 0.01f;
+                Vector3 hitVector = new Vector3((player.transform.position - transform.position).normalized.x, 0, 0);
+                player.transform.position += hitVector * 0.2f;
+                //player.attachedRigidbody.AddForce(hitVector * 2000);
+                player.GetComponent<PlayerCombatScript>().TakeDamage(attackDamage);
             }
         }
 
     }
     public GameObject RangeProjectile;
-    private GameObject SpawnedProjectile;
     public void AttackRange(float delay)
     {
         if (RangeProjectile == null)
@@ -75,27 +66,21 @@ public class EnemyCombat : MonoBehaviour
 
         if (!dazed)
         {
-            SpawnedProjectile = Instantiate(RangeProjectile, transform.position, Quaternion.identity);
+            Instantiate(RangeProjectile, transform.position, Quaternion.identity);
         }
 
     }
 
 
-    public bool canBeDazed = true;
+
     public bool spawnParticle = false;
-    public GameObject bloodEffect;
-    public GameObject manaParticle;
-    public int manaRecoverAmount = 50;
+    public GameObject particleEffect;
+    private float dazedDuration = 1f;
+    public float dazedtime = -1;
+    public bool dazed = false;
+    public bool dead = false;
+    public bool damageframe = false;
 
-    [SerializeField] private float dazedDuration = 1f;
-    [HideInInspector] public float dazedtime = -1;
-    [HideInInspector] public bool dazed = false;
-    [HideInInspector] public bool dead = false;
-    [HideInInspector] public bool damageframe = false;
-
-    GameObject healthBar;
-    public GameObject healthBarPrefab;
-    public Vector3 healthBarOffset = new Vector3(-0.2f,0.4f,0);
     public void TakeDamage(int damage)
     {
 
@@ -103,29 +88,13 @@ public class EnemyCombat : MonoBehaviour
         currentHealth -= damage;
         damageframe = true;
 
-        if (!healthBar)
-        {
-
-            healthBar = Instantiate(healthBarPrefab, transform.position + healthBarOffset, Quaternion.identity);
-        }
-
-        if (healthBar)
-        {
-            healthBar.GetComponent<EnemyHealthBar>().healthPercentage = (float)currentHealth / maxHealth;
-        }
-
-
-        GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity); 
+        GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity);
         dmgText.transform.GetChild(0).GetComponent<TextMeshPro>().text = damage.ToString();
+
 
         if (spawnParticle)
         {
-            Instantiate(bloodEffect, transform.position, Quaternion.identity); //blood
-        }
-
-        if (SpawnedProjectile)
-        {
-            SpawnedProjectile.GetComponent<Projectile>().destroySelf = true;
+            Instantiate(particleEffect, transform.position, Quaternion.identity);
         }
 
         if (currentHealth < 0)
@@ -138,7 +107,7 @@ public class EnemyCombat : MonoBehaviour
 
     void Update()
     {
-        if(dazedtime + dazedDuration > Time.time && canBeDazed)
+        if(dazedtime + dazedDuration > Time.time)
         {
             dazed = true;
         }
@@ -146,55 +115,23 @@ public class EnemyCombat : MonoBehaviour
         {
             dazed = false;
         }
-
-        if (healthBar)
-        {
-            healthBar.transform.position = transform.position + healthBarOffset;
-        }
-
     }
 
 
     public void Die()
     {
-        if (healthBar)
-        {
-            Destroy(healthBar);
-        }
-
         CapsuleCollider2D[] colList = transform.GetComponentsInChildren<CapsuleCollider2D>();
         foreach (CapsuleCollider2D col in colList)
         {
             col.enabled = false;
         }
-        Destroy(this.gameObject,10);
-
-        StartCoroutine(SpawnMana(1f));
-        
-    }
-    IEnumerator fade(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        for (float i = 300; i >= 0; i--)
-        {
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, i / 300);
-            yield return new WaitForSeconds(0.01f);
-        }
-    }
-    IEnumerator SpawnMana(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Instantiate(manaParticle, transform.position, Quaternion.identity); //mana
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>().ChangeMana(manaRecoverAmount);
-        StartCoroutine(fade(2));
+        Destroy(this.gameObject,5);
     }
 
 
     void OnDrawGizmosSelected()
     {
-        if(attackPoint)
-            Gizmos.DrawWireSphere(attackPoint.position, attackColliderRadius);
+        Gizmos.DrawWireSphere(attackPoint.position, attackColliderRadius);
     }
 
 }

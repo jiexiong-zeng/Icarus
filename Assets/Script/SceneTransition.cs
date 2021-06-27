@@ -35,6 +35,8 @@ public class SceneTransition : MonoBehaviour
             StartCoroutine(FadetoBlack());
             
         }
+        //Object.DontDestroyOnLoad(GameObject.Find("HUD"));
+        Object.DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
     }
 
     IEnumerator FadetoBlack()

@@ -105,8 +105,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026470482, y: 0.057730824}
-  m_Size: {x: 0.31921238, y: 0.414998}
+  m_Offset: {x: -0.026470482, y: 0.038320124}
+  m_Size: {x: 0.31921238, y: 0.4538194}
   m_Direction: 0
 --- !u!50 &1999876187
 Rigidbody2D:
@@ -235,7 +235,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
@@ -276,8 +276,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.025156856, y: 0.04665923}
-  m_Size: {x: 0.2982185, y: 0.46157503}
+  m_Offset: {x: -0.0258255, y: 0.053464293}
+  m_Size: {x: 0.25136566, y: 0.48009324}
   m_Direction: 0
 --- !u!114 &7060992372913701675
 MonoBehaviour:
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_FacingRight: 1
   falling: 0
   movementSmoothing: 0.05
-  startFaceRight: 1
+  startFaceRight: 0
 --- !u!114 &7060992372913701674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,13 +322,23 @@ MonoBehaviour:
     m_Bits: 128
   maxHealth: 100
   attackColliderRadius: 0.7
+  currentHealth: 0
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
+  LightFlash: {fileID: 0}
+  LightFlashOffset: {x: 0, y: 0, z: 0}
   RangeProjectile: {fileID: 7332329667318249617, guid: a5b5f828aeb404240a70084abb2dddc7, type: 3}
+  canBeDazed: 1
   spawnParticle: 1
-  particleEffect: {fileID: 1962130249936933181, guid: 6c283f6a818a8c247a8aa349be15119c, type: 3}
+  bloodEffect: {fileID: 1962130249936933181, guid: 6c283f6a818a8c247a8aa349be15119c, type: 3}
+  manaParticle: {fileID: 5160084224683086708, guid: a191223ca19e5804fa2ac402863d9e58, type: 3}
+  manaRecoverAmount: 50
+  dazedDuration: 1
   dazedtime: -1
   dazed: 0
   dead: 0
+  damageframe: 0
+  healthBarPrefab: {fileID: 5877144230054706168, guid: f75b3e5f265418b4fb3cb705fca992ec, type: 3}
+  healthBarOffset: {x: -0.22, y: 0.3, z: 0}
 --- !u!114 &7060992372913701677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,18 +352,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  attackRange: 5
-  currentState: 
   animationLocked: 0
   noFriction: {fileID: 6200000, guid: cafb041bffae0314cb24a6db406316c4, type: 2}
   hasFriction: {fileID: 6200000, guid: 8954ec7e7594b5547aae6778f73b6fb4, type: 2}
-  aggroDuration: 10
+  currentState: 
   aggroed: 0
+  aggroDuration: 10
+  attackRange: 5
   delaybtwAttack: 3
   targetDelay: 0.7
   patrol: 0
   m_PatrolPoint1: {fileID: 1782307186}
   m_PatrolPoint2: {fileID: 600198023}
+  waitDuration: 2
 --- !u!1 &7060992373505611040
 GameObject:
   m_ObjectHideFlags: 0

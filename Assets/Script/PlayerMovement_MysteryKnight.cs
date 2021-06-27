@@ -7,35 +7,40 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     private CharacterController2D controller;
     private Animator animator;
     private Rigidbody2D rigidBody;
-    private Collider2D playerHitbox;
     private PlayerCombatScript combat;
 
-    public float runSpeed = 40f;
-    public float jumpduration = 0.2f;
-
-
-    private bool attack;
-
-    public float dashSpeed = 40f;
-    public float dashDuration = 0.5f;
-    float dashTime = 0f;
-    public float invulnerableDuration = 0.2f;
-    public float invulnerableTime = 0f;
-
+    private float xAxis;
+    private float yAxis;
+    public bool attack = false;
+    private bool block = true;
+    private bool parry = false;
     private bool magic = false;
     private bool jump = false;
+    public bool animationLocked = false;
+    [SerializeField] private PhysicsMaterial2D noFriction, hasFriction;
+    [SerializeField] private float runSpeed = 40f;
 
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        controller = GetComponent<CharacterController2D>();
-        rigidBody = GetComponent<Rigidbody2D>();
-        combat = GetComponent<PlayerCombatScript>();
-        playerHitbox = GetComponent<CapsuleCollider2D>();
-    }
+    //dash
+    [SerializeField] private float dashSpeed = 40f;
+    [SerializeField] private float dashDuration = 0.5f;
+    private float dashTime = 0f;
+
+    //invul
+    public float dashInvulnerableDuration = 0.2f;
+    [HideInInspector] public float invulnerableTime = 0f;
+
+    //magic
+    public float magicChargeTime = 0.6f;
+    private float magicTime;
+
+    //block
+    private float blockDelay = 0.1f;
+    private float blockTime;
+    [SerializeField] private GameObject FireShield;
+    private GameObject spawnedShield;
 
     //Animation
-    public string currentState;
+    [HideInInspector] public string currentState;
     const string PLAYER_IDLE = "MysteryKnight_Idle";
     const string PLAYER_RUN = "MysteryKnight_Run";
     const string PLAYER_JUMP = "MysteryKnight_Jump";
@@ -43,6 +48,11 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     const string PLAYER_DASH = "MysteryKnight_Dash";
     const string PLAYER_MAGIC = "MysteryKnight_Magic";
     const string PLAYER_ATTACK1 = "MysteryKnight_Attack1";
+    const string PLAYER_HURT = "MysteryKnight_Hurt";
+    const string PLAYER_PARRY= "MysteryKnight_Parry";
+    const string PLAYER_COUNTER = "MysteryKnight_Counter";
+    const string PLAYER_HEAVYATTACK = "MysteryKnight_HeavyAttack";
+
 
     public void ChangeAnimationState(string newState)
     {
@@ -54,29 +64,25 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         currentState = newState;
     }
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        combat = GetComponent<PlayerCombatScript>();
+    }
 
-    private float xAxis;
-    private float yAxis;
-    public bool animationLocked = false;
-    public PhysicsMaterial2D noFriction, hasFriction;
-
-    public float magicChargeTime = 0.6f;
-    private float magicTime;
-
-    private float debugi;
     private void DashCheck()
     {
         dashTime -= Time.deltaTime;
         invulnerableTime -= Time.deltaTime;
-        if (Input.GetButtonDown("Dash") && dashTime < 0)
+        if (Input.GetButtonDown("Dash") && dashTime < 0 && !animationLocked)
         {
             if (combat.stamina >= combat.dashStaminaCost)
             {
                 combat.Dash();
-                debugi += 1;
-                Debug.Log(debugi);
                 dashTime = dashDuration;
-                invulnerableTime = invulnerableDuration;
+                invulnerableTime = dashInvulnerableDuration;
             }
             else
             {
@@ -93,7 +99,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             {
                 magicTime -= Time.deltaTime; // start charging magic
             }
-            else
+            else if (magicTime <= magicChargeTime)
             {
                 combat.FlashManaBar();
             }
@@ -106,20 +112,67 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
         if (magicTime < 0)   //if magic fully charged
         {
-            combat.mana -= combat.manaCost;
             combat.AttackRangeNoDelay();
             magicTime = magicChargeTime + 0.3f;
         }
     }
 
+
+    private void BlockCheck()
+    {
+        if (block)
+        {
+            combat.staminaTime = combat.staminaRegenDelay;
+            blockTime -= Time.deltaTime;
+        }
+        else
+        {
+            blockTime = blockDelay;
+            combat.block = false;
+            if(spawnedShield)
+                spawnedShield.GetComponent<Animator>().SetBool("End", true);
+            Destroy(spawnedShield,0.5f);
+        }
+
+  
+        if (combat.blockBroken)
+        {
+            blockTime = blockDelay;
+            combat.block = false;
+            if (spawnedShield)
+                spawnedShield.GetComponent<Animator>().SetBool("End", true);
+            Destroy(spawnedShield,0.5f);
+            combat.blockBroken = false;
+        }
+
+        if (blockTime < 0)
+        {
+            combat.block = true;
+            if (spawnedShield)
+                spawnedShield.transform.position = transform.position + new Vector3(transform.localScale.x * 0.1f * 3, 0, 0);
+        }
+    }
+
     private void StateCheck() // Assortment of status checks
     {
-        // Friction Material - to prevent sliding off slanted surfaces
+        if (combat.heavyAttack)
+        {
+            invulnerableTime = 0.2f;
+            ChangeAnimationState(PLAYER_HEAVYATTACK);
+            combat.heavyAttack = false;
+        }
+        if (combat.parrysuccess)
+        {
+            invulnerableTime = 0.5f;
+            ChangeAnimationState(PLAYER_COUNTER);
+            combat.parrysuccess = false;
+        }
+
         if (dashTime > 0)
         {
             rigidBody.sharedMaterial = noFriction;
         }
-        else if (xAxis == 0 || magic || animationLocked)
+        else if (xAxis == 0 || magic || block || animationLocked)
         {
             rigidBody.sharedMaterial = hasFriction;
         }
@@ -145,10 +198,19 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Projectile"), false);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Blocker"), false);
-            playerHitbox.enabled = true;
         }
 
-        if (!controller.m_Grounded && rigidBody.velocity.y < 0)
+        if (combat.dazed)
+        {
+            ChangeAnimationState(PLAYER_HURT);
+            animationLocked = true;
+        }
+        else if(currentState == PLAYER_HURT) 
+        {
+                animationLocked = false;
+        }
+
+        if (!controller.m_Grounded && rigidBody.velocity.y < 0 && currentState != PLAYER_HURT)
         {
             ChangeAnimationState(PLAYER_FALL);
         }
@@ -159,19 +221,29 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     void Update()
     {
         //input
-
-        xAxis = Input.GetAxisRaw("Horizontal");
+        if(!Input.GetButton("Control"))
+            xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
         magic = Input.GetButton("Secondary");
+        block = Input.GetButton("Control");
 
-        if (Input.GetButtonDown("Primary"))
+        if (Input.GetButton("Control") && (Input.GetButtonDown("Primary")))
+        {
+            parry = true;
+            if (spawnedShield)
+                spawnedShield.GetComponent<Animator>().SetBool("End", true);
+            Destroy(spawnedShield, 0.5f);
+        }
+
+        else if (Input.GetButtonDown("Primary"))
             attack = true;
 
-        if (Input.GetButtonDown("Jump"))
+        else if (Input.GetButtonDown("Jump") && controller.m_Grounded)
             jump = true;
 
         DashCheck();
         MagicCheck();
+        BlockCheck();
         StateCheck();
     }    
 
@@ -215,9 +287,23 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                     ChangeAnimationState(PLAYER_DASH);
                 }
 
+                else if (parry)
+                {
+                    controller.Stop();
+                    ChangeAnimationState(PLAYER_PARRY);
+                    parry = false;
+                }
+
+                else if (block)
+                {
+                    //controller.Stop();
+                    ChangeAnimationState(PLAYER_IDLE);
+                    if (!spawnedShield)
+                        spawnedShield = Instantiate(FireShield, transform.position + new Vector3(transform.localScale.x * 0.1f * 3, 0, 0), Quaternion.identity);
+                }
                 else if (attack)
                 {
-                    if (combat.stamina > combat.attackStaminaCost)
+                    if (combat.stamina > 30) //custom set to same value
                     {
                         controller.Stop();
                         ChangeAnimationState(PLAYER_ATTACK1);
@@ -235,8 +321,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                     ChangeAnimationState(PLAYER_MAGIC);
                 }
 
-
-                else if (xAxis != 0)
+                else if (xAxis != 0) //run
                 {
                     controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
                     if (!controller.isJumping)
@@ -245,7 +330,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
                 else  //idle
                 {
-                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") && !controller.isJumping)
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") /*&& !controller.isJumping*/)
                         ChangeAnimationState(PLAYER_IDLE);
                 }
             }
@@ -253,5 +338,17 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
        
     }
 
-    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            invulnerableTime = 0.2f;
+            combat.TakeDamage(30);
+            Vector3 hitVector = new Vector3((transform.position - other.transform.position).x, 0, 0);
+            hitVector = Vector3.Normalize(hitVector);
+            controller.Knockback(hitVector.x);
+        }
+    }
+
 }

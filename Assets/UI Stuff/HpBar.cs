@@ -5,27 +5,34 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    public PlayerCombatScript combat;
     public Image frontFill;
     public Image backFill;
     public float timeTaken;
-
+    private Color defaultColor;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void Begin(float current, float max)
+    public void Begin(float current, float max, float scale = 1)
     {
-        combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
-        timeTaken = 0.5f;
+        Vector2 rectSize = transform.GetComponent<RectTransform>().sizeDelta;
+        transform.GetComponent<RectTransform>().sizeDelta = new Vector2(rectSize.x * scale, rectSize.y);
+        //timeTaken = 0.5f;
+        //combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
+        timeTaken = 0.2f;
         frontFill = transform.Find("InnerFront").GetComponent<Image>();
         backFill = transform.Find("InnerBack").GetComponent<Image>();
 
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(max, GetComponent<RectTransform>().sizeDelta.y);
         frontFill.fillAmount = current / max;
         backFill.fillAmount = current / max;
         StartCoroutine(StartBar(frontFill.fillAmount));
+
+
+        defaultColor = transform.Find("Outer").GetComponent<Image>().color;
     }
 
 
@@ -45,10 +52,8 @@ public class HpBar : MonoBehaviour
         backFill.fillAmount = val;
     }
 
-    public void DropHealth(float newAmount)
+    public void Drop(float newAmount)
     {
-        //Update current health
-        //currentHealth = currentHealth - damage;
         //Update front immediately
         frontFill.fillAmount = newAmount;
         //Update back catches up
@@ -57,10 +62,8 @@ public class HpBar : MonoBehaviour
         StartCoroutine(DelayHealth(backFill.fillAmount, frontFill.fillAmount, true));
     }
 
-    public void GainHealth(float newAmount)
+    public void Gain(float newAmount)
     {
-        //Update current health
-        //currentHealth = currentHealth + heals;
         //Update back immediately
         backFill.color = Color.green; //Green casue healing
         backFill.fillAmount = newAmount;
@@ -83,10 +86,13 @@ public class HpBar : MonoBehaviour
 
     public IEnumerator Flash()
     {
-        Debug.Log("Test");
-        transform.Find("Outer").GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.1f);
-        transform.Find("Outer").GetComponent<Image>().color = Color.black;
+        for (int i = 0; i < 2; i++)
+        {
+            transform.Find("Background").GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            transform.Find("Background").GetComponent<Image>().color = defaultColor;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
 

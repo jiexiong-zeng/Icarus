@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class SkeletonController : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class SkeletonController : MonoBehaviour
     [SerializeField] private float aggroDuration = 10f;
 
     //attack
+    public GameObject LightFlash;
+    public Vector3 LightFlashOffset;
+
     private float attackTime;
     [SerializeField] private float delaybtwAttack = 2f;
     [SerializeField] private float attackRange = 0.7f;
@@ -57,7 +61,8 @@ public class SkeletonController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         aggroTime = -aggroDuration;
-
+        moveSpeed = Random.Range(moveSpeed - 1, moveSpeed + 1);
+        waitDuration = Random.Range(waitDuration - 1, waitDuration + 1);
 
         if (patrol)
         {
@@ -81,25 +86,56 @@ public class SkeletonController : MonoBehaviour
         //Debug.Log(playerPos);
         if (canMove)
         {
-            Behavior();
+            if (commitedToShortAttack)
+            {
+                shortAttackCommit();
+            }
+            else if (commitedToLongAttack)
+            {
+                longAttackCommit();
+            }
+            else
+            {
+                Behavior();
+            }
         }
     }
 
+    private GameObject Flash;
     void Behavior()
     {
         if (aggroed)
         {
+            if (attackTime > 0)
+            {
+                return;
+            }
+
+
+
             CheckFlip();
 
-            if (Vector2.Distance(playerPos.position, rigidBody.position) <= attackRange)
+            if (Vector2.Distance(playerPos.position, rigidBody.position) <= longAttackCommitRange)
             {
-
-                controller.Stop();
-                Debug.Log("1");
-                if (attackTime + delaybtwAttack < Time.time)
+                
+                if (Vector2.Distance(playerPos.position, rigidBody.position) <= shortAttackCommitRange)
                 {
-                    attackTime = Time.time;
-                    ChangeAnimationState(ATTACK);
+                    if(!Flash)
+                    {
+                        Flash = Instantiate(LightFlash, transform.position + new Vector3(transform.localScale.x * LightFlashOffset.x, LightFlashOffset.y, LightFlashOffset.z), Quaternion.identity);
+                        Flash.transform.Rotate(new Vector3(0, 0, -20));
+                        Flash.GetComponent<Light2D>().color = new Color32(0, 80, 180, 255);
+                    }
+                    shortAttackCommit();
+                }
+                else
+                {
+                    if(!Flash)
+                    {
+                        Flash = Instantiate(LightFlash, transform.position + new Vector3(transform.localScale.x * LightFlashOffset.x, LightFlashOffset.y, LightFlashOffset.z), Quaternion.identity);
+                        Flash.transform.Rotate(new Vector3(0, 0, -20));
+                    }
+                    longAttackCommit();
                 }
             }
 
@@ -108,7 +144,6 @@ public class SkeletonController : MonoBehaviour
                 if (controller.gap || (Mathf.Abs(playerPos.position.y - rigidBody.position.y) > 0.8f && !controller.isOnSlope))
                 {
                     controller.Stop();
-                    Debug.Log("2");
                     ChangeAnimationState(IDLE);
                 }
                 else
@@ -190,6 +225,8 @@ public class SkeletonController : MonoBehaviour
 
         if (aggroTime + aggroDuration > Time.time)
         {
+            if (!aggroed)
+                attackTime = 1f;
             aggroed = true;
         }
         else
@@ -201,22 +238,20 @@ public class SkeletonController : MonoBehaviour
         if (combat.dead)
         {
             controller.Freeze();
-            if (combat.damageframe)
-            {
-                combat.damageframe = false;
+            if (currentState != DEATH)
                 ChangeAnimationState(HURT);
-            }
-            ChangeAnimationState(DEATH);
+            StartCoroutine(DeathAnimation());
+            //ChangeAnimationState(DEATH);
         }
 
-        else if (combat.dazed)
+        else if (combat.dazed || combat.damageframe)
         {
             aggroTime = Time.time;
             controller.Stop();
             if (combat.damageframe)
             {
                 combat.damageframe = false;
-                ChangeAnimationState(HURT);
+                //ChangeAnimationState(HURT);
             }
         }
 
@@ -227,6 +262,65 @@ public class SkeletonController : MonoBehaviour
 
         return false;
         
+    }
+    IEnumerator DeathAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ChangeAnimationState(DEATH);
+    }
+
+    private int attackDistance = 0;
+    private float shortAttackCommitRange = 1f;
+    private float longAttackCommitRange = 2f;
+    private bool commitedToLongAttack = false;
+    private bool commitedToShortAttack = false;
+    void longAttackCommit()
+    {
+        commitedToLongAttack = true;
+        if (Vector2.Distance(playerPos.position, rigidBody.position) <= attackRange || attackDistance > 60)
+        {
+            ChangeAnimationState(ATTACK);
+            attackDistance = 0;
+            commitedToLongAttack = false;
+            attackTime = delaybtwAttack;
+        }
+        else
+        {
+                attackDistance++;
+                ChangeAnimationState(RUN);
+                controller.Move(transform.localScale.x*(moveSpeed+2) * Time.deltaTime);
+        }
+
+    }
+
+    private int numberOfAttacks = 0;
+    private int moveCounter = 0;
+    void shortAttackCommit()
+    {
+        commitedToShortAttack = true;
+
+        if (numberOfAttacks < 3)
+        {
+            if (moveCounter > 2)
+            {
+                ChangeAnimationState(ATTACK);
+                numberOfAttacks++;
+                moveCounter = 0;
+            }
+            else
+            {
+                ChangeAnimationState(RUN);
+                controller.Move(transform.localScale.x * (moveSpeed) * Time.deltaTime);
+                moveCounter++;
+            }
+        }
+        else
+        {
+            commitedToShortAttack = false;
+            numberOfAttacks = 0;
+            attackTime = delaybtwAttack;
+        }
+
     }
 
     void CheckFlip()

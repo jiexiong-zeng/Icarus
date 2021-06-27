@@ -19,7 +19,7 @@ public class Knight_Attack2 : StateMachineBehaviour
         continueCombo = false;
         delaytime = delay + 0.2f;
         playermove.animationLocked = true;
-        combat.Attack(delay, attackDamage);
+        combat.Attack(delay, attackDamage,0.1f,30);
     }
     
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

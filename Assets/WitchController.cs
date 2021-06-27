@@ -43,7 +43,7 @@ public class WitchController : MonoBehaviour
 
     public void ChangeAnimationState(string newState)
     {
-        if (currentState == newState)
+        if (currentState == newState && currentState != HURT)
             return;
 
 
@@ -59,6 +59,7 @@ public class WitchController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         aggroTime = -aggroDuration;
+        moveSpeed = Random.Range(moveSpeed - 1, moveSpeed + 1);
 
         if (patrol)
         {
@@ -105,7 +106,7 @@ public class WitchController : MonoBehaviour
             aggroed = false;
         }
 
-        if (targetDelay + attackTime > Time.time)
+        if (targetDelay + attackTime > Time.time && aggroed)
         {
             CheckFlip();
         }
@@ -113,13 +114,20 @@ public class WitchController : MonoBehaviour
         if (combat.dead)
         {
             controller.Freeze();
-            ChangeAnimationState(DEATH);
+            if (currentState != DEATH)
+                ChangeAnimationState(HURT);
+            StartCoroutine(DeathAnimation());
         }
 
-        else if (combat.dazed)
+        else if (combat.dazed || combat.damageframe)
         {
+            aggroTime = Time.time;
             controller.Stop();
-            ChangeAnimationState(HURT);
+            if (combat.damageframe)
+            {
+                combat.damageframe = false;
+                //ChangeAnimationState(HURT);
+            }
         }
 
         else if (!animationLocked)
@@ -128,6 +136,12 @@ public class WitchController : MonoBehaviour
         }
 
         return false; 
+    }
+
+    IEnumerator DeathAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ChangeAnimationState(DEATH);
     }
 
     void Behavior()

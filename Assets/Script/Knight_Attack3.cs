@@ -11,7 +11,7 @@ public class Knight_Attack3 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         combat = animator.GetComponent<PlayerCombatScript>();
-        combat.Attack(delay, attackDamage);
+        combat.Attack(delay, attackDamage,0.1f,30);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

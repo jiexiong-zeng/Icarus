@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3543462064764009467}
   - component: {fileID: 3543462064764009466}
   - component: {fileID: 3543462064764009465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Transition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb203e2b7e93cd4894e16e8e5a5cb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
-  spawnPos: {x: 0, y: 0, z: 0}
-  SpawnPoint: {fileID: 0}
+  sceneToLoad: Castle 2
+  spawnPos: {x: 5, y: -2.9, z: 0}
+  TemporaryTeleportPoint: {fileID: 0}
+  Adjustment: {x: 1, y: 0, z: 0}

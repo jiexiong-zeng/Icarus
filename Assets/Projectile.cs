@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     private PlayerCombatScript playerCombat;
     private Vector3 targetVector;
     private float startTime;
+    public bool destroySelf = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,11 @@ public class Projectile : MonoBehaviour
     private bool hit = false;
     void Update()
     {
+        if( Time.time < startTime + fireDelay && destroySelf)
+        {
+            Destroy(gameObject);
+        }
+
         if ((Time.time > startTime + fireDelay) && !hit)
         {
             GetComponent<CapsuleCollider2D>().enabled = true;
@@ -50,6 +56,8 @@ public class Projectile : MonoBehaviour
             transform.position -= targetVector * speed * Time.deltaTime;
         }
         
+
+
     }
 
     public string endAnimation;
@@ -63,7 +71,10 @@ public class Projectile : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            Vector3 hitVector = new Vector3((other.transform.position - transform.position).normalized.x, 0, 0);
+            Vector3 hitVector = new Vector3((other.transform.position - transform.position).x, 0, 0);
+            hitVector = Vector3.Normalize(hitVector);
+
+
             other.transform.position += hitVector * 0.2f;
             //other.attachedRigidbody.AddForce(hitVector * 2000);
             playerCombat.TakeDamage(damage);

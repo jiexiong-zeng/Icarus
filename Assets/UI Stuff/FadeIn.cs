@@ -11,7 +11,7 @@ public class FadeIn : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-        StartCoroutine(fade("Someplace")); //Call whenever needed
+        StartCoroutine(fade(text.text)); //Call whenever needed
     }
 
    IEnumerator fade(string areaName)

@@ -58,6 +58,8 @@ public class WolfController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         aggroTime = -aggroDuration;
+        moveSpeed = Random.Range(moveSpeed - 1, moveSpeed + 1);
+        waitDuration = Random.Range(waitDuration - 1, waitDuration + 1);
 
         if (patrol)
         {
@@ -71,7 +73,6 @@ public class WolfController : MonoBehaviour
     {
         aggroTime -= Time.deltaTime;
         waitTime -= Time.deltaTime;
-        attackTime -= Time.deltaTime;
         canMove = StateCheck();
     }
 
@@ -107,17 +108,19 @@ public class WolfController : MonoBehaviour
         if (combat.dead)
         {
             controller.Freeze();
-            ChangeAnimationState(DEATH);
+            if (currentState != DEATH)
+                ChangeAnimationState(HURT);
+            StartCoroutine(DeathAnimation());
         }
 
-        else if (combat.dazed)
+        else if (combat.dazed || combat.damageframe)
         {
             aggroTime = Time.time;
             controller.Stop();
             if (combat.damageframe)
             {
                 combat.damageframe = false;
-                ChangeAnimationState(HURT);
+                //ChangeAnimationState(HURT);
             }
         }
 
@@ -128,6 +131,11 @@ public class WolfController : MonoBehaviour
 
         return false;
         
+    }
+    IEnumerator DeathAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ChangeAnimationState(DEATH);
     }
 
     void Behavior()
@@ -146,6 +154,11 @@ public class WolfController : MonoBehaviour
                     attackTime = Time.time;
                     ChangeAnimationState(ATTACK);
                 }
+                 else
+                {
+                    ChangeAnimationState(IDLE);
+                }
+            
             }
 
             else

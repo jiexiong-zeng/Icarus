@@ -7,6 +7,9 @@ public class MysteryKnight_Attack1 : StateMachineBehaviour
  
     public float delay = 0.1f;
     public int attackDamage;
+    public float forwardMotion = 0.1f;
+    public float attackStaminaCost = 30;
+    public float nextAttackStaminaCost = 30;
     private float delaytime;
     private PlayerMovement_MysteryKnight playermove;
     private PlayerCombatScript combat;
@@ -19,17 +22,17 @@ public class MysteryKnight_Attack1 : StateMachineBehaviour
         playermove = animator.GetComponent<PlayerMovement_MysteryKnight>();
         flashed = false;
         animator.SetBool("continueCombo", false);
-        delaytime = delay + 0.2f;
+        delaytime = delay;
         playermove.animationLocked = true;
-        combat.Attack(delay, attackDamage);
+        combat.Attack(delay, attackDamage, forwardMotion,attackStaminaCost);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         delaytime -= Time.deltaTime;
-        if (Input.GetButton("Primary") && delaytime < 0)
+        if (Input.GetButtonDown("Primary") && delaytime < 0)
         {
-            if (combat.stamina > combat.attackStaminaCost)
+            if (combat.stamina > nextAttackStaminaCost)
             {
                 animator.SetBool("continueCombo", true);
             }
@@ -46,6 +49,7 @@ public class MysteryKnight_Attack1 : StateMachineBehaviour
     {
         playermove.currentState = "MysteryKnight_Idle";
         playermove.animationLocked = false;
+        playermove.attack = false;
     }
 
 }

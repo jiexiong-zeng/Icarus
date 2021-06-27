@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.6
-  attackDamage: 30
+  attackDamage: 60
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

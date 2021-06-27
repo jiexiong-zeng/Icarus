@@ -11,7 +11,7 @@ public class CharacterController2D : MonoBehaviour
 	private CapsuleCollider2D Collider;
 	//private Vector3 m_Velocity = Vector3.zero;
 	//public Tilemap tile;
-	public GameObject oneWayPlatform;
+	private GameObject oneWayPlatform;
 
 	//slope stuff
 	private Vector2 colliderSize;
@@ -50,18 +50,13 @@ public class CharacterController2D : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
     }
 
-	void OnSceneLoaded() {
-
-		GameObject SpawnPoint = GameObject.Find("SpawnPoint");
-		if (SpawnPoint != null)
-			transform.position = SpawnPoint.transform.position;
-    }
     private void Start()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		Collider = GetComponent<CapsuleCollider2D>();
 		colliderSize = Collider.size;
 		m_Rigidbody2D.gravityScale = initialGravity;
+		oneWayPlatform = GameObject.Find("OneWay");
 	}
 
 	private void Update()
@@ -86,6 +81,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			atLedge = true;
 		}
+
 
 	}
     void FixedUpdate()
@@ -222,4 +218,26 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+
+	//private float knockbackDuration = 1f;
+	//private float knockbackStartTime;
+	public Vector2 knockbackSpeed = new Vector2(10, 1);
+
+	public void Knockback(float direction)
+	{
+		//knockbackStartTime = Time.time;
+		m_Rigidbody2D.velocity = new Vector2(knockbackSpeed.x * direction, knockbackSpeed.y);
+	}
+	/*
+	private void CheckKnockBack()
+    {
+		if (Time.time >= knockbackStartTime + knockbackDuration)
+        {
+			m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
+
+		}
+    }
+	*/
+
 }

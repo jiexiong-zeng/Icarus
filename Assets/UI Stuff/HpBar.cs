@@ -9,7 +9,7 @@ public class HpBar : MonoBehaviour
     public Image frontFill;
     public Image backFill;
     public float timeTaken;
-
+    private Color defaultColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +19,18 @@ public class HpBar : MonoBehaviour
     public void Begin(float current, float max)
     {
         combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
-        timeTaken = 0.5f;
+        timeTaken = 0.2f;
         frontFill = transform.Find("InnerFront").GetComponent<Image>();
         backFill = transform.Find("InnerBack").GetComponent<Image>();
 
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(max, GetComponent<RectTransform>().sizeDelta.y);
         frontFill.fillAmount = current / max;
         backFill.fillAmount = current / max;
         StartCoroutine(StartBar(frontFill.fillAmount));
+
+
+        defaultColor = transform.Find("Outer").GetComponent<Image>().color;
     }
 
 
@@ -83,10 +88,13 @@ public class HpBar : MonoBehaviour
 
     public IEnumerator Flash()
     {
-        Debug.Log("Test");
-        transform.Find("Outer").GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(0.1f);
-        transform.Find("Outer").GetComponent<Image>().color = Color.black;
+        for (int i = 0; i < 2; i++)
+        {
+            transform.Find("Background").GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            transform.Find("Background").GetComponent<Image>().color = defaultColor;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
 

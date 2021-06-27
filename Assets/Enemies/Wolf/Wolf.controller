@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
-  attackDamage: 50
+  attackDamage: 40
 --- !u!1102 &-4074076157404248390
 AnimatorState:
   serializedVersion: 6

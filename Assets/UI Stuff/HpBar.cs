@@ -17,10 +17,7 @@ public class HpBar : MonoBehaviour
 
     public void Begin(float current, float max, float scale = 1)
     {
-        Vector2 rectSize = transform.GetComponent<RectTransform>().sizeDelta;
-        transform.GetComponent<RectTransform>().sizeDelta = new Vector2(rectSize.x * scale, rectSize.y);
-        //timeTaken = 0.5f;
-        //combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
+        combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
         timeTaken = 0.2f;
         frontFill = transform.Find("InnerFront").GetComponent<Image>();
         backFill = transform.Find("InnerBack").GetComponent<Image>();

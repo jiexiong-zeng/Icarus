@@ -29,13 +29,14 @@ public class FireBiteScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //GetComponent<CapsuleCollider2D>().enabled = false;
-        Debug.Log(other.name);
+
         if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("1");
-            Vector3 hitVector = new Vector3((other.transform.position - transform.position).normalized.x, 0, 0);
+            Vector3 hitVector = new Vector3((other.transform.position - transform.position).x, 0, 0);
+            hitVector = Vector3.Normalize(hitVector);
+
             other.transform.position += hitVector * 0.2f;
-            other.gameObject.GetComponents<EnemyCombat>()[0].TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyCombat>().TakeDamage(damage);
             //other.attachedRigidbody.AddForce(hitVector * 1000);
         }
 

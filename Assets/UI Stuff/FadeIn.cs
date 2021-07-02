@@ -11,10 +11,15 @@ public class FadeIn : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-        StartCoroutine(fade(text.text)); //Call whenever needed
+        StartCoroutine(Fade(text.text)); //Call whenever needed
     }
 
-   IEnumerator fade(string areaName)
+    public void ShowText(string input)
+    {
+        StartCoroutine(Fade(input));
+    }
+
+   IEnumerator Fade(string areaName)
    {
         text.SetText(areaName);
         for(float i = 0; i < 300; i++)

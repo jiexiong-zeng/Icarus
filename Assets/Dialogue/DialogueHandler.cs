@@ -5,70 +5,56 @@ using TMPro;
 
 public class DialogueHandler : MonoBehaviour
 {
-   public GameObject bubble;
-   public TextMeshPro speech;
-   public DialogueData dialogueData;
-   int i;
-   Dialogue test;
+   
+    public GameObject bubblePrefab; 
+    public string[] dialogues;
+
+    GameObject bubble;
+    TextMeshPro speech;
+    int i;
+    bool inProgress;
+    public bool isHandling;
+    
 
     private void Start()
     {
         i = 0;
-        //Get Dialogue data
-        dialogueData = GameObject.Find("DialogueData").GetComponent<DialogueData>();
-        //Get speechbubble(inspector)
-        //Get speech 
-        speech = bubble.GetComponentInChildren<TextMeshPro>();
+        inProgress = false;
+        isHandling = false;
     }
 
     public void HandleDialogue()
     {
-        //Get dialogue
-        foreach (Dialogue dialogue in dialogueData.interactions)
-        {
-            //Find the specific interaction
-            if (dialogue.NPCname == name)
-            {
-                test = dialogue;
-                //Activate the bubble
-                bubble.SetActive(true);
-                //Set text
-                StopAllCoroutines();
-                StartCoroutine(TextAnim(dialogue.dialogues[i].Text));
-            }
-        }
+        isHandling = true;
+        bubble = Instantiate(bubblePrefab, transform.position + Vector3.up, transform.rotation);
+        speech = bubble.GetComponentInChildren<TextMeshPro>();
+        StopAllCoroutines();
+        StartCoroutine(TextAnim(dialogues[i]));
     }
     
     void NextDialogue()
     {
-        if (i < test.dialogues.Length - 1 && bubble.activeSelf)
+        if(isHandling)
         {
-            i++;
-            StopAllCoroutines();
-            StartCoroutine(TextAnim(test.dialogues[i].Text));
+            if (i < dialogues.Length - 1)
+            {
+                i++;
+                StopAllCoroutines();
+                StartCoroutine(TextAnim(dialogues[i]));
+            }
+            else
+            {
+                i = 0;
+                isHandling = false;
+                Destroy(bubble);
+            }
         }
-        else
-        {
-            i = 0;
-            bubble.SetActive(false);
-        }
+        
     }
-
-    /*
-    IEnumerator ShowDialogues(Dialogue dialogue)
-    {
-        int length = dialogue.dialogues.GetLength(0);
-        for (int i = 0; i < length; i++)
-        {
-            //To create a typing effect
-            StartCoroutine(TextAnim(dialogue.dialogues[i].Text));
-            yield return new WaitForSeconds(.15f * dialogue.dialogues[i].Text.Length);
-        }
-    }
-    */
 
     IEnumerator TextAnim(string Text)
     {
+        inProgress = true;
         string text = "";
         foreach(char character in Text)
         {
@@ -76,6 +62,7 @@ public class DialogueHandler : MonoBehaviour
             speech.SetText(text);
             yield return new WaitForSeconds(.1f);
         }
+        inProgress = false;
     }
 
 
@@ -83,8 +70,14 @@ public class DialogueHandler : MonoBehaviour
     {
         if (Input.GetKeyDown("return"))
         {
-            Debug.Log("yo");
-            NextDialogue();
+            if (!inProgress)
+                NextDialogue();
+            else
+            {
+                StopAllCoroutines();
+                speech.SetText(dialogues[i]);
+                inProgress = false;
+            }
         }
     }
 }

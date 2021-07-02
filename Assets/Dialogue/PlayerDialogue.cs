@@ -6,7 +6,9 @@ public class PlayerDialogue : MonoBehaviour
 {
     public float InteractionRadius;
     public LayerMask NPCLayers;
-    public GameObject Prompt;
+    //public GameObject Prompt;
+
+    DialogueHandler handler;
 
     // Update is called once per frame
     void Update()
@@ -17,33 +19,13 @@ public class PlayerDialogue : MonoBehaviour
 
             if (Input.GetKey("e"))
             {
-                //Get NPC
                 string name = npcColliders[0].name;
-                //Call dialogue handler for NPC
-                GameObject.Find(name).GetComponent<DialogueHandler>().HandleDialogue();
-                /*
-                Debug.Log(name);
-                foreach (Dialogue dialogue in dialogueData.interactions)
-                {
-                    //Find the specific interaction
-                    if (dialogue.NPCname == name)
-                    {
-                        Debug.Log("NPC name is " + dialogue.NPCname);
-                        Debug.Log("First dialogue is " + dialogue.dialogues[0].Text);
-                        dialogueController.startDialogue(dialogue);
-                        //break;
-                    }
-                }
-                */
+                handler = GameObject.Find(name).GetComponent<DialogueHandler>();
+                if(!handler.isHandling)
+                    handler.HandleDialogue();
             }
 
-            else
-            {
-                Prompt.SetActive(true);
-            }
         }
 
-        else
-            Prompt.SetActive(false);
     }
 }

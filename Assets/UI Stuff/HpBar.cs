@@ -17,7 +17,7 @@ public class HpBar : MonoBehaviour
 
     public void Begin(float current, float max, float scale = 1)
     {
-        combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
+        //combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
         timeTaken = 0.2f;
         frontFill = transform.Find("InnerFront").GetComponent<Image>();
         backFill = transform.Find("InnerBack").GetComponent<Image>();

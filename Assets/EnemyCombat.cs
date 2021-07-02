@@ -136,6 +136,23 @@ public class EnemyCombat : MonoBehaviour
 
     }
 
+    public GameObject HomingProjectile;
+    public Vector3 projectileOffset;
+    public void Homing(float delay)
+    {
+        if(HomingProjectile != null)
+            StartCoroutine(HomingRoutine(delay));
+    }
+
+    public IEnumerator HomingRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (!dazed)
+            Instantiate(HomingProjectile, GameObject.FindGameObjectWithTag("Player").transform.position + projectileOffset, Quaternion.identity);
+    }
+
+
     void Update()
     {
         if(dazedtime + dazedDuration > Time.time && canBeDazed)

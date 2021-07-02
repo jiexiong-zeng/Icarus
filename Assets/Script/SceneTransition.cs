@@ -9,6 +9,7 @@ public class SceneTransition : MonoBehaviour
     public Vector3 spawnPos;
     private GameObject SpawnPoint;
     private LoadingScreenScript loadingScreen;
+    private FadeIn areaName;
     //temporary
     public GameObject TemporaryTeleportPoint;
     public Vector3 Adjustment;
@@ -41,7 +42,13 @@ public class SceneTransition : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         SpawnPoint.transform.position = spawnPos;
+        if (areaName == null)
+            areaName = GameObject.Find("Area Name").GetComponent<FadeIn>();
+        areaName.ShowText(sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
+        
+        
+
     }
 
 

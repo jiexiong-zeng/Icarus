@@ -115,13 +115,11 @@ public class EnemyController : MonoBehaviour
 		{
 			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
 			m_Rigidbody2D.velocity = targetVelocity;
-
 		}
 		else
 		{
 			targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
 			m_Rigidbody2D.velocity = targetVelocity;
-
 		}
 		
 		if (speed > 0 && !m_FacingRight)

@@ -114,11 +114,11 @@ public class PlayerCombatScript : MonoBehaviour
         {
             if (amount > 0)
             {
-                manaBar.GainHealth(mana / maxMana);
+                manaBar.Gain(mana / maxMana);
             }
             else
             {
-                manaBar.DropHealth(mana / maxMana);
+                manaBar.Drop(mana / maxMana);
             }
         }
     }
@@ -136,7 +136,7 @@ public class PlayerCombatScript : MonoBehaviour
             }
             else
             {
-                stamBar.DropHealth(stamina / maxStamina);
+                stamBar.Drop(stamina / maxStamina);
             }
         }
     }
@@ -372,7 +372,7 @@ public class PlayerCombatScript : MonoBehaviour
             Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
             health -= damage;
             if (isHUDon)
-                healthBar.DropHealth(health / maxHealth);
+                healthBar.Drop(health / maxHealth);
             if (health <= 0)
                 Die();
         }

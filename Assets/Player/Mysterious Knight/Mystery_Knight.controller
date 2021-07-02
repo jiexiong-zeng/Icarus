@@ -530,7 +530,7 @@ MonoBehaviour:
   delay: 0
   attackDamage: 60
   forwardMotion: 0.2
-  attackStaminaCost: 60
+  attackStaminaCost: 85
   fireEffect: {fileID: 2752864882765823122, guid: 92e0a5823bc22b94eb9783bab209e9c2, type: 3}
 --- !u!1102 &3117574051854039480
 AnimatorState:
@@ -597,7 +597,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5230693294666962778}
-    m_Position: {x: 310, y: 150, z: 0}
+    m_Position: {x: 160, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1527341678373047035}
     m_Position: {x: 310, y: 200, z: 0}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using TMPro;
+
 public class SceneManagerScript : MonoBehaviour
 {
     private CinemachineVirtualCamera followCam;
@@ -46,6 +48,12 @@ public class SceneManagerScript : MonoBehaviour
             loadingScreen = GameObject.Find("LoadingScreen").GetComponent<LoadingScreenScript>();
         loadingScreen.LoadingScreen(false);
 
+        GameObject areaName = GameObject.Find("Area Name");
+        areaName.GetComponent<TextMeshProUGUI>().SetText(scene.name);
+        if(scene.name == "Forest 1")
+        {
+            PlayerPrefs.SetInt("SpawnPointNumber",-1);
+        }
     }
 
     // called when the game is terminated

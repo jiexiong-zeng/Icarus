@@ -64,10 +64,10 @@ public class CharacterController2D : MonoBehaviour
 
 		m_Grounded = false;
 		RaycastHit2D hit_mid, hit_left, hit_right;
-		hit_mid = Physics2D.Raycast(m_GroundCheck.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
-		hit_left = Physics2D.Raycast(m_GroundCheckLeft.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
-		hit_right = Physics2D.Raycast(m_GroundCheckRight.transform.position, Vector2.down, 0.1f, m_WhatIsGround);
-
+		hit_mid = Physics2D.Raycast(m_GroundCheck.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
+		hit_left = Physics2D.Raycast(m_GroundCheckLeft.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
+		hit_right = Physics2D.Raycast(m_GroundCheckRight.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
+		Debug.Log("left: " + hit_left.collider + " mid: " + hit_mid.collider + " right: " + hit_right.collider);
 		if (hit_mid.collider != null || hit_left.collider != null || hit_right.collider != null)
 		{
 			m_Grounded = true;

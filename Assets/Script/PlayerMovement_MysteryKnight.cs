@@ -235,7 +235,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             Destroy(spawnedShield, 0.5f);
         }
 
-        else if (Input.GetButtonDown("Primary"))
+        else if (Input.GetButtonDown("Primary") && controller.m_Grounded)
             attack = true;
 
         else if (Input.GetButtonDown("Jump") && controller.m_Grounded)
@@ -258,7 +258,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             }
 
             //if grounded
-            if (controller.m_Grounded)
+            if (controller.m_Grounded)// && currentState != PLAYER_JUMP)
             {
                 if (jump)
                 {

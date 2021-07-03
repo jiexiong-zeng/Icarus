@@ -67,7 +67,7 @@ public class CharacterController2D : MonoBehaviour
 		hit_mid = Physics2D.Raycast(m_GroundCheck.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
 		hit_left = Physics2D.Raycast(m_GroundCheckLeft.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
 		hit_right = Physics2D.Raycast(m_GroundCheckRight.transform.position, Vector2.down, 0.2f, m_WhatIsGround);
-		Debug.Log("left: " + hit_left.collider + " mid: " + hit_mid.collider + " right: " + hit_right.collider);
+		//Debug.Log("left: " + hit_left.collider + " mid: " + hit_mid.collider + " right: " + hit_right.collider);
 		if (hit_mid.collider != null || hit_left.collider != null || hit_right.collider != null)
 		{
 			m_Grounded = true;
@@ -178,6 +178,11 @@ public class CharacterController2D : MonoBehaviour
 		m_Grounded = false;
 		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce);
 	}
+	public void AirJump()
+    {
+		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce*3f/4f);
+	}
+
 
 	public void ClimbLedge()
     {

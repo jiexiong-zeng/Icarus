@@ -53,6 +53,11 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     const string PLAYER_COUNTER = "MysteryKnight_Counter";
     const string PLAYER_HEAVYATTACK = "MysteryKnight_HeavyAttack";
 
+    //Unlocks
+    private bool airDashUnlocked = true;
+    private bool airJumpUnlocked = true;
+    private bool hasAirJumped = false;
+
 
     public void ChangeAnimationState(string newState)
     {
@@ -80,15 +85,29 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         {
             if (combat.stamina >= combat.dashStaminaCost)
             {
+                rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, 0);
                 combat.Dash();
-                dashTime = dashDuration;
                 invulnerableTime = dashInvulnerableDuration;
+                if (controller.m_Grounded)
+                    dashTime = dashDuration;
+                else
+                    dashTime = dashDuration + 0.15f;
             }
             else
             {
                 combat.FlashStaminaBar();
             }
         }
+        
+        if(dashTime > 0)
+        {
+            rigidBody.gravityScale = 0.2f;
+        }
+        else
+        {
+            controller.UnFreeze();
+        }
+
     }
 
     private void MagicCheck()
@@ -187,6 +206,12 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             controller.isJumping = true;
         }
 
+        if (controller.m_Grounded)
+        {
+            hasAirJumped = false;
+        }
+
+
         if (invulnerableTime > 0)
         {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
@@ -210,7 +235,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
                 animationLocked = false;
         }
 
-        if (!controller.m_Grounded && rigidBody.velocity.y < 0 && currentState != PLAYER_HURT)
+        if (!controller.m_Grounded && rigidBody.velocity.y < 0 && currentState != PLAYER_HURT && dashTime < 0)
         {
             ChangeAnimationState(PLAYER_FALL);
         }
@@ -238,7 +263,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
         else if (Input.GetButtonDown("Primary") && controller.m_Grounded)
             attack = true;
 
-        else if (Input.GetButtonDown("Jump") && controller.m_Grounded)
+        else if (Input.GetButtonDown("Jump"))
             jump = true;
 
         DashCheck();
@@ -254,7 +279,26 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             //if not grounded
             if (!controller.m_Grounded)
             {
-                controller.Move(xAxis * runSpeed * Time.fixedDeltaTime,false);
+                //controller.Move(xAxis * runSpeed * Time.fixedDeltaTime,false);
+
+                if (airDashUnlocked && dashTime > 0)
+                {
+                    ChangeAnimationState(PLAYER_DASH);
+                    controller.Move(dashSpeed* transform.localScale.x * Time.fixedDeltaTime, false);
+                }
+
+                else if(airJumpUnlocked && jump && !hasAirJumped)
+                {
+                    controller.AirJump();
+                    ChangeAnimationState(PLAYER_JUMP);
+                    jump = false;
+                    hasAirJumped = true;
+                }
+                else
+                {
+                    controller.Move(xAxis * runSpeed * Time.fixedDeltaTime, false);
+                }
+
             }
 
             //if grounded
@@ -330,7 +374,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
 
                 else  //idle
                 {
-                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") /*&& !controller.isJumping*/)
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MysteryKnight_Sheath") && currentState != PLAYER_JUMP)
                         ChangeAnimationState(PLAYER_IDLE);
                 }
             }

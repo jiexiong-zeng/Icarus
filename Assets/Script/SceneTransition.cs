@@ -11,8 +11,8 @@ public class SceneTransition : MonoBehaviour
     private LoadingScreenScript loadingScreen;
     private FadeIn areaName;
     //temporary
-    public GameObject TemporaryTeleportPoint;
-    public Vector3 Adjustment;
+    //public GameObject TemporaryTeleportPoint;
+    //public Vector3 Adjustment;
 
 
 

@@ -62,7 +62,7 @@ public class LoadingScreenScript : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1;
         SpawnPoint = GameObject.Find("SpawnPoint");
         SpawnPoint.transform.position = new Vector3(PlayerPrefs.GetFloat("Respawn_x"), PlayerPrefs.GetFloat("Respawn_y"), PlayerPrefs.GetFloat("Respawn_z"));

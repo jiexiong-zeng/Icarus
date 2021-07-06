@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe1dc0d5366ef3418748b7056f48a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 7
+  m_JumpForce: 8
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_CeilingCheck: {fileID: 4841366485046856748}
   m_WallCheck1: {fileID: 4841366484808425191}
   m_WallCheck2: {fileID: 4841366483479302010}
-  maxSpeed: 10
+  maxSpeed: 7
   initialGravity: 2
   m_Grounded: 0
   m_FacingRight: 1
@@ -945,7 +945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8937430d0e2a7a46a5f3e80f4c5df3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
+  fallMultiplier: 2
   lowJumpMultiplier: 2
 --- !u!114 &3734595897298238802
 MonoBehaviour:

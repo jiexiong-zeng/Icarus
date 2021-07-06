@@ -56,8 +56,8 @@ public class CharacterController2D : MonoBehaviour
 		Collider = GetComponent<CapsuleCollider2D>();
 		colliderSize = Collider.size;
 		m_Rigidbody2D.gravityScale = initialGravity;
-		oneWayPlatform = GameObject.Find("OneWay");
 	}
+
 
 	private void Update()
 	{
@@ -163,6 +163,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 	public IEnumerator FallThrough()
     {
+		oneWayPlatform = GameObject.Find("OneWay");
 		Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), oneWayPlatform.GetComponent<CompositeCollider2D>(),true);
 		yield return new WaitForSeconds(0.2f);
 		Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), oneWayPlatform.GetComponent<CompositeCollider2D>(),false);

@@ -40,7 +40,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     private GameObject spawnedShield;
 
     //Animation
-    [HideInInspector] public string currentState;
+    public string currentState;
     const string PLAYER_IDLE = "MysteryKnight_Idle";
     const string PLAYER_RUN = "MysteryKnight_Run";
     const string PLAYER_JUMP = "MysteryKnight_Jump";

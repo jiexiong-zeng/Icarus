@@ -5,8 +5,8 @@ using UnityEngine;
 public class leverScript : MonoBehaviour
 {
     public GameObject door;
-    private bool open = false;
-    private int i = 0;
+    protected bool open = false;
+    protected int i = 0;
     public int distance = 100;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class leverScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (open && i < distance)
         {
@@ -24,7 +24,7 @@ public class leverScript : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
         if (Input.GetButton("Interact"))

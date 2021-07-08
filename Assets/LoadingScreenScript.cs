@@ -10,6 +10,8 @@ public class LoadingScreenScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Image image = GetComponentInChildren<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
         //StartCoroutine(FadeOut());
     }
 

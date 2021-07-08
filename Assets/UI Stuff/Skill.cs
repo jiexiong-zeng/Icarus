@@ -6,13 +6,25 @@ using UnityEngine.UI;
 public class Skill : MonoBehaviour
 {
     public string skillName;
-    RectTransform myRect;
+    public bool isUnlocked;
+    public Color displayColor;
+
+    public Color locked;
+    public Color unlocked;
+
+
+    //RectTransform myRect;
     // Start is called before the first frame update
     void Start()
     {
-        myRect = GetComponent<RectTransform>();
+        locked = new Color(0, 0, 0);
+        unlocked = new Color(255, 255, 255);
+        //myRect = GetComponent<RectTransform>();
+        displayColor = isUnlocked ? unlocked : locked;
+        GetComponent<Image>().color = displayColor;
     }
 
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -27,5 +39,5 @@ public class Skill : MonoBehaviour
         else
             GetComponent<Image>().color = new Color(255, 255, 255);
     }
-
+    */
 }

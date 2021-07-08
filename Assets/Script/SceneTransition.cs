@@ -46,9 +46,6 @@ public class SceneTransition : MonoBehaviour
             areaName = GameObject.Find("Area Name").GetComponent<FadeIn>();
         areaName.ShowText(sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
-        
-        
-
     }
 
 

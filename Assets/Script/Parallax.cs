@@ -21,8 +21,8 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        float temp = (target.transform.position.x * (1.0f - parallaxEffect));
-        float dist = (target.transform.position.x * parallaxEffect);
+        float temp = (camera.transform.position.x * (1.0f - parallaxEffect));
+        float dist = (camera.transform.position.x * parallaxEffect);
         if (followYPosition)
             transform.position = new Vector3(startpos + dist, camera.transform.position.y, transform.position.z);
         else

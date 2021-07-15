@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29011e494ac28b14e84bae2c25b9f72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionRadius: 3
+  InteractionRadius: 1
   NPCLayers:
     serializedVersion: 2
     m_Bits: 512

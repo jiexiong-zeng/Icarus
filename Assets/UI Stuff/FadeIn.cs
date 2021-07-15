@@ -22,7 +22,7 @@ public class FadeIn : MonoBehaviour
    IEnumerator Fade(string areaName)
    {
         text.SetText(areaName);
-        for(float i = 0; i < 300; i++)
+        for(float i = 0; i <= 300; i++)
         {
             if(i <= 100)
                 text.color = new Color(text.color.r, text.color.g, text.color.b, i / 100);

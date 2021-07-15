@@ -8,6 +8,7 @@ public class DialogueHandler : MonoBehaviour
    
     public GameObject bubblePrefab; 
     public string[] dialogues;
+    public Transform[] allchildren;
 
     GameObject bubble;
     TextMeshPro speech;
@@ -21,12 +22,17 @@ public class DialogueHandler : MonoBehaviour
         i = 0;
         inProgress = false;
         isHandling = false;
+        allchildren = GetComponentsInChildren<Transform>();
+        allchildren[3].gameObject.SetActive(false);
+        //allchildren[4].gameObject.SetActive(false);
     }
 
     public void HandleDialogue()
     {
         isHandling = true;
-        bubble = Instantiate(bubblePrefab, transform.position + Vector3.up, transform.rotation);
+        //transform.GetChild(1).gameObject.SetActive(false);
+        //transform.GetChild(2).gameObject.SetActive(false);
+        bubble = Instantiate(bubblePrefab, transform.position + Vector3.up, Quaternion.identity);
         speech = bubble.GetComponentInChildren<TextMeshPro>();
         StopAllCoroutines();
         StartCoroutine(TextAnim(dialogues[i]));
@@ -44,12 +50,20 @@ public class DialogueHandler : MonoBehaviour
             }
             else
             {
-                i = 0;
-                isHandling = false;
-                Destroy(bubble);
+                CloseDialogue();
+                //transform.GetChild(1).gameObject.SetActive(true);
+                //transform.GetChild(2).gameObject.SetActive(true);
+                
             }
         }
         
+    }
+
+    public void CloseDialogue()
+    {
+        i = 0;
+        isHandling = false;
+        Destroy(bubble);
     }
 
     IEnumerator TextAnim(string Text)

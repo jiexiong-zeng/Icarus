@@ -39,6 +39,7 @@ public class ObeliskData
     public string scene;
     public float[] position = new float[3];
     public int num;
+    public string pathToImg;
 
 
     public ObeliskData(string sceneName, Vector3 pos, int number)

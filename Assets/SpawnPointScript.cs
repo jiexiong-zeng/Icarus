@@ -48,40 +48,49 @@ public class SpawnPointScript : MonoBehaviour
                 active = true;
                 GetComponent<Animator>().Play("Obelisk2");
                 PlayerPrefs.SetInt("SpawnPointNumber", SpawnPointNumber);
+                PlayerPrefs.SetString("RespawnScene", SceneManager.GetActiveScene().name);
+                PlayerPrefs.SetFloat("Respawn_x", transform.position.x);
+                PlayerPrefs.SetFloat("Respawn_y", transform.position.y);
+                PlayerPrefs.SetFloat("Respawn_z", transform.position.z);
+                GameObject spawnPoint = GameObject.Find("SpawnPoint");
+                spawnPoint.transform.position = transform.position;
             }
-            PlayerPrefs.SetString("RespawnScene", SceneManager.GetActiveScene().name);
-            PlayerPrefs.SetFloat("Respawn_x", transform.position.x);
-            PlayerPrefs.SetFloat("Respawn_y", transform.position.y);
-            PlayerPrefs.SetFloat("Respawn_z", transform.position.z);
-
+            
             if(!saved)
             {
                 var thisObelisk = new ObeliskData(SceneManager.GetActiveScene().name, transform.position, SpawnPointNumber);
+                thisObelisk.pathToImg ="Obelisks\\obelisk_" + SpawnPointNumber.ToString(); //Path from resources folder
+                
                 foreach (var obelisk in SaveLoad.savedObelisks)
                 {
                     if (thisObelisk.num == obelisk.num)
                         unique = false;
                 }
-                if(unique)
+                if (unique)
+                {
+                    ScreenCapture.CaptureScreenshot("Assets\\Resources\\" + thisObelisk.pathToImg + ".png");
                     SaveLoad.SaveObelisk(thisObelisk);
+                }
                 saved = !saved;
             }
 
-            GameObject spawnPoint = GameObject.Find("SpawnPoint");
-            spawnPoint.transform.position = transform.position;
-        }
-
-        if (Input.GetKey("return"))
-        {
-            if (!true)
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Obelisk1") && !options.isShowing)
             {
-                Debug.Log("Fast travel");
-                StartCoroutine(FastTravel(SaveLoad.savedObelisks[0]));
-                travelling = true;
+                Debug.Log("Opening");
+                options.ShowOptions(this);
             }
 
-            options.ShowOptions(this);
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Obelisk1") && options.isShowing)
+            {
+                Debug.Log("Closing");
+                options.CloseOptions();
+            }
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        options.CloseOptions();
     }
 
     IEnumerator FastTravel(ObeliskData tp)

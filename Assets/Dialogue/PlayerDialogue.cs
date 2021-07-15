@@ -16,16 +16,36 @@ public class PlayerDialogue : MonoBehaviour
         Collider2D[] npcColliders = Physics2D.OverlapCircleAll(transform.position,InteractionRadius,NPCLayers);
         if (npcColliders.Length != 0)
         {
-
+            string name = npcColliders[0].name;
+            handler = GameObject.Find(name).GetComponent<DialogueHandler>();
             if (Input.GetKey("e"))
             {
-                string name = npcColliders[0].name;
-                handler = GameObject.Find(name).GetComponent<DialogueHandler>();
-                if(!handler.isHandling)
+                if (!handler.isHandling)
+                {
+                    handler.allchildren[3].gameObject.SetActive(false);
+                    //handler.allchildren[4].gameObject.SetActive(false);
                     handler.HandleDialogue();
+                }
+            }
+
+            if (!handler.isHandling && !handler.allchildren[3].gameObject.activeInHierarchy)
+            {
+                handler.allchildren[3].gameObject.SetActive(true);
+                //handler.allchildren[4].gameObject.SetActive(true);
             }
 
         }
+
+        else
+        {
+            if (handler != null)
+            {
+                handler.allchildren[3].gameObject.SetActive(false);
+                handler.CloseDialogue();
+                //handler.allchildren[4].gameObject.SetActive(false);
+            }
+        }
+            
 
     }
 }

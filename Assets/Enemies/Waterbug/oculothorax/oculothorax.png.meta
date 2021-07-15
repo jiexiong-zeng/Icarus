@@ -1,0 +1,792 @@
+fileFormatVersion: 2
+guid: 3d1621b7f608c3341a47aed3aead90cb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -511429869829310981
+    second: oculothorax00
+  - first:
+      213: -4618461553516640997
+    second: oculothorax01
+  - first:
+      213: 1545978807682925322
+    second: oculothorax02
+  - first:
+      213: -731126699991459584
+    second: oculothorax03
+  - first:
+      213: 1026089228388707361
+    second: oculothorax04
+  - first:
+      213: 3507793502999319091
+    second: oculothorax05
+  - first:
+      213: 4791772194568725445
+    second: oculothorax06
+  - first:
+      213: 4939519306293314978
+    second: oculothorax07
+  - first:
+      213: -737521946482950423
+    second: oculothorax08
+  - first:
+      213: 4874359640823935878
+    second: oculothorax09
+  - first:
+      213: 1843524020669980704
+    second: oculothorax10
+  - first:
+      213: 836963545750485261
+    second: oculothorax11
+  - first:
+      213: 8293623488760656234
+    second: oculothorax12
+  - first:
+      213: -2515247749585546199
+    second: oculothorax13
+  - first:
+      213: 7796745555952381411
+    second: oculothorax14
+  - first:
+      213: -6369219399822103598
+    second: oculothorax15
+  - first:
+      213: -7922082852817638339
+    second: oculothorax16
+  - first:
+      213: -2850352719716901158
+    second: oculothorax17
+  - first:
+      213: 818563169394407805
+    second: oculothorax18
+  - first:
+      213: 7888061619034094430
+    second: oculothorax19
+  - first:
+      213: -240331339275742007
+    second: oculothorax20
+  - first:
+      213: 8788364381127718604
+    second: oculothorax21
+  - first:
+      213: -4581576029537591543
+    second: oculothorax22
+  - first:
+      213: -5964468459269544231
+    second: oculothorax23
+  - first:
+      213: 2624689588712058498
+    second: oculothorax24
+  - first:
+      213: -8688419399306656576
+    second: oculothorax25
+  - first:
+      213: -7369470580221114923
+    second: oculothorax26
+  - first:
+      213: -6037220576339210039
+    second: oculothorax27
+  - first:
+      213: 3180031901252791865
+    second: oculothorax28
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: oculothorax00
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf5bc493e3907e8f0800000000000000
+      internalID: -511429869829310981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax01
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1587ddcfade7efb0800000000000000
+      internalID: -4618461553516640997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax02
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03093ed88b647510800000000000000
+      internalID: 1545978807682925322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax03
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0099439d3248ad5f0800000000000000
+      internalID: -731126699991459584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax04
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12ca6fd77b66d3e00800000000000000
+      internalID: 1026089228388707361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax05
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 211
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33292bb1b9f2ea030800000000000000
+      internalID: 3507793502999319091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax06
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3ecdd4c6bcf7240800000000000000
+      internalID: 4791772194568725445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax07
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a50ccc63a2bc8440800000000000000
+      internalID: 4939519306293314978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax08
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ee34dd72bbc3c5f0800000000000000
+      internalID: -737521946482950423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax09
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 683bfc2944435a340800000000000000
+      internalID: 4874359640823935878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax10
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0202fe25453859910800000000000000
+      internalID: 1843524020669980704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax11
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 169
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d09b86219ed7d9b00800000000000000
+      internalID: 836963545750485261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a613a6c1f9ed81370800000000000000
+      internalID: 8293623488760656234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9245ad38f7b081dd0800000000000000
+      internalID: -2515247749585546199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eda5a236ca933c60800000000000000
+      internalID: 7796745555952381411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax15
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dba31193bcfb97a0800000000000000
+      internalID: -6369219399822103598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax16
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3c679c4e9b1f0290800000000000000
+      internalID: -7922082852817638339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax17
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 127
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade94b0ad438178d0800000000000000
+      internalID: -2850352719716901158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d79b8f99dde1c5b00800000000000000
+      internalID: 818563169394407805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax19
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b7be0ff36087d60800000000000000
+      internalID: 7888061619034094430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax20
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c453169beb2aacf0800000000000000
+      internalID: -240331339275742007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax21
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc630d587da86f970800000000000000
+      internalID: 8788364381127718604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax22
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90f97f710e8fa60c0800000000000000
+      internalID: -4581576029537591543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax23
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 85
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d6a7339983f93da0800000000000000
+      internalID: -5964468459269544231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 43
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28e29d45645cc6420800000000000000
+      internalID: 2624689588712058498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax25
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 43
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c4c6bce6988c6780800000000000000
+      internalID: -8688419399306656576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax26
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 43
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d58a3b6d816ab990800000000000000
+      internalID: -7369470580221114923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax27
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 43
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c05f945fdb773ca0800000000000000
+      internalID: -6037220576339210039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oculothorax28
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 43
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e25986a2eb12c20800000000000000
+      internalID: 3180031901252791865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

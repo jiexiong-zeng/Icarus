@@ -1,0 +1,948 @@
+fileFormatVersion: 2
+guid: 10001a4f144f1c74b9332ed7f32d0c81
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3273820279786838410
+    second: small monster00
+  - first:
+      213: 3263509068357952027
+    second: small monster01
+  - first:
+      213: -5722712926571648718
+    second: small monster02
+  - first:
+      213: -2766158267926456177
+    second: small monster03
+  - first:
+      213: 1589239488836887766
+    second: small monster04
+  - first:
+      213: -7717672707709864242
+    second: small monster05
+  - first:
+      213: -5317452107531755129
+    second: small monster06
+  - first:
+      213: -7107595534159839821
+    second: small monster07
+  - first:
+      213: -4297365205451029360
+    second: small monster08
+  - first:
+      213: -2861625850085807297
+    second: small monster09
+  - first:
+      213: 4087553061757537786
+    second: small monster10
+  - first:
+      213: 633355063132767955
+    second: small monster11
+  - first:
+      213: 3487182558305857910
+    second: small monster12
+  - first:
+      213: -4055170712058651858
+    second: small monster13
+  - first:
+      213: -935266097959256251
+    second: small monster14
+  - first:
+      213: -6388791858767553990
+    second: small monster15
+  - first:
+      213: -8095176476340144612
+    second: small monster16
+  - first:
+      213: -5498757043302608019
+    second: small monster17
+  - first:
+      213: -1412876393900392537
+    second: small monster18
+  - first:
+      213: 6439638615856902334
+    second: small monster19
+  - first:
+      213: -3461028146372093615
+    second: small monster20
+  - first:
+      213: 6841424520097744108
+    second: small monster21
+  - first:
+      213: -813042609556192581
+    second: small monster22
+  - first:
+      213: 4271304556717506172
+    second: small monster23
+  - first:
+      213: 9082402115778165819
+    second: small monster24
+  - first:
+      213: 6548714301249751330
+    second: small monster25
+  - first:
+      213: -9018822522381397206
+    second: small monster26
+  - first:
+      213: 5168336305361918636
+    second: small monster27
+  - first:
+      213: 1415062016328180524
+    second: small monster28
+  - first:
+      213: 5327337329130825083
+    second: small monster29
+  - first:
+      213: -4898036174208793323
+    second: small monster30
+  - first:
+      213: -173809409456274138
+    second: small monster31
+  - first:
+      213: 5673684570435006413
+    second: small monster32
+  - first:
+      213: -8462975488617230158
+    second: small monster33
+  - first:
+      213: -4611580463680752733
+    second: small monster34
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: small monster00
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 676e5dc0dcd0192d0800000000000000
+      internalID: -3273820279786838410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster01
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b12edb4f4305a4d20800000000000000
+      internalID: 3263509068357952027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster02
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 239292cd9e6d490b0800000000000000
+      internalID: -5722712926571648718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster03
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f88dbb706b1ac99d0800000000000000
+      internalID: -2766158267926456177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster04
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d4652b15ec1e0610800000000000000
+      internalID: 1589239488836887766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster05
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec6f934ff8155e490800000000000000
+      internalID: -7717672707709864242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster06
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 781ea643b7d9436b0800000000000000
+      internalID: -5317452107531755129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster07
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bdff33f48fbc5d90800000000000000
+      internalID: -7107595534159839821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster08
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094c7f23d11bc54c0800000000000000
+      internalID: -4297365205451029360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster09
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b6f8d63767948d0800000000000000
+      internalID: -2861625850085807297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster10
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd4e965ad7e9b830800000000000000
+      internalID: 4087553061757537786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster11
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d649b203112ac800800000000000000
+      internalID: 633355063132767955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67132c69f06f46030800000000000000
+      internalID: 3487182558305857910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster13
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b1d2cf8b329b7c0800000000000000
+      internalID: -4055170712058651858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster14
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f3cac60744503f0800000000000000
+      internalID: -935266097959256251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster15
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a904a57a37657a0800000000000000
+      internalID: -6388791858767553990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster16
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c16b5a582e728af80800000000000000
+      internalID: -8095176476340144612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster17
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6355cf4a9d70b3b0800000000000000
+      internalID: -5498757043302608019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af380ec764746ce0800000000000000
+      internalID: -1412876393900392537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster19
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb0f904d3313e5950800000000000000
+      internalID: 6439638615856902334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster20
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 159dcd9fc35f7ffc0800000000000000
+      internalID: -3461028146372093615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster21
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce4c2168a5f91fe50800000000000000
+      internalID: 6841424520097744108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster22
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb28526ed0e77b4f0800000000000000
+      internalID: -813042609556192581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster23
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7e77ae2dd8b64b30800000000000000
+      internalID: 4271304556717506172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3cb63a8a9c2b0e70800000000000000
+      internalID: 9082402115778165819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster25
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 229038dd5f4b1ea50800000000000000
+      internalID: 6548714301249751330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster26
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a231a2d13b4b6d280800000000000000
+      internalID: -9018822522381397206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster27
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caa1ad89c7e99b740800000000000000
+      internalID: 5168336305361918636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster28
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c23a362186f43a310800000000000000
+      internalID: 1415062016328180524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster29
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b75658d43118ee940800000000000000
+      internalID: 5327337329130825083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster30
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 515854bec0ea60cb0800000000000000
+      internalID: -4898036174208793323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster31
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6250db25341869df0800000000000000
+      internalID: -173809409456274138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster32
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcfa46c6e0afcbe40800000000000000
+      internalID: 5673684570435006413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster33
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b0d122c1a87d8a80800000000000000
+      internalID: -8462975488617230158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small monster34
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a37d2160006000c0800000000000000
+      internalID: -4611580463680752733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

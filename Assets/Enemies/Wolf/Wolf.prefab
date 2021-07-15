@@ -436,15 +436,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1716487844519121129}
   playerLayers:
     serializedVersion: 2
     m_Bits: 128
   maxHealth: 80
   attackColliderRadius: 0.1
+  attackBoxSize: {x: 1, y: 1}
   currentHealth: 0
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
   RangeProjectile: {fileID: 0}
-  canBeDazed: 0
+  canBeDazed: 1
   spawnParticle: 1
   bloodEffect: {fileID: 1962130249936933181, guid: 6c283f6a818a8c247a8aa349be15119c, type: 3}
   manaParticle: {fileID: 5160084224683086708, guid: a191223ca19e5804fa2ac402863d9e58, type: 3}
@@ -456,6 +458,8 @@ MonoBehaviour:
   damageframe: 0
   healthBarPrefab: {fileID: 5877144230054706168, guid: f75b3e5f265418b4fb3cb705fca992ec, type: 3}
   healthBarOffset: {x: -0.22, y: 0.266, z: 0}
+  HomingProjectile: {fileID: 0}
+  projectileOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1716487845505153671
 MonoBehaviour:
   m_ObjectHideFlags: 0

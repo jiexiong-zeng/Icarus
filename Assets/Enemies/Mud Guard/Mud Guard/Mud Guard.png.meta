@@ -1,0 +1,924 @@
+fileFormatVersion: 2
+guid: 31e36819f374a874ca06e36fc66b3a2a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3592981621208684249
+    second: Mud Guard00
+  - first:
+      213: -6887875622338214655
+    second: Mud Guard01
+  - first:
+      213: -9221441958377604994
+    second: Mud Guard02
+  - first:
+      213: 2078461803730183659
+    second: Mud Guard03
+  - first:
+      213: 5424724528950961082
+    second: Mud Guard04
+  - first:
+      213: -998940455030571215
+    second: Mud Guard05
+  - first:
+      213: -8231773672826841579
+    second: Mud Guard06
+  - first:
+      213: -4505732406311072264
+    second: Mud Guard07
+  - first:
+      213: 3684135192165497683
+    second: Mud Guard08
+  - first:
+      213: 7966082024939554064
+    second: Mud Guard09
+  - first:
+      213: 1298871274183228431
+    second: Mud Guard10
+  - first:
+      213: -8729579576475362022
+    second: Mud Guard11
+  - first:
+      213: -3016687697240406556
+    second: Mud Guard12
+  - first:
+      213: 5640326874846497634
+    second: Mud Guard13
+  - first:
+      213: 3977020548916770899
+    second: Mud Guard14
+  - first:
+      213: -4149084838485082117
+    second: Mud Guard15
+  - first:
+      213: -5358300006455921203
+    second: Mud Guard16
+  - first:
+      213: -4349513212707768227
+    second: Mud Guard17
+  - first:
+      213: 7719092767629649699
+    second: Mud Guard18
+  - first:
+      213: 2364202981384289795
+    second: Mud Guard19
+  - first:
+      213: -7594914951272936788
+    second: Mud Guard20
+  - first:
+      213: 5588859049117412445
+    second: Mud Guard21
+  - first:
+      213: 1537012941417999279
+    second: Mud Guard22
+  - first:
+      213: -7745386830823859185
+    second: Mud Guard23
+  - first:
+      213: 5647381094958345048
+    second: Mud Guard24
+  - first:
+      213: -2305994707534492176
+    second: Mud Guard25
+  - first:
+      213: -5820073677800620106
+    second: Mud Guard26
+  - first:
+      213: -6656611792043809330
+    second: Mud Guard27
+  - first:
+      213: 9172989216908494065
+    second: Mud Guard28
+  - first:
+      213: -5306593981115927652
+    second: Mud Guard29
+  - first:
+      213: -8751942155048335841
+    second: Mud Guard30
+  - first:
+      213: 1820197662929034210
+    second: Mud Guard31
+  - first:
+      213: -7435937006489036886
+    second: Mud Guard32
+  - first:
+      213: 4596095622217162220
+    second: Mud Guard33
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mud Guard00
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d696a08fb5dcd130800000000000000
+      internalID: 3592981621208684249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard01
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10545717d995960a0800000000000000
+      internalID: -6887875622338214655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard02
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e78350a656bd60080800000000000000
+      internalID: -9221441958377604994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard03
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be52e829ffd28dc10800000000000000
+      internalID: 2078461803730183659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard04
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab36878b73e784b40800000000000000
+      internalID: 5424724528950961082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard05
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 971
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13fb222e2fc0322f0800000000000000
+      internalID: -998940455030571215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard06
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5165eb7557dd2cd80800000000000000
+      internalID: -8231773672826841579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard07
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fdccd4bf3c6871c0800000000000000
+      internalID: -4505732406311072264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard08
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b3a89107da02330800000000000000
+      internalID: 3684135192165497683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard09
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 015852445653d8e60800000000000000
+      internalID: 7966082024939554064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard10
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0c76aaca84860210800000000000000
+      internalID: 1298871274183228431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard11
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 777
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d5ea160ad4ad680800000000000000
+      internalID: -8729579576475362022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e5c1bfb5829226d0800000000000000
+      internalID: -3016687697240406556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard13
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26b8050b867764e40800000000000000
+      internalID: 5640326874846497634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard14
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358fc9a3e17313730800000000000000
+      internalID: 3977020548916770899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard15
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bff332b725d7b66c0800000000000000
+      internalID: -4149084838485082117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard16
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc5b83b988e73a5b0800000000000000
+      internalID: -5358300006455921203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard17
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 583
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d587faa17cc63a3c0800000000000000
+      internalID: -4349513212707768227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3272ad289f9bf1b60800000000000000
+      internalID: 7719092767629649699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard19
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30e7452e5165fc020800000000000000
+      internalID: 2364202981384289795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard20
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caac2166711799690800000000000000
+      internalID: -7594914951272936788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard21
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5cee52b1bd9f8d40800000000000000
+      internalID: 5588859049117412445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard22
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fabe5647021945510800000000000000
+      internalID: 1537012941417999279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard23
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 389
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0c51c4d6bbd28490800000000000000
+      internalID: -7745386830823859185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85baf3c4f278f5e40800000000000000
+      internalID: 5647381094958345048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard25
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fdc97bf7067fffd0800000000000000
+      internalID: -2305994707534492176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard26
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bfb71c73d1fa3fa0800000000000000
+      internalID: -5820073677800620106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard27
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec56d87e7d6fe93a0800000000000000
+      internalID: -6656611792043809330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard28
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f4c15a97110d4f70800000000000000
+      internalID: 9172989216908494065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard29
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 195
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c93fb54c3e03b56b0800000000000000
+      internalID: -5306593981115927652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard30
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f16c391dafada8680800000000000000
+      internalID: -8751942155048335841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard31
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb91ef6124a24910800000000000000
+      internalID: 1820197662929034210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard32
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa71a0c90be3ec890800000000000000
+      internalID: -7435937006489036886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mud Guard33
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 1
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ced5bf30e9c98cf30800000000000000
+      internalID: 4596095622217162220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

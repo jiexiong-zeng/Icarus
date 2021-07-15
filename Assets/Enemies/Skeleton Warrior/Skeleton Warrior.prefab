@@ -127,11 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 4364068777014203269}
   playerLayers:
     serializedVersion: 2
     m_Bits: 128
   maxHealth: 150
   attackColliderRadius: 0.22
+  attackBoxSize: {x: 1, y: 1}
   currentHealth: 0
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
   RangeProjectile: {fileID: 0}
@@ -147,6 +149,8 @@ MonoBehaviour:
   damageframe: 0
   healthBarPrefab: {fileID: 5877144230054706168, guid: f75b3e5f265418b4fb3cb705fca992ec, type: 3}
   healthBarOffset: {x: -0.2, y: 0.4, z: 0}
+  HomingProjectile: {fileID: 0}
+  projectileOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &5167721841208053454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,11 +423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.325
+      value: 21.06
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.843
+      value: -2.34
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -506,5 +510,10 @@ GameObject:
 --- !u!4 &4364068776985997556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6256419526757083276, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
+  m_PrefabInstance: {fileID: 7656978115875559544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4364068777014203269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6256419526804360189, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
   m_PrefabInstance: {fileID: 7656978115875559544}
   m_PrefabAsset: {fileID: 0}

@@ -7,7 +7,7 @@ public class DontDestroyOnLoad : MonoBehaviour
     public static DontDestroyOnLoad instance = null;
     private void Awake()
     {
-        Debug.Log(this.name);
+        
         if (instance == null)
         {
             instance = this;

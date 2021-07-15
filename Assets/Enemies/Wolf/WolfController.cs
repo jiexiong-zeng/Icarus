@@ -120,7 +120,7 @@ public class WolfController : MonoBehaviour
             if (combat.damageframe)
             {
                 combat.damageframe = false;
-                //ChangeAnimationState(HURT);
+                ChangeAnimationState(HURT);
             }
         }
 

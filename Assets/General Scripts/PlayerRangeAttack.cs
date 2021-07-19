@@ -10,7 +10,7 @@ public class PlayerRangeAttack : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         combat = animator.GetComponent<PlayerCombatScript>();
-        combat.AttackRange(delay);
+        //combat.AttackRange(delay);
 
     }
 

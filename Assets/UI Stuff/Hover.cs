@@ -22,7 +22,7 @@ public class Hover : MonoBehaviour
             GetComponent<Image>().color = new Color(0, 0, 0);
             Debug.Log(obelisk.pathToImg);
             Debug.Log(Resources.Load<Sprite>("Obelisks\\test"));
-            GameObject.Find("Screenshot").GetComponent<Image>().sprite = Resources.Load<Sprite>(obelisk.pathToImg);
+           // GameObject.Find("Screenshot").GetComponent<Image>().sprite = Resources.Load<Sprite>(obelisk.pathToImg);
             if (Input.GetMouseButtonDown(0))
             {
                 transform.parent.GetComponent<TravelOptions>().CloseOptions(obelisk);

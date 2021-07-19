@@ -18,7 +18,8 @@ public class MysteryKnight_HeavyAttack : StateMachineBehaviour
         playermove = animator.GetComponent<PlayerMovement_MysteryKnight>();
         playermove.animationLocked = true;
         combat.HeavyAttack(delay, attackDamage, forwardMotion, attackStaminaCost);
-        Instantiate(fireEffect, animator.transform.position + new Vector3(animator.transform.localScale.x * 0.1f * 10, 0, 0), Quaternion.identity);
+        combat.ChangeMana(-20f, combat.manaRegenDelay);
+        Instantiate(fireEffect, animator.transform.position + new Vector3(animator.transform.localScale.x * 0.1f * 9, 0, 0), Quaternion.identity);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

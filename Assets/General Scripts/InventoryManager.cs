@@ -36,10 +36,10 @@ public class InventoryManager : MonoBehaviour
 
     public void AddToGrid(GameObject item, MyDelegateType inputFunction)
     {
-        if (inventory.Find(x => x.name == item.name.Split(' ')[0]) != null)
+        if (inventory.Find(x => x.name == item.name) != null)
         {
             Debug.Log("Incrementing");
-            var inventoryItem = inventory.Find(x => x.name == item.name.Split(' ')[0]);
+            var inventoryItem = inventory.Find(x => x.name == item.name);
             inventoryItem.amount++;
             //if (activeItem.name == inventoryItem.name)
                 //activeItem.amount = inventoryItem.amount;

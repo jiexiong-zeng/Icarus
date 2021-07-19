@@ -76,13 +76,13 @@ public class SpawnPointScript : MonoBehaviour
 
             if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Obelisk1") && !options.isShowing)
             {
-                Debug.Log("Opening");
+                //Debug.Log("Opening");
                 options.ShowOptions(this);
             }
 
             if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Obelisk1") && options.isShowing)
             {
-                Debug.Log("Closing");
+                //Debug.Log("Closing");
                 options.CloseOptions();
             }
         }

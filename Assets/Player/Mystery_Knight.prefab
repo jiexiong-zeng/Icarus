@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 3734595897298238802}
   - component: {fileID: 1317711232}
   - component: {fileID: 244354119572861228}
+  - component: {fileID: 8040547773500769651}
   m_Layer: 7
   m_Name: Mystery_Knight
   m_TagString: Player
@@ -1040,6 +1041,19 @@ MonoBehaviour:
   NPCLayers:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &8040547773500769651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4841366484106534967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bfcd72a8ebba8468abbed90ab434a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 7109177300638155006, guid: e3e2cd6410108fd47b9aec771950fbe0, type: 3}
 --- !u!1 &4841366484481245045
 GameObject:
   m_ObjectHideFlags: 0

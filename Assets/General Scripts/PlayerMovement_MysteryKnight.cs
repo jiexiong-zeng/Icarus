@@ -18,7 +18,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
     private bool jump = false;
     public bool animationLocked = false;
     [SerializeField] private PhysicsMaterial2D noFriction, hasFriction;
-    [SerializeField] private float runSpeed = 40f;
+    [SerializeField] public float runSpeed = 40f;
 
     //dash
     [SerializeField] private float dashSpeed = 40f;

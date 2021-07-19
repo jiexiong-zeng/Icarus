@@ -10,16 +10,12 @@ public class TravelOptions : MonoBehaviour
     SpawnPointScript reference;
     public bool isShowing;
     //public static ObeliskData selected;
-    Transform[] children;
 
     // Start is called before the first frame update
     void Start()
     {
         //selected = null;
-        children = gameObject.GetComponentsInChildren<Transform>();
         isShowing = false;
-        for (int i = 1; i < children.Length; i++)
-            children[i].gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,17 +33,12 @@ public class TravelOptions : MonoBehaviour
         reference = instance;
         StopAllCoroutines();
         StartCoroutine(changeState());
-        for (int j = 1; j < children.Length; j++)
-            children[j].gameObject.SetActive(true);
         int i = 0;
         //Debug.Log(SaveLoad.savedObelisks.Count);
-        Debug.Log(gameObject.GetComponentsInChildren<Transform>().Length);
-        if(gameObject.GetComponentsInChildren<Transform>().Length == 4)
+        if(gameObject.GetComponentsInChildren<Transform>().Length < 3)
             foreach(ObeliskData obelisk in SaveLoad.savedObelisks)
             {
-                //Debug.Log(transform.GetChild(0).name);
-                Debug.Log(transform.GetChild(0).GetChild(0).name);
-                var prefab = Instantiate(buttonPrefab, transform.GetChild(0).GetChild(0));
+                var prefab = Instantiate(buttonPrefab, transform);
                 var rect = prefab.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2(0, ++i * -40);
                 prefab.GetComponentInChildren<TextMeshProUGUI>().SetText(obelisk.scene);
@@ -62,14 +53,12 @@ public class TravelOptions : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(changeState());
         //delete all
-        Transform[] allChildren = transform.GetChild(0).gameObject.GetComponentsInChildren<Transform>();
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
         for (int i = 1; i < allChildren.Length; i ++)
-            if(allChildren[i].name != "Screenshot" && allChildren[i].name != "MenuGoesHere")
+            if(allChildren[i].name != "Screenshot")
                 Destroy(allChildren[i].gameObject);
-        for (int i = 1; i < children.Length; i++)
-            children[i].gameObject.SetActive(false);
         //Fast travel
-        if (obelisk != null)
+        if(obelisk != null)
             reference.FastTravelRoutine(obelisk);
 
     }
@@ -77,7 +66,7 @@ public class TravelOptions : MonoBehaviour
     IEnumerator changeState()
     { 
         yield return new WaitForSeconds(0.5f);
-        //Debug.Log("Swapping");
+        Debug.Log("Swapping");
         isShowing = !isShowing;
     }
 

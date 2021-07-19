@@ -30,12 +30,9 @@ public class Consumable : MonoBehaviour
     {
         if(collision.collider.gameObject.tag == "Player")
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Added to consumables");
             inventoryManager.AddToGrid(this.gameObject, Effect);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            Destroy(gameObject);
         }
     }
 }

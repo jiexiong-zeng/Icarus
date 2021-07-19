@@ -225,7 +225,6 @@ MonoBehaviour:
   falling: 0
   movementSmoothing: 0.05
   startFaceRight: 1
-  spriteIsFlipped: 0
 --- !u!114 &8375616455440949161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,13 +315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6327541998848274faabb03d9a804a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 7074228683005413673}
   playerLayers:
     serializedVersion: 2
     m_Bits: 128
   maxHealth: 300
   attackColliderRadius: 0.7
-  attackBoxSize: {x: 1, y: 1}
   currentHealth: 0
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
   RangeProjectile: {fileID: 0}

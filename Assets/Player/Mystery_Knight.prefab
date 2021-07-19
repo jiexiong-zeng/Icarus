@@ -865,6 +865,10 @@ MonoBehaviour:
   atLadder: 0
   atLedge: 0
   isJumping: 0
+  pushedBack: 0
+  pushBackDirection: {x: 0, y: 0, z: 0}
+  pushBackSpeed: 0
+  blinkEffect: {fileID: 1482287874943813267, guid: f605029f2fdd28640987754119186757, type: 3}
   knockbackSpeed: {x: 3, y: 3}
 --- !u!114 &4841366484106534927
 MonoBehaviour:
@@ -891,7 +895,7 @@ MonoBehaviour:
     m_Bits: 2048
   attackRange: 0.3
   maxHealth: 200
-  maxStamina: 120
+  maxStamina: 200
   maxMana: 100
   health: 0
   stamina: 0
@@ -899,24 +903,40 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   manaBar: {fileID: 0}
   stamBar: {fileID: 0}
-  manaRefillRate: 5
-  staminaRefillRate: 0.6
+  manaRefillOnHit: 5
+  manaRecoveryMax: 20
+  manaRecovered: 0
+  manaRefillRate: 0.5
+  staminaRefillRate: 2
   dashStaminaCost: 30
-  manaCost: 50
+  fireballmanaCost: 50
+  windblastmanaCost: 30
+  thunderballmanaCost: 30
+  blinkmanaCost: 20
+  waveDashmanaCost: 30
+  waterminemanaCost: 40
   staminaRegenDelay: 1
   staminaTime: 0
+  manaRegenDelay: 1
+  manaTime: 0
+  blinkCooldown: 1
+  blinkTime: 0
   floatingText: {fileID: 4827432546840907538, guid: ad49309efdf797f4cb2ef0b557f5c0d9, type: 3}
   bloodParticleEffect: {fileID: 1962130249936933181, guid: 6c283f6a818a8c247a8aa349be15119c, type: 3}
   deathParticleEffect: {fileID: 7540224445942576910, guid: 381672ce1489be942b2380c62d42511f, type: 3}
   dazed: 0
   dead: 0
   heavyAttack: 0
-  RangeProjectile: {fileID: 3128238198876545047, guid: 9bdffc981ff0d1641bce702d40d4074b, type: 3}
+  Fireball: {fileID: 3128238198876545047, guid: 9bdffc981ff0d1641bce702d40d4074b, type: 3}
+  WindBlast: {fileID: 3488352831206610429, guid: 801a4c5af6788654db0371c8a53823a1, type: 3}
+  ThunderBall: {fileID: 3756086491712748216, guid: 334b84e7fc7456447a31ed19ff4fb0db, type: 3}
+  WaterMine: {fileID: 7320545211499976908, guid: d6c4227100e00d54084858d35d36b97d, type: 3}
   flashEffect: {fileID: 8047739799255555513, guid: a7fe0ea6cd264a447ad1e6805f103a60, type: 3}
   blockBroken: 0
   parrysuccess: 0
   inParry: 0
   block: 0
+  iceBlock: 0
 --- !u!70 &3734595897988321227
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -966,9 +986,13 @@ MonoBehaviour:
   runSpeed: 10
   dashSpeed: 30
   dashDuration: 0.15
+  fireExplosion: {fileID: 8801627026047991686, guid: b8cd2bc2ca48b024a97ba150e1bcf50c, type: 3}
+  airDashEffect: {fileID: 8520351078446344298, guid: 1f5e181051c8fa34b8d8744ae62b5aaa, type: 3}
+  waveDashEffect: {fileID: 5189126332381718294, guid: f927045a3e3db5e4d9ec6bf82d3df250, type: 3}
   dashInvulnerableDuration: 0.2
   invulnerableTime: 0
-  magicChargeTime: 0.6
+  magicChargeTime: 0.45
+  chargeWindblast: {fileID: 712665371884271441, guid: 40b6ec39380c8b0428d81aa44f9bdac6, type: 3}
   FireShield: {fileID: 293513104032305435, guid: 65aacca28d8295741bcfd7055eac9ba9, type: 3}
   currentState: 
 --- !u!114 &1317711232

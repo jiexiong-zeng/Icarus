@@ -132,7 +132,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxHealth: 150
-  attackColliderRadius: 0.33
+  attackColliderRadius: 0.22
   attackBoxSize: {x: 1, y: 1}
   currentHealth: 0
   floatingText: {fileID: 4864925302416594701, guid: ba2e5560d9a6cba44881468e0837f0e9, type: 3}
@@ -177,10 +177,6 @@ MonoBehaviour:
   falling: 0
   movementSmoothing: 0.05
   startFaceRight: 1
-  spriteIsFlipped: 0
-  pushedBack: 0
-  pushBackDirection: {x: 0, y: 0, z: 0}
-  pushBackSpeed: 0
 --- !u!114 &6128417478441889856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526804360189, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.688
+      value: 0.633
       objectReference: {fileID: 0}
     - target: {fileID: 6256419526804360189, guid: df4aec9f249fc024e99cab47b292fdf9, type: 3}
       propertyPath: m_LocalPosition.y

@@ -44,11 +44,8 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 targetVelocity;
 	public bool isJumping = false;
 
-	public bool pushedBack = false;
-	public Vector3 pushBackDirection;
-	public float pushBackSpeed;
 
-	private void Awake()
+    private void Awake()
     {
 		DontDestroyOnLoad(this.gameObject);
     }
@@ -85,16 +82,12 @@ public class CharacterController2D : MonoBehaviour
 			atLedge = true;
 		}
 
+
 	}
     void FixedUpdate()
     {
 		SlopeCheck();
 		m_Rigidbody2D.velocity = Vector2.ClampMagnitude(m_Rigidbody2D.velocity, maxSpeed);
-
-		if (pushedBack)
-		{
-			ApplyPushBack(pushBackDirection, pushBackSpeed);
-		}
 	}
 
     private void SlopeCheck()
@@ -134,77 +127,40 @@ public class CharacterController2D : MonoBehaviour
 
 	}
 
-	private void ApplyPushBack(Vector3 direction, float speed)
-	{
-		if (pushBackSpeed > 0)
-		{
-			targetVelocity = new Vector2(speed * direction.x, m_Rigidbody2D.velocity.y);
-			m_Rigidbody2D.velocity = targetVelocity;
-			pushBackSpeed -= 1;
-		}
-
-		else
-		{
-			pushedBack = false;
-		}
-	}
-
 	private float jumptime;
 	public void Move(float speed, bool jump)
 	{
 		float multiplier = 10f;
 
-		if (!pushedBack)
+		if (m_Grounded && isOnSlope && !isJumping)
 		{
-			if (m_Grounded && isOnSlope && !isJumping)
-			{
-				targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
-			}
-			else
-			{
-				targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
-			}
-
-			if (jump)
-			{
-				jumptime = Time.time;
-				m_Grounded = false;
-				targetVelocity.y = m_JumpForce;
-			}
-			//m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
-			m_Rigidbody2D.velocity = targetVelocity;
-
-			// If the input is moving the player right and the player is facing left...
-			if (speed > 0 && !m_FacingRight)
-			{
-				Flip();
-			}
-			else if (speed < 0 && m_FacingRight)
-			{
-				Flip();
-			}
+			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
 		}
-	}
+		else
+		{
+			targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
+		}
 
-	public GameObject blinkEffect;
-	public void Blink(float distance = 1)
-    {
-		if(SkillWheel.selected == 1)
-			Instantiate(blinkEffect, transform.position, Quaternion.identity);
-
-		float blinkDistance;
-		RaycastHit2D hit2 = Physics2D.Raycast(m_GroundCheck.position, Vector2.right * transform.localScale, 10f, m_WhatIsGround);
-		//Debug.Log("forwardMotion: " + forwardMotion + ", maxdistance: " + hit.distance);
-		if (hit2.distance > distance || hit2.collider == null)
-			blinkDistance = distance;
-        else
+		if (jump)
         {
-			blinkDistance = hit2.distance;
+			jumptime = Time.time;
+			m_Grounded = false;
+			targetVelocity.y = m_JumpForce;
+        }
+		//m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+		m_Rigidbody2D.velocity = targetVelocity;
+
+		// If the input is moving the player right and the player is facing left...
+		if (speed > 0 && !m_FacingRight)
+		{
+			Flip();
 		}
-		transform.position += new Vector3(transform.localScale.x * blinkDistance, 0, 0); 
+		else if (speed < 0 && m_FacingRight)
+		{
+			Flip();
+		}
+		
 	}
-
-
 	public IEnumerator FallThrough()
     {
 		oneWayPlatform = GameObject.Find("OneWay");

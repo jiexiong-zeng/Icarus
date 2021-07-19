@@ -136,7 +136,7 @@ public class EnemyCombat : MonoBehaviour
             SpawnedProjectile.GetComponent<Projectile>().destroySelf = true;
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth < 0)
         {
             dead = true;
             Die();
@@ -187,17 +187,11 @@ public class EnemyCombat : MonoBehaviour
             Destroy(healthBar);
         }
 
-        this.gameObject.layer = LayerMask.NameToLayer("Enemy Corpse");
-        foreach (Transform trans in GetComponentsInChildren<Transform>(true))
-        {
-            trans.gameObject.layer = LayerMask.NameToLayer("Enemy Corpse");
-        }
-        /*
         CapsuleCollider2D[] colList = transform.GetComponentsInChildren<CapsuleCollider2D>();
         
         CapsuleCollider2D[] playerColList = GameObject.FindGameObjectWithTag("Player").GetComponentsInChildren<CapsuleCollider2D>();
 
-        
+
 
         foreach (CapsuleCollider2D col in colList)
         {
@@ -205,7 +199,6 @@ public class EnemyCombat : MonoBehaviour
                 Physics2D.IgnoreCollision(col, playerCol,true);
             //col.enabled = false;
         }
-        */
         Destroy(this.gameObject,10);
 
         StartCoroutine(SpawnMana(1f));

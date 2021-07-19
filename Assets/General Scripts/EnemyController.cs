@@ -31,10 +31,6 @@ public class EnemyController : MonoBehaviour
 	public bool startFaceRight = true;
 	public bool spriteIsFlipped = false;
 
-	public bool pushedBack = false;
-	public Vector3 pushBackDirection;
-	public float pushBackSpeed;
-
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -81,11 +77,6 @@ public class EnemyController : MonoBehaviour
 	{
 		SlopeCheck();
 		m_Rigidbody2D.velocity = Vector2.ClampMagnitude(m_Rigidbody2D.velocity, maxSpeed);
-
-		if (pushedBack)
-		{
-			ApplyPushBack(pushBackDirection, pushBackSpeed);
-		}
 	}
 
 	private void SlopeCheck()
@@ -126,47 +117,30 @@ public class EnemyController : MonoBehaviour
 	public void Move(float speed)
 	{
 		float multiplier = 10f;
-		if (!pushedBack)
+
+		if (isOnSlope && m_Grounded)
 		{
-			if (isOnSlope && m_Grounded)
-			{
-				targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
-				//m_Rigidbody2D.AddForce(targetVelocity / m_Rigidbody2D.mass);
-				m_Rigidbody2D.velocity = targetVelocity;
-			}
-			else
-			{
-				targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
-				//m_Rigidbody2D.AddForce(targetVelocity / m_Rigidbody2D.mass);
-				m_Rigidbody2D.velocity = targetVelocity;
-			}
-
-
-			if (speed > 0 && !m_FacingRight)
-			{
-				Flip();
-			}
-			else if (speed < 0 && m_FacingRight)
-			{
-				Flip();
-			}
-		}
-	}
-
-	private void ApplyPushBack(Vector3 direction, float speed)
-	{
-		if (pushBackSpeed > 0)
-		{
-			targetVelocity = new Vector2(speed * direction.x, m_Rigidbody2D.velocity.y);
+			targetVelocity = new Vector2(-speed * multiplier * slopeNormalPerp.x, -speed * multiplier * slopeNormalPerp.y);
 			m_Rigidbody2D.velocity = targetVelocity;
-			pushBackSpeed -= 1;
+		}
+		else
+		{
+			targetVelocity = new Vector2(speed * multiplier, m_Rigidbody2D.velocity.y);
+			m_Rigidbody2D.velocity = targetVelocity;
 		}
 
-        else
-        {
-			pushedBack = false;
-        }
+		
+		if (speed > 0 && !m_FacingRight)
+		{
+			Flip();
+		}
+		else if (speed < 0 && m_FacingRight)
+		{
+			Flip();
+		}
+
 	}
+
 
 	public void Fly(float speed, Vector3 target)
     {
@@ -199,9 +173,8 @@ public class EnemyController : MonoBehaviour
 
 	public void Stop()
 	{
-		if(!pushedBack)
-			m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
-			//m_Rigidbody2D.velocity = new Vector2(0, 0);
+		m_Rigidbody2D.velocity = new Vector2(0, 0);
+		//m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
 	}
 
 	public void Dash(float dashSpeed)

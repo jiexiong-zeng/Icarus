@@ -12,7 +12,6 @@ public class PlayerCombatScript : MonoBehaviour
     public Animator animator;
     public Transform attackPoint;
     public LayerMask enemyLayers;
-    private CharacterController2D controller;
     [SerializeField] private LayerMask m_WhatIsGround,blockerLayer;
 
     public float attackRange = 0.5f;
@@ -29,27 +28,15 @@ public class PlayerCombatScript : MonoBehaviour
     public HpBar stamBar;
     bool isHUDon;
 
-    public int manaRefillOnHit = 5;
-    public int manaRecoveryMax = 20;
-    public float manaRecovered = 0;
-    public float manaRefillRate = 0.2f;
+    public int manaRefillRate = 50;
     public float staminaRefillRate = 0.2f;
-
+    //public int attackStaminaCost = 50;
     public int dashStaminaCost = 30;
-    public int fireballmanaCost = 50;
-    public int windblastmanaCost = 30;
-    public int thunderballmanaCost = 30;
-    public int blinkmanaCost = 20;
-    public int waveDashmanaCost = 30;
-    public int waterminemanaCost = 40;
-
+    public int manaCost = 50;
 
     public float staminaRegenDelay = 1f;
     public float staminaTime;
-    public float manaRegenDelay = 1f;
-    public float manaTime;
-    public float blinkCooldown = 1f;
-    public float blinkTime;
+
 
     public GameObject floatingText;
     public GameObject bloodParticleEffect;
@@ -64,8 +51,8 @@ public class PlayerCombatScript : MonoBehaviour
     {
         health = maxHealth;
         stamina = maxStamina;
-        mana = maxMana;
-        controller = GetComponent<CharacterController2D>();
+        mana = 0;
+
         isHUDon = GameObject.Find("HPBar") == null ? false : true;
         if (isHUDon)
         {
@@ -78,34 +65,17 @@ public class PlayerCombatScript : MonoBehaviour
         } 
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        if(Input.GetButton("Primary"))
+            heavyAttackChargeTime -= Time.deltaTime;
+
+        staminaTime -= Time.deltaTime;
 
         if (stamina < maxStamina && staminaTime <= 0)
         {
             ChangeStamina(staminaRefillRate, 0);
         }
-
-        if (mana < maxMana && manaTime <= 0 && manaRecovered < manaRecoveryMax)
-        {
-            ChangeMana(manaRefillRate, 0);
-            manaRecovered += manaRefillRate;
-        }
-
-        if (block && mana > 0)
-            ChangeMana(-0.2f, manaRegenDelay);
-        if (mana < 0)
-            mana = 0;
-    }
-
-    void Update()
-    {
-        if (Input.GetButton("Primary"))
-            heavyAttackChargeTime -= Time.deltaTime;
-
-        staminaTime -= Time.deltaTime;
-        manaTime -= Time.deltaTime;
-        blinkTime -= Time.deltaTime;
 
         if (mana > maxMana)
         {
@@ -113,7 +83,7 @@ public class PlayerCombatScript : MonoBehaviour
         }
 
         dazedtime -= Time.deltaTime;
-        if (dazedtime > 0)
+        if(dazedtime > 0)
         {
             dazed = true;
         }
@@ -127,8 +97,6 @@ public class PlayerCombatScript : MonoBehaviour
             blockBroken = true;
     }
 
-
-
     public void FlashManaBar()
     {
         StartCoroutine(manaBar.Flash());
@@ -138,14 +106,9 @@ public class PlayerCombatScript : MonoBehaviour
         StartCoroutine(stamBar.Flash());
     }
 
-    public void ChangeMana(float amount, float delay = 0)
+    public void ChangeMana(int amount)
     {
         mana += amount;
-        manaTime = delay;
-        if(amount < 0)
-        {
-            manaRecovered = 0; //reset regen
-        }
 
         if (isHUDon)
         {
@@ -160,7 +123,7 @@ public class PlayerCombatScript : MonoBehaviour
         }
     }
 
-    public void ChangeStamina(float amount, float delay = 0)
+    public void ChangeStamina(float amount, float delay)
     {
         stamina += amount;
         staminaTime = delay;
@@ -202,9 +165,8 @@ public class PlayerCombatScript : MonoBehaviour
         if (!dazed)
         {
 
-            if (heavyAttackChargeTime <= 0 && SkillWheel.selected != 0)
+            if (heavyAttackChargeTime <= 0)
             {
-
                 heavyAttack = true;
                 //HeavyAttack(attackDamage,forwardMotion,attackStaminaCost);
             }
@@ -238,29 +200,23 @@ public class PlayerCombatScript : MonoBehaviour
                 foreach (Collider2D enemy in hitEnemies)
                 {
                     //refill mana base on damage;
-                    ChangeMana(manaRefillOnHit);
+                    ChangeMana(manaRefillRate);
 
                     //Vector3 hitVector = new Vector3((enemy.transform.position - transform.position).x, 0, 0);
                     //hitVector = Vector3.Normalize(hitVector);
                     //enemy.attachedRigidbody.AddForce(hitVector * 5000);
                     //enemy.transform.position += hitVector * 0.1f;
 
-                    /*
+
                     RaycastHit2D Enemyhit = Physics2D.Raycast(enemy.transform.position, Vector2.right * transform.localScale, 10f, m_WhatIsGround);
                     float pushDistance = 0.1f;
+
+                    //Debug.Log("pushdist: 0.3f, maxdistance: " + Enemyhit.distance);
+
                     if (pushDistance > Enemyhit.distance && Enemyhit.distance != 0)
                         pushDistance = hit.distance;
-                    
+
                     enemy.transform.position += new Vector3(transform.localScale.x * pushDistance, 0, 0);
-                    */
-
-                    EnemyController enemyMove = enemy.gameObject.GetComponent<EnemyController>();
-                    enemyMove.pushedBack = true;
-                    Vector3 hitVector = new Vector3((enemy.transform.position - transform.position).x, 0, 0);
-                    hitVector = Vector3.Normalize(hitVector);
-                    enemyMove.pushBackDirection = hitVector;
-                    enemyMove.pushBackSpeed = 4;
-
 
                     enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
                 }
@@ -275,20 +231,27 @@ public class PlayerCombatScript : MonoBehaviour
         StartCoroutine(HeavyAttackRoutine(delay, attackDamage, forwardMotion, attackStaminaCost));
     }
 
+
     IEnumerator HeavyAttackRoutine(float delay, int attackDamage, float forwardMotion, float attackStaminaCost)
     {
-        //StartCoroutine(SlowMotion(0.1f));
+        StartCoroutine(SlowMotion(0.1f));
+        //StartCoroutine(SlowMotion(0.15f));
         yield return new WaitForSeconds(delay);
         ChangeStamina(-attackStaminaCost, staminaRegenDelay);
 
         //screen shake
         CameraEffects.ShakeOnce(0.1f, 1);
 
-        //raycast max distance to avoid phasing through objects
+        //raycast max distance to avoid phasing through objects :DDDDDDD
         RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0, 0.1f, 0), Vector2.right*transform.localScale,10f, m_WhatIsGround);
         forwardMotion *= 2;
+        Debug.Log("forwardMotion: " + forwardMotion + ", maxdistance: " + hit.distance);
         if (forwardMotion > hit.distance && hit.distance != 0)
             forwardMotion = 0;
+        Debug.Log(forwardMotion);
+
+        //forwardMotion += (Input.GetAxisRaw("Horizontal") * 0.1f); //increases or decreases the forward motion base on movement command
+        //GetComponent<Rigidbody2D>().AddForce(new Vector3(transform.localScale.x * forwardMotion * 10000, 0, 0));
 
         transform.position += new Vector3(transform.localScale.x*forwardMotion, 0, 0); //nudge player forward on attack
 
@@ -297,116 +260,61 @@ public class PlayerCombatScript : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //refill mana base on damage;
-            ChangeMana(manaRefillOnHit);
+            ChangeMana(manaRefillRate);
 
-            EnemyController enemyMove = enemy.gameObject.GetComponent<EnemyController>();
-            enemyMove.pushedBack = true;
-            Vector3 hitVector = new Vector3((enemy.transform.position - transform.position).x, 0, 0);
-            hitVector = Vector3.Normalize(hitVector);
-            enemyMove.pushBackDirection = hitVector;
-            enemyMove.pushBackSpeed = 6;
+            RaycastHit2D Enemyhit = Physics2D.Raycast(enemy.transform.position, Vector2.right * transform.localScale, 10f, m_WhatIsGround);
+            float pushDistance = 0.3f;
 
+            Debug.Log("pushdist: 0.3f, maxdistance: " + Enemyhit.distance);
+
+            if (pushDistance > Enemyhit.distance && Enemyhit.distance != 0)
+                pushDistance = hit.distance;
+
+            enemy.transform.position += new Vector3(transform.localScale.x * pushDistance,0,0);
+
+            //enemy.attachedRigidbody.AddForce(hitVector * 10000);
             enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
         }
     }
 
-    public void Bash(float distance, float attackStaminaCost, float manaCost = 0)
+
+
+    public GameObject RangeProjectile;
+    public void AttackRange(float delay)
     {
-        //StartCoroutine(SlowMotion(0.1f));
-        ChangeStamina(-attackStaminaCost, staminaRegenDelay);
-        ChangeMana(-manaCost,manaRegenDelay);
-
-        //screen shake
-        CameraEffects.ShakeOnce(0.1f, 1);
-
-        //transform.position += new Vector3(transform.localScale.x * forwardMotion, 0, 0); //nudge player forward on attack
-
-
-        controller.pushedBack = true;
-        controller.pushBackDirection = new Vector3(transform.localScale.x, 0, 0);
-        controller.pushBackSpeed = distance;
-        
-    }
-
-
-    public void DashAttack(int attackDamage, float distance, float attackStaminaCost, float manaCost = 0)
-    {
-        //StartCoroutine(SlowMotion(0.1f));
-        ChangeStamina(-attackStaminaCost, staminaRegenDelay);
-        ChangeMana(-manaCost, manaRegenDelay);
-
-        //screen shake
-        CameraEffects.ShakeOnce(0.1f, 1);
-
-        controller.Blink(distance);
-        //StartCoroutine(SlowMotion(0.1f));
-        /*
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(-attackPoint.position, attackRange + 0.2f, enemyLayers);
-        //  Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position - new Vector3(transform.localScale.x * 0.25f, 0, 0), attackRange + 0.2f, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
+        if (RangeProjectile == null)
         {
-            //refill mana base on damage;
-            ChangeMana(manaRefillOnHit);
-
-            EnemyController enemyMove = enemy.gameObject.GetComponent<EnemyController>();
-            enemyMove.pushedBack = true;
-            Vector3 hitVector = new Vector3((enemy.transform.position - transform.position).x, 0, 0);
-            hitVector = Vector3.Normalize(hitVector);
-            enemyMove.pushBackDirection = hitVector;
-            enemyMove.pushBackSpeed = 7;
-
-            enemy.GetComponent<EnemyCombat>().TakeDamage(attackDamage);
-        }*/
+            return;
+        }
+        StartCoroutine(AttackRangeRoutine(delay));
     }
 
-    public GameObject Fireball;
+    public IEnumerator AttackRangeRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
-    public void CastFireball()
+        if (!dazed)
+        {
+            //Spawn slightly in front of the player
+            Vector3 spawnPos;
+            if(transform.localScale.x == 1)
+            {
+                spawnPos = transform.position + new Vector3(0.2f, 0, 0);
+            }
+            else
+            {
+                spawnPos = transform.position - new Vector3(0.2f, 0, 0);
+            }
+            GameObject Projectile = Instantiate(RangeProjectile, spawnPos, Quaternion.identity);
+            Projectile.transform.localScale = transform.localScale;
+        }
+
+    }
+
+    public void AttackRangeNoDelay()
     {
         StartCoroutine(SlowMotion(0.2f));
-        ChangeMana(-fireballmanaCost, manaRegenDelay);
-        Vector3 spawnPos;
-        if (transform.localScale.x == 1)
-        {
-            spawnPos = transform.position + new Vector3(0.5f, 0, 0);
-        }
-        else
-        {
-            spawnPos = transform.position - new Vector3(0.5f, 0, 0);
-        }
-        GameObject Projectile = Instantiate(Fireball, spawnPos, Quaternion.identity);
-        Projectile.transform.localScale = transform.localScale;
-    }
-
-    public GameObject WindBlast;
-
-    public void CastWindblast()
-    {
-        //StartCoroutine(SlowMotion(0.2f));
-        ChangeMana(-windblastmanaCost, manaRegenDelay);
-        Vector3 spawnPos;
-        if (transform.localScale.x == 1)
-        {
-            spawnPos = transform.position + new Vector3(0.5f, 0, 0);
-        }
-        else
-        {
-            spawnPos = transform.position - new Vector3(0.5f, 0, 0);
-        }
-        GameObject Projectile = Instantiate(WindBlast, spawnPos, Quaternion.identity);
-        Projectile.transform.localScale = transform.localScale;
-    }
-
-
-
-
-    public GameObject ThunderBall;
-
-    public void CastThunderBall()
-    {
-        //StartCoroutine(SlowMotion(0.2f));
-        ChangeMana(-thunderballmanaCost, manaRegenDelay);
+        ChangeMana(-manaCost);
         Vector3 spawnPos;
         if (transform.localScale.x == 1)
         {
@@ -416,39 +324,9 @@ public class PlayerCombatScript : MonoBehaviour
         {
             spawnPos = transform.position - new Vector3(0.2f, 0, 0);
         }
-        GameObject Projectile = Instantiate(ThunderBall, spawnPos, Quaternion.identity);
+        GameObject Projectile = Instantiate(RangeProjectile, spawnPos, Quaternion.identity);
         Projectile.transform.localScale = transform.localScale;
     }
-
-    public GameObject WaterMine;
-
-    public void CastWatermine()
-    {
-        //StartCoroutine(SlowMotion(0.2f));
-        ChangeMana(-waterminemanaCost, manaRegenDelay);
-        Vector3 spawnPos;
-        if (transform.localScale.x == 1)
-        {
-            spawnPos = transform.position + new Vector3(0.4f, 0.2f, 0);
-        }
-        else
-        {
-            spawnPos = transform.position - new Vector3(0.4f, 0.2f, 0);
-        }
-        GameObject Projectile = Instantiate(WaterMine, spawnPos, Quaternion.identity);
-        Projectile.transform.localScale = transform.localScale;
-    }
-
-
-    public void Blink()
-    {
-        ChangeMana(-blinkmanaCost, manaRegenDelay);
-        blinkTime = blinkCooldown;
-    }
-
-
-
-
 
     public GameObject flashEffect;
     public bool blockBroken;
@@ -465,10 +343,9 @@ public class PlayerCombatScript : MonoBehaviour
             parrysuccess = true;
         }
 
-        else if ((block && mana >= damage/3) || iceBlock)
+        else if (block && stamina >= damage/2)
         {
-            if(!iceBlock)
-                ChangeMana(-damage/3, manaRegenDelay);
+            ChangeStamina(-damage/2, staminaRegenDelay);
             //Instantiate(flashEffect, transform.position + new Vector3(transform.localScale.x * 0.1f * 4, 0, 0), Quaternion.identity);
             GameObject Text = Instantiate(floatingText, transform.position + new Vector3(transform.localScale.x * 0.1f, 0.2f, 0), Quaternion.identity);
             Text.transform.GetChild(0).GetComponent<TextMeshPro>().text = "BLOCKED";
@@ -486,8 +363,7 @@ public class PlayerCombatScript : MonoBehaviour
                 Text.transform.GetChild(0).GetComponent<TextMeshPro>().color = Color.red;
                 Text.transform.GetChild(0).GetComponent<TextMeshPro>().fontSize = 1.2f;
             }
-            if(SkillWheel.selected != 4)
-                dazedtime = 0.2f;
+            dazedtime = 0.2f;
             //instantiate dmgtext
             GameObject dmgText = Instantiate(floatingText, transform.position, Quaternion.identity);
             //set dmgtext to damage taken
@@ -546,7 +422,6 @@ public class PlayerCombatScript : MonoBehaviour
     }
 
     public bool block = false;
-    public bool iceBlock = false;
     
 
     /*

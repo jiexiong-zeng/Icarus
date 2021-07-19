@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,8 +49,6 @@ public class SkillWheel : MonoBehaviour
         else
             for (int i = 1; i < allChildren.Length; i += sectorComps)
                 allChildren[i].gameObject.SetActive(false);
-
-
-        //Debug.Log(selected);
+        
     }
 }

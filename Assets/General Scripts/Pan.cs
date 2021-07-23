@@ -39,17 +39,23 @@ public class Pan : MonoBehaviour
 
     IEnumerator PanRoutine()
     {
+        Debug.Log("Za worldo");
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         vcam = gameObject.GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform.parent;
         CinemachineBrain brain = mainCam.GetComponent<CinemachineBrain>();
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 0;
         vcam.Priority = 11;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSecondsRealtime(0.02f);
         while (brain.IsBlending)
             yield return null;
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         vcam.Priority = 1;
+        yield return new WaitForSecondsRealtime(0.02f);
+        while (brain.IsBlending)
+            yield return null;
+        Time.timeScale = 1;
     }
 
 }

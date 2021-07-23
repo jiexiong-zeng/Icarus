@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DialogueHandler : MonoBehaviour
@@ -24,20 +25,27 @@ public class DialogueHandler : MonoBehaviour
         isHandling = false;
         allchildren = GetComponentsInChildren<Transform>();
         allchildren[3].gameObject.SetActive(false);
-        bubble.SetActive(false);
+        if (bubble == null)
+            bubble = GameObject.Find("Dialogue");
+        //bubble.SetActive(false);
         //allchildren[4].gameObject.SetActive(false);
     }
 
     public void HandleDialogue()
     {
         isHandling = true;
+        MenuManager.MenuOpen = true;
         //transform.GetChild(1).gameObject.SetActive(false);
         //transform.GetChild(2).gameObject.SetActive(false);
 
         //bubble = Instantiate(bubblePrefab, transform.position + Vector3.up, Quaternion.identity);
         //speech = bubble.GetComponentInChildren<TextMeshPro>();
+        if (bubble == null)
+            bubble = GameObject.Find("Dialogue");
+        bubble.GetComponent<Image>().color = new Color(bubble.GetComponent<Image>().color.r, bubble.GetComponent<Image>().color.g, bubble.GetComponent<Image>().color.b, 1);
         bubble.SetActive(true);
         speech = bubble.GetComponentInChildren<TextMeshProUGUI>();
+        speech.color = new Color(speech.color.r, speech.color.g, speech.color.b, 1);
         StopAllCoroutines();
         StartCoroutine(TextAnim(dialogues[i]));
     }
@@ -67,8 +75,10 @@ public class DialogueHandler : MonoBehaviour
     {
         i = 0;
         isHandling = false;
+        MenuManager.MenuOpen = false;
         //Destroy(bubble);
-        bubble.SetActive(false);
+        bubble.GetComponent<Image>().color = new Color(bubble.GetComponent<Image>().color.r, bubble.GetComponent<Image>().color.g, bubble.GetComponent<Image>().color.b, 0);
+        speech.color = new Color(speech.color.r, speech.color.g, speech.color.b, 0);
     }
 
     IEnumerator TextAnim(string Text)

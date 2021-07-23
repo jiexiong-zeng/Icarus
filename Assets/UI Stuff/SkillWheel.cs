@@ -29,28 +29,31 @@ public class SkillWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, playerToMouse);
-        int selectedSector = (angle > 0) ? Mathf.FloorToInt(angle * numSectors / 360) : Mathf.FloorToInt((360 + angle) * numSectors / 360);
-        //Debug.Log(selectedSector);
-        pos.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.transform.position);
-        if (Input.GetKey("tab"))
+        if(player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
         {
-            for (int i = 1; i < allChildren.Length; i += sectorComps)
+            Vector3 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
+            float angle = Vector2.SignedAngle(Vector2.right, playerToMouse);
+            int selectedSector = (angle > 0) ? Mathf.FloorToInt(angle * numSectors / 360) : Mathf.FloorToInt((360 + angle) * numSectors / 360);
+            //Debug.Log(selectedSector);
+            pos.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.transform.position);
+            if (Input.GetKey("tab"))
             {
-                allChildren[i].gameObject.SetActive(true);
-                var bg = allChildren[i + 1].gameObject;
-                bg.GetComponent<Image>().color = (i == 1 + selectedSector * sectorComps) ? new Color(255, 255, 255, 1) : new Color(255, 255, 255, 0.25f);
+                for (int i = 1; i < allChildren.Length; i += sectorComps)
+                {
+                    allChildren[i].gameObject.SetActive(true);
+                    var bg = allChildren[i + 1].gameObject;
+                    bg.GetComponent<Image>().color = (i == 1 + selectedSector * sectorComps) ? new Color(255, 255, 255, 1) : new Color(255, 255, 255, 0.25f);
+                }
+
+                if (allChildren[3 + sectorComps * selectedSector].gameObject.GetComponent<Skill>().isUnlocked)
+                    selected = selectedSector;
             }
-
-            if (allChildren[3 + sectorComps * selectedSector].gameObject.GetComponent<Skill>().isUnlocked)
-                selected = selectedSector;
+            else
+                for (int i = 1; i < allChildren.Length; i += sectorComps)
+                    allChildren[i].gameObject.SetActive(false);
         }
-        else
-            for (int i = 1; i < allChildren.Length; i += sectorComps)
-                allChildren[i].gameObject.SetActive(false);
-
-
         //Debug.Log(selected);
     }
 }

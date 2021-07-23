@@ -11,7 +11,6 @@ public class SpawnPointScript : MonoBehaviour
 
     private bool saved = false;
     private bool unique = true;
-    private bool travelling = false;
     GameObject spawnPoint;
     TravelOptions options;
     

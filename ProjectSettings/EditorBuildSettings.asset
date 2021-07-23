@@ -29,4 +29,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Castle 3.unity
     guid: 6f8330ccb91041748aeb4933d518b37f
+  - enabled: 1
+    path: Assets/Scenes/City Entrance.unity
+    guid: 5977213a68cdf234da4dbc5baab5a85e
+  - enabled: 1
+    path: Assets/Scenes/Upper City 1.unity
+    guid: 3837f6456a5633340a6ab9a0cc0c0391
+  - enabled: 1
+    path: Assets/Scenes/Upper City 2.unity
+    guid: 4fe4c906498521647afd85c214f2e23f
+  - enabled: 1
+    path: Assets/Scenes/Upper City 3.unity
+    guid: 30cfd78819dba2a4d8aca17ec3c967b7
+  - enabled: 1
+    path: Assets/Scenes/Lower City 1.unity
+    guid: 7604d8e94dcb4ba4399a6c90b926da20
+  - enabled: 1
+    path: Assets/Scenes/Lower City 2.unity
+    guid: 326f8a6fd451b4148b38b1a54287541e
+  - enabled: 1
+    path: Assets/Scenes/Strange Mountain.unity
+    guid: ab476b05326319244b1f47cbfadfc180
+  - enabled: 1
+    path: Assets/Scenes/Strange Mountain 2.unity
+    guid: 93000fc5ef1c8c142aa75965c1a17d96
+  - enabled: 1
+    path: Assets/Scenes/Strange Mountain 3.unity
+    guid: 4db86f96573673446b9f8f2d72e4ea58
+  - enabled: 1
+    path: Assets/Scenes/Coast 1.unity
+    guid: 14ba36d39accf114996f3381f10c2192
+  - enabled: 1
+    path: Assets/Scenes/Coast 2.unity
+    guid: db38294d77e65cf479e5ea5e3956edbf
+  - enabled: 1
+    path: Assets/Scenes/Coast 3.unity
+    guid: c263c2b68c1035942a3fffe9f2a10547
+  - enabled: 1
+    path: Assets/Scenes/Dead Forest 1.unity
+    guid: fe18dc0820b87d642aa86f5cb83f5af8
   m_configObjects: {}

@@ -40,8 +40,11 @@ public class PlayerDialogue : MonoBehaviour
         {
             if (handler != null)
             {
+                //Debug.Log(handler.gameObject.name);
                 handler.allchildren[3].gameObject.SetActive(false);
                 handler.CloseDialogue();
+                handler = null;
+                Debug.Log(handler);
                 //handler.allchildren[4].gameObject.SetActive(false);
             }
         }

@@ -32,6 +32,8 @@ public class PlayerCombatScript : MonoBehaviour
     public int manaRefillOnHit = 5;
     public int manaRecoveryMax = 20;
     public float manaRecovered = 0;
+    public float manaSpent = 0;
+    public float manaCap = 100;
     public float manaRefillRate = 0.2f;
     public float staminaRefillRate = 0.2f;
 
@@ -58,6 +60,8 @@ public class PlayerCombatScript : MonoBehaviour
     private float dazedtime;
     public bool dazed = false;
     public bool dead = false;
+
+    public bool shielded = false;
 
 
     void Start()
@@ -86,11 +90,14 @@ public class PlayerCombatScript : MonoBehaviour
             ChangeStamina(staminaRefillRate, 0);
         }
 
-        if (mana < maxMana && manaTime <= 0 && manaRecovered < manaRecoveryMax)
+        if (mana < manaCap && manaTime <= 0)
         {
+            manaCap = (Mathf.Abs(manaSpent) > manaRecoveryMax) ? manaCap - (Mathf.Abs(manaSpent) - manaRecoveryMax) : manaCap;
             ChangeMana(manaRefillRate, 0);
-            manaRecovered += manaRefillRate;
+            manaSpent = 0; //Reset consumption
+            //manaRecovered += manaRefillRate;
         }
+
 
         if (block && mana > 0)
             ChangeMana(-0.2f, manaRegenDelay);
@@ -142,10 +149,17 @@ public class PlayerCombatScript : MonoBehaviour
     {
         mana += amount;
         manaTime = delay;
-        if(amount < 0)
+        if(amount < 0) 
         {
-            manaRecovered = 0; //reset regen
+            manaSpent += amount;
+            //manaRecovered = 0; //reset regen
         }
+
+        if(amount > 0 && mana > manaCap)
+        {
+            manaCap = mana;
+        } 
+
 
         if (isHUDon)
         {
@@ -455,7 +469,12 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     { 
-        if (parry & !dazed)
+        if(shielded)
+        {
+            shielded = false;
+        }
+
+        else if (parry & !dazed)
         {
             Instantiate(flashEffect, transform.position + new Vector3(transform.localScale.x * 0.1f* 4, 0, 0), Quaternion.identity);
             //StartCoroutine(SlowMotion(0.15f));

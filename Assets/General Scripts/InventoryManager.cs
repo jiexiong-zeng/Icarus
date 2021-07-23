@@ -56,7 +56,7 @@ public class InventoryManager : MonoBehaviour
                 //Debug.Log(activeItem.name);
             }
             //Add to collected
-            inventory.Add(new InventoryObject(item.name, slotsFilled, item.GetComponent<SpriteRenderer>().sprite, () => inputFunction() ));
+            inventory.Add(new InventoryObject(item.name.Split(' ')[0], slotsFilled, item.GetComponent<SpriteRenderer>().sprite, () => inputFunction() ));
             //Add to inventory
             for (int i = 0; i < numComponents; i++)
                 children[1 + slotsFilled* numComponents + i].gameObject.SetActive(true);

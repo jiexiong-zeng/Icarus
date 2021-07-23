@@ -11,7 +11,7 @@ public class ManaPotion : Consumable
         base.Effect();
         combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
 
-        combat.mana += 50;
-        combat.manaBar.Gain(combat.mana / combat.maxMana);
+        combat.ChangeMana(50);
+        //combat.manaBar.Gain(combat.mana / combat.maxMana);
     }
 }

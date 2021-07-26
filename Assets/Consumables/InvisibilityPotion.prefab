@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1075910389569085661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278188899630579360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146129ab16c72264982212d8661b27ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: 'Disappear from the eyes of your enemies. Won''t work if they''ve already
+    seen you though.  Effect duration: 10s '
+  image: {fileID: 0}
+  move: {fileID: 0}
+  sprite: {fileID: 0}
+  duration: 10
+--- !u!1001 &5835295129020304270
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7756337806471689505, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689505, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5142468
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689506, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689507, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3328234186428351682, guid: 3588434e4dd56c945a6faac7e1c2c272, type: 3}
+    - target: {fileID: 7756337806471689518, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_Name
+      value: InvisibilityPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756337806471689518, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 759718183622697620, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+--- !u!1 &4278188899630579360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7756337806471689518, guid: 82dbe1f918f4bdd45a1d690a53b2762c, type: 3}
+  m_PrefabInstance: {fileID: 5835295129020304270}
+  m_PrefabAsset: {fileID: 0}

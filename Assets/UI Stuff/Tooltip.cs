@@ -15,6 +15,9 @@ public class Tooltip : MonoBehaviour
 
     public void SetText(string content, string header = "")
     {
+        //Debug.Log(TooltipSystem.current.tooltip);
+        //Debug.Log(headerField);
+        //Debug.Log(TooltipSystem.current.tooltip.headerField);
         if (string.IsNullOrEmpty(header))
         {
             headerField.gameObject.SetActive(false);
@@ -38,6 +41,9 @@ public class Tooltip : MonoBehaviour
     void Update()
     {
         Vector2 position = Input.mousePosition;
-        transform.position = position;
+        if (Input.mousePosition.x < 960)
+            transform.position = position;
+        else
+            transform.position = new Vector3(position.x - gameObject.GetComponent<RectTransform>().sizeDelta.x * 1.7f, position.y, 0f);
     }
 }

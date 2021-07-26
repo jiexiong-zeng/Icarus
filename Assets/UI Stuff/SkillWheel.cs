@@ -24,6 +24,10 @@ public class SkillWheel : MonoBehaviour
         //Debug.Log(numSectors);
         for (int i = 1; i < allChildren.Length; i+=sectorComps)
             allChildren[i].gameObject.SetActive(false);
+        Lock(1);
+        Lock(2);
+        Lock(3);
+        Lock(4);
     }
 
     // Update is called once per frame
@@ -44,7 +48,10 @@ public class SkillWheel : MonoBehaviour
                 {
                     allChildren[i].gameObject.SetActive(true);
                     var bg = allChildren[i + 1].gameObject;
-                    bg.GetComponent<Image>().color = (i == 1 + selectedSector * sectorComps) ? new Color(255, 255, 255, 1) : new Color(255, 255, 255, 0.25f);
+                    if (allChildren[i + 2].gameObject.GetComponent<Skill>().isUnlocked)
+                        bg.GetComponent<Image>().color = (i == 1 + selectedSector * sectorComps) ? new Color(255, 255, 255, 1) : new Color(255, 255, 255, 0.25f);
+                    else
+                        bg.GetComponent<Image>().color = Color.black;
                 }
 
                 if (allChildren[3 + sectorComps * selectedSector].gameObject.GetComponent<Skill>().isUnlocked)
@@ -56,4 +63,15 @@ public class SkillWheel : MonoBehaviour
         }
         //Debug.Log(selected);
     }
+
+    public void Lock(int sector)
+    {
+        allChildren[3 + sectorComps * sector].gameObject.GetComponent<Skill>().isUnlocked = false;
+    }
+
+    public void Unlock(int sector)
+    {
+        allChildren[3 + sectorComps * sector].gameObject.GetComponent<Skill>().isUnlocked = true;
+    }
+
 }

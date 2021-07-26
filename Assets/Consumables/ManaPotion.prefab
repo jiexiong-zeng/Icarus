@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580af34abbe30db488e1d1319c9a2a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: Refills 50 mana
   combat: {fileID: 0}
 --- !u!1001 &511276131203673148
 PrefabInstance:

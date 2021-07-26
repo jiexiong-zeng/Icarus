@@ -2645,7 +2645,7 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 1
-  m_BlendUpdateMethod: 0
+  m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -4612,7 +4612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnBeginEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4637,7 +4637,7 @@ PrefabInstance:
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 364357128}
+      objectReference: {fileID: 249660287492271596, guid: 1dbb3d7f4b5210449a69c00bd9d7f2af, type: 3}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnBeginEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -4652,7 +4652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: PanToObject
+      value: Unlock
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnBeginEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -4660,7 +4660,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Pan, Assembly-CSharp
+      value: SkillWheel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
+      propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8375616455440949161, guid: ac9399ad2e193664a983e5b9ba47d9b2, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument

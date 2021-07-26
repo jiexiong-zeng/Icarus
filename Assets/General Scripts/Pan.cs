@@ -44,6 +44,8 @@ public class Pan : MonoBehaviour
         vcam = gameObject.GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform.parent;
         CinemachineBrain brain = mainCam.GetComponent<CinemachineBrain>();
+        brain.m_BlendUpdateMethod = CinemachineBrain.BrainUpdateMethod.LateUpdate;
+        brain.m_IgnoreTimeScale = true;
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = 0;
         vcam.Priority = 11;

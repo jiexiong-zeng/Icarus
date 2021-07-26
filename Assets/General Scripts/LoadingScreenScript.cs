@@ -71,5 +71,4 @@ public class LoadingScreenScript : MonoBehaviour
         SceneManager.LoadScene(PlayerPrefs.GetString("RespawnScene"));
     }
 
-
 }

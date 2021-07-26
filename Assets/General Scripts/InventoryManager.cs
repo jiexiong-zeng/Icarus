@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public static List<InventoryObject> inventory = new List<InventoryObject>();
     public int slotsFilled = 0;
     public static int activeSlot = -9999;
+    public static List<Vector3> collected = new List<Vector3>();
     //public static InventoryObject activeItem = null;
 
     public GameObject grid;
@@ -34,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
     public delegate void MyDelegateType();
 
-    public void AddToGrid(GameObject item, MyDelegateType inputFunction)
+    public void AddToGrid(GameObject item, MyDelegateType inputFunction , string details = "")
     {
         if (inventory.Find(x => x.name == item.name.Split(' ')[0]) != null)
         {
@@ -55,18 +56,17 @@ public class InventoryManager : MonoBehaviour
                 //activeItem = new InventoryObject(item.name, slotsFilled, item.GetComponent<SpriteRenderer>().sprite);
                 //Debug.Log(activeItem.name);
             }
+
             //Add to collected
-            inventory.Add(new InventoryObject(item.name.Split(' ')[0], slotsFilled, item.GetComponent<SpriteRenderer>().sprite, () => inputFunction() ));
+            inventory.Add(new InventoryObject(item.name.Split(' ')[0], slotsFilled, item.GetComponent<SpriteRenderer>().sprite, () => inputFunction() , details));
+
             //Add to inventory
             for (int i = 0; i < numComponents; i++)
                 children[1 + slotsFilled* numComponents + i].gameObject.SetActive(true);
             children[2 + slotsFilled*numComponents].GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
             slotsFilled++;
         }
-
-        //inputFunction();
     }
-
 }
 
 [System.Serializable]
@@ -76,19 +76,19 @@ public class InventoryObject
     public int slot;
     public string name;
     public Sprite sprite;
+    public string details;
     FunctionDelegate OnConsume;
 
     public delegate void FunctionDelegate();
 
-    //public void Consume();
-
-    public InventoryObject(string nameInput, int num, Sprite img, FunctionDelegate function)
+    public InventoryObject(string nameInput, int num, Sprite img, FunctionDelegate function, string content = "")
     {
         name = nameInput;
         amount = 1;
         slot = num;
         sprite = img;
         OnConsume = function;
+        details = content;
     }
 
     public void Consume()

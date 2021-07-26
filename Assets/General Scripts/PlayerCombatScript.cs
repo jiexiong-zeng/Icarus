@@ -66,7 +66,7 @@ public class PlayerCombatScript : MonoBehaviour
 
     void Start()
     {
-        health = maxHealth;
+        health = maxHealth - 25;
         stamina = maxStamina;
         mana = maxMana;
         controller = GetComponent<CharacterController2D>();
@@ -530,6 +530,7 @@ public class PlayerCombatScript : MonoBehaviour
     
     private void Die()
     {
+        SkillWheel.selected = 0;
         Time.timeScale = 0.1f;
         //CinemachineVirtualCamera followCam = GameObject.Find("Cinemachine").GetComponent<CinemachineVirtualCamera>();  //zoom?
         //followCam.m_Lens.OrthographicSize = 1;

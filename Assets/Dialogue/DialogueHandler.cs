@@ -12,7 +12,7 @@ public class DialogueHandler : MonoBehaviour
     public Transform[] allchildren;
 
     public GameObject bubble;
-    TextMeshProUGUI speech;
+    public TextMeshProUGUI speech;
     int i;
     bool inProgress;
     public bool isHandling;

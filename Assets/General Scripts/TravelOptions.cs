@@ -57,7 +57,7 @@ public class TravelOptions : MonoBehaviour
                 //var rect = prefab.GetComponent<RectTransform>();
                 //rect.anchoredPosition = new Vector2(0, ++i * -40);
                 prefab.GetComponentInChildren<TextMeshProUGUI>().SetText(obelisk.scene);
-                var button = prefab.GetComponent<Hover>();
+                var button = prefab.GetComponent<HoverFastTravel>();
                 button.obelisk = obelisk;
             }
     }

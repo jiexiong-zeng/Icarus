@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class TooltipSystem : MonoBehaviour
 {
-    private static TooltipSystem current;
+    public static TooltipSystem current;
     public Tooltip tooltip;
 
     // Start is called before the first frame update
     void Awake()
     {
-
-        current = this;
-        Debug.Log(current);
+        if (current == null)
+            current = this;
+        else
+            Destroy(this);
     }
 
     public static void Show(string content, string header = "")

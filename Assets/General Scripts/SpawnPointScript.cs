@@ -85,6 +85,10 @@ public class SpawnPointScript : MonoBehaviour
                 options.CloseOptions();
             }
         }
+
+        if (Input.GetKey("escape") && options.isShowing)
+            options.CloseOptions();
+
     }
 
     void OnTriggerExit2D(Collider2D collision)

@@ -12,6 +12,7 @@ public class BossController : MonoBehaviour
     private Transform playerPos;
 
     public UnityEvent OnBeginEvent;
+    public float startAggro = 3f;
 
     public float moveSpeed = 5f;
     public float attackRange = 0.7f;
@@ -37,7 +38,7 @@ public class BossController : MonoBehaviour
 
     public IEnumerator StartAggro()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3f);
         aggroed = true;
     }
 
@@ -97,6 +98,7 @@ public class BossController : MonoBehaviour
             ChangeAnimationState(DEATH);
             shouldSpawn = false;
             OnDeathEvent.Invoke();
+            GameObject.Find("Skill Wheel").GetComponent<SkillWheel>().Unlock(1);
         }
 
         else if (combat.dazed)

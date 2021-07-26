@@ -47,6 +47,8 @@ public class StartScreen : MonoBehaviour
         else
         {
             SceneManager.LoadScene(PlayerPrefs.GetString("Sanctuary"));
+            var obelisk = GameObject.Find("Obelisk");
+            SaveLoad.SaveObelisk(new ObeliskData("Sanctuary", obelisk.transform.position, 0));
         }
     }
 
@@ -54,6 +56,7 @@ public class StartScreen : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         File.Delete(Application.persistentDataPath + "/travelpoints.info");
+        Debug.Log(File.Exists(Application.persistentDataPath + "/travelpoints.info"));
         LoadGame();
     }
 

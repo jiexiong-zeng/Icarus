@@ -24,22 +24,36 @@ public class ConsumableIcon : MonoBehaviour
     {
         if (InventoryManager.inventory.Count != 0)
         {
-            img.enabled = true;
-            num.enabled = true;
-            var pos = InventoryManager.activeSlot + offset;
-            if(pos < 0)
-                pos = InventoryManager.inventory.Count - 1;
-            pos = pos % InventoryManager.inventory.Count;
-            img.sprite = InventoryManager.inventory[pos].sprite;
-            num.SetText(InventoryManager.inventory[pos].amount.ToString());
-            if (Input.mouseScrollDelta != Vector2.zero && offset == 0) //Only main slot does any modifications
+            if(offset == 1 && InventoryManager.inventory.Count < 2) //Left
             {
-                //Debug.Log(InventoryManager.activeSlot);
-                InventoryManager.activeSlot = (InventoryManager.activeSlot + (int)Input.mouseScrollDelta.y);
-                if (InventoryManager.activeSlot < 0)
-                    InventoryManager.activeSlot = InventoryManager.inventory.Count - 1;
-                InventoryManager.activeSlot = InventoryManager.activeSlot % InventoryManager.inventory.Count;
+              //Don't show   
             }
+
+            else if(offset == -1 && InventoryManager.inventory.Count < 3) //Right
+            {
+              //Don't show
+            }
+
+            else
+            {
+                img.enabled = true;
+                num.enabled = true;
+                var pos = InventoryManager.activeSlot + offset;
+                if (pos < 0)
+                    pos = InventoryManager.inventory.Count - 1;
+                pos = pos % InventoryManager.inventory.Count;
+                img.sprite = InventoryManager.inventory[pos].sprite;
+                num.SetText(InventoryManager.inventory[pos].amount.ToString());
+                if (Input.mouseScrollDelta != Vector2.zero && offset == 0) //Only main slot does any modifications
+                {
+                    //Debug.Log(InventoryManager.activeSlot);
+                    InventoryManager.activeSlot = (InventoryManager.activeSlot + (int)Input.mouseScrollDelta.y);
+                    if (InventoryManager.activeSlot < 0)
+                        InventoryManager.activeSlot = InventoryManager.inventory.Count - 1;
+                    InventoryManager.activeSlot = InventoryManager.activeSlot % InventoryManager.inventory.Count;
+                }
+            }
+            
         }
 
         else

@@ -20,7 +20,6 @@ public class SpawnPointScript : MonoBehaviour
     {
         options = GameObject.Find("Fast Travel").GetComponent<TravelOptions>();
         spawnPoint = GameObject.Find("SpawnPoint");
-        SaveLoad.LoadObelisks();
         if (PlayerPrefs.GetInt("SpawnPointNumber") == SpawnPointNumber)
         {
             active = true;
@@ -76,6 +75,7 @@ public class SpawnPointScript : MonoBehaviour
             if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Obelisk1") && !options.isShowing)
             {
                 //Debug.Log("Opening");
+                SaveLoad.LoadObelisks();
                 options.ShowOptions(this);
             }
 

@@ -66,7 +66,7 @@ public class PlayerCombatScript : MonoBehaviour
 
     void Start()
     {
-        health = maxHealth - 25;
+        health = maxHealth;
         stamina = maxStamina;
         mana = maxMana;
         controller = GetComponent<CharacterController2D>();
@@ -165,11 +165,11 @@ public class PlayerCombatScript : MonoBehaviour
         {
             if (amount > 0)
             {
-                manaBar.Gain(mana / maxMana);
+                manaBar.Set(mana / maxMana);
             }
             else
             {
-                manaBar.Drop(mana / maxMana);
+                manaBar.Set(mana / maxMana);
             }
         }
     }
@@ -515,7 +515,7 @@ public class PlayerCombatScript : MonoBehaviour
             Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
             health -= damage;
             if (isHUDon)
-                healthBar.Drop(health / maxHealth);
+                healthBar.Set(health / maxHealth);
             if (health <= 0)
                 Die();
         }

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class StartScreen : MonoBehaviour
 {
-    public float selected = 1;
+    public float selected = 0;
     Transform arrow;
     float selectedy;
 
@@ -22,6 +22,7 @@ public class StartScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //Debug.Log(Input.GetAxisRaw("Horizontal"));
         selectedy = transform.GetChild((int)selected).position.y;
         arrow.position = new Vector2(arrow.position.x, selectedy);
@@ -30,6 +31,7 @@ public class StartScreen : MonoBehaviour
             selected = 1;
         else if (selected < 1)
             selected = transform.childCount - 1;
+        */
     }
 
     public void LoadGame()

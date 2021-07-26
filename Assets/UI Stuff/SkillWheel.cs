@@ -24,10 +24,10 @@ public class SkillWheel : MonoBehaviour
         //Debug.Log(numSectors);
         for (int i = 1; i < allChildren.Length; i+=sectorComps)
             allChildren[i].gameObject.SetActive(false);
-        Lock(1);
-        Lock(2);
-        Lock(3);
-        Lock(4);
+        //Lock(1);
+        //Lock(2);
+        //Lock(3);
+        //Lock(4);
     }
 
     // Update is called once per frame

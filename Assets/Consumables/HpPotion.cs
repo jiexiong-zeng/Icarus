@@ -11,6 +11,6 @@ public class HpPotion : Consumable
         combat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombatScript>();
 
         combat.health += 50;
-        combat.healthBar.Gain(combat.health / combat.maxHealth);
+        combat.healthBar.Set(combat.health / combat.maxHealth);
     }
 }

@@ -13,6 +13,7 @@ public static class SaveLoad
     {
         //Add new obelisk to list of fast travel points
         savedObelisks.Add(info);
+        Debug.Log(savedObelisks.Count);
         BinaryFormatter bf = new BinaryFormatter();
         Debug.Log(Application.persistentDataPath);
         FileStream file = File.Create(Application.persistentDataPath + "/travelpoints.info"); 

@@ -387,7 +387,7 @@ public class PlayerMovement_MysteryKnight : MonoBehaviour
             }
         }
 
-        else if (Input.GetButtonDown("Primary") && controller.m_Grounded)
+        else if (Input.GetButtonDown("Primary") && controller.m_Grounded && !MenuManager.MenuOpen)
             attack = true;
 
         else if (Input.GetButtonDown("Jump"))

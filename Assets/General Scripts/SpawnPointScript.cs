@@ -25,6 +25,11 @@ public class SpawnPointScript : MonoBehaviour
             active = true;
             GetComponent<Animator>().Play("Obelisk2");
         }
+        foreach (var obelisk in SaveLoad.savedObelisks)
+        {
+            if (SpawnPointNumber == obelisk.num)
+                saved = true;
+        }
     }
 
     // Update is called once per frame
@@ -56,9 +61,12 @@ public class SpawnPointScript : MonoBehaviour
             
             if(!saved)
             {
-                var thisObelisk = new ObeliskData(SceneManager.GetActiveScene().name, transform.position, SpawnPointNumber);
-                thisObelisk.pathToImg ="Obelisks\\obelisk_" + SpawnPointNumber.ToString(); //Path from resources folder
-                
+                var thisObelisk = new ObeliskData(SceneManager.GetActiveScene().name, transform.position, SpawnPointNumber)
+                {
+                    pathToImg = "Obelisks\\obelisk_" + SpawnPointNumber.ToString() //Path from resources folder
+                };
+                ScreenCapture.CaptureScreenshot("Assets\\Resources\\" + thisObelisk.pathToImg + ".png");
+
                 foreach (var obelisk in SaveLoad.savedObelisks)
                 {
                     if (thisObelisk.num == obelisk.num)
@@ -66,7 +74,6 @@ public class SpawnPointScript : MonoBehaviour
                 }
                 if (unique)
                 {
-                    ScreenCapture.CaptureScreenshot("Assets\\Resources\\" + thisObelisk.pathToImg + ".png");
                     SaveLoad.SaveObelisk(thisObelisk);
                 }
                 saved = !saved;

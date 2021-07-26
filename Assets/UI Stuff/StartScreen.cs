@@ -36,6 +36,7 @@ public class StartScreen : MonoBehaviour
 
     public void LoadGame()
     {
+        SaveLoad.LoadObelisks();
         Time.timeScale = 1;
         gameObject.SetActive(false);
         Debug.Log(PlayerPrefs.GetString("RespawnScene", "No Scene"));

@@ -45,8 +45,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009076834, y: -0.034038544}
-  m_Size: {x: 0.42738485, y: 0.65053797}
+  m_Offset: {x: -0.0012528896, y: 0.008991957}
+  m_Size: {x: 0.56821203, y: 0.56821203}
   m_Direction: 0
 --- !u!50 &992136716
 Rigidbody2D:
@@ -226,6 +226,9 @@ MonoBehaviour:
   movementSmoothing: 0.05
   startFaceRight: 1
   spriteIsFlipped: 0
+  pushedBack: 0
+  pushBackDirection: {x: 0, y: 0, z: 0}
+  pushBackSpeed: 0
 --- !u!114 &8375616455440949161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +268,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startAggro: 3
   moveSpeed: 10
   attackRange: 0.7
   attackRangedRange: 3

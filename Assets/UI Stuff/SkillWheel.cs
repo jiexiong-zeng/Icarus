@@ -1,7 +1,8 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class SkillWheel : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SkillWheel : MonoBehaviour
         pos = GetComponent<RectTransform>();
         allChildren = GetComponentsInChildren<Transform>();
         player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(Smoothen());
         sectorComps = allChildren[1].GetComponentsInChildren<Transform>().Length;
         numSectors = (allChildren.Length - 1) / sectorComps;
         //Debug.Log(sectorComps);
@@ -33,15 +35,24 @@ public class SkillWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player == null)
+        var brain = Camera.main.GetComponent<CinemachineBrain>();
+        if (brain.m_BlendUpdateMethod != CinemachineBrain.BrainUpdateMethod.LateUpdate)
+            brain.m_BlendUpdateMethod = CinemachineBrain.BrainUpdateMethod.LateUpdate;
+
+        if (player == null)
+        {
+            //StopAllCoroutines();
             player = GameObject.FindGameObjectWithTag("Player");
+        }
         if(player != null)
         {
+            //StartCoroutine(Smoothen());
             Vector3 playerToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
             float angle = Vector2.SignedAngle(Vector2.right, playerToMouse);
             int selectedSector = (angle > 0) ? Mathf.FloorToInt(angle * numSectors / 360) : Mathf.FloorToInt((360 + angle) * numSectors / 360);
+            //var targetpos = Camera.main.WorldToScreenPoint(player.transform.position);
+            //transform.position = targetpos;
             //Debug.Log(selectedSector);
-            pos.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.transform.position);
             if (Input.GetKey("tab"))
             {
                 for (int i = 1; i < allChildren.Length; i += sectorComps)
@@ -62,6 +73,15 @@ public class SkillWheel : MonoBehaviour
                     allChildren[i].gameObject.SetActive(false);
         }
         //Debug.Log(selected);
+    }
+
+    IEnumerator Smoothen()
+    {
+        while (true)
+        {
+            pos.position = RectTransformUtility.WorldToScreenPoint(Camera.main, player.transform.position);
+            yield return new WaitForSecondsRealtime(Time.deltaTime * 10);
+        }
     }
 
     public void Lock(int sector)

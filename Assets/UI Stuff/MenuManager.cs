@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class MenuManager : MonoBehaviour
 {
-    public static bool MenuOpen;
+    public static bool MenuOpen = false;
 
     private void Update()
     {

@@ -41,6 +41,7 @@ public class TravelOptions : MonoBehaviour
 
     public void ShowOptions(SpawnPointScript instance)
     {
+        MenuManager.MenuOpen = true;
         reference = instance;
         StopAllCoroutines();
         StartCoroutine(changeState());
@@ -65,6 +66,7 @@ public class TravelOptions : MonoBehaviour
 
     public void CloseOptions(ObeliskData obelisk = null)
     {
+        MenuManager.MenuOpen = false;
         StopAllCoroutines();
         StartCoroutine(changeState());
         //delete all
@@ -85,7 +87,6 @@ public class TravelOptions : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //Debug.Log("Swapping");
         isShowing = !isShowing;
-        MenuManager.MenuOpen = isShowing;
     }
 
 }
